@@ -1,4 +1,7 @@
 
+
+
+
     @*Go To Top Button*@
 <button id="goToTop" onclick="goTop()"><i class="fa fa-angle-up fa-lg"></i></button>
  @*Home Section*@
@@ -122,37 +125,40 @@
     <h1 class="title"> our <span>products</span> <a href="#">view all >></a> </h1>
 
     <div class="box-container">
+    
+        @foreach (var file in Model)
+        {
+            <div class="box">
+                <div class="icons">
+                    <a href="#" class="fas fa-shopping-cart"></a>
+                    <a href="#" class="fas fa-heart"></a>
+                    <a href="#" class="fas fa-eye"></a>
+                </div>
+                <div class="img">
+                  <img src="@Url.Content(file.pimage)" />
 
-        <div class="box">
-            <div class="icons">
-                <a href="#" class="fas fa-shopping-cart"></a>
-                <a href="#" class="fas fa-heart"></a>
-                <a href="#" class="fas fa-eye"></a>
-            </div>
-            <div class="img">
-                <img src="~/Content/Images/berries.jpg" alt="">
-            </div>
-            <div class="content">
-                <h3>berries citrus fruits cake</h3>
-                <div class="price">$19.99</div>
-                <div class="stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="far fa-star"></i>
+
+                </div>
+
+                
+                <div class="content">
+
+
+                    <h3>@file.pname</h3>
+                    <div class="price">Rs &nbsp;@file.pprice</div>
+                  
                 </div>
             </div>
-        </div>
 
-        <div class="box">
+
+        @*<div class="box">
             <div class="icons">
                 <a href="#" class="fas fa-shopping-cart"></a>
                 <a href="#" class="fas fa-heart"></a>
                 <a href="#" class="fas fa-eye"></a>
             </div>
             <div class="img">
-                <img src="~/Content/Images/colorful.jpg" alt="">
+                <img src="~/Content/productimage/@Path.GetFileName(file)" />
             </div>
             <div class="content">
                 <h3>resh mellow sp color cake</h3>
@@ -174,7 +180,7 @@
                 <a href="#" class="fas fa-eye"></a>
             </div>
             <div class="img">
-                <img src="~/Content/Images/rose.jpg" alt="">
+                <img src="~/Content/productimage/@Path.GetFileName(file)" />
             </div>
             <div class="content">
                 <h3>Rose color sparkel cake</h3>
@@ -196,7 +202,7 @@
                 <a href="#" class="fas fa-eye"></a>
             </div>
             <div class="img">
-                <img src="~/Content/Images/strawberry2.jpg" alt="">
+                <img src="~/Content/productimage/@Path.GetFileName(file)" />
             </div>
             <div class="content">
                 <h3>strawberry nutella cake</h3>
@@ -218,7 +224,7 @@
                 <a href="#" class="fas fa-eye"></a>
             </div>
             <div class="img">
-                <img src="~/Content/Images/greencake.jpg" alt="">
+                <img src="~/Content/productimage/@Path.GetFileName(file)" />
             </div>
             <div class="content">
                 <h3>green bread spar cake</h3>
@@ -240,7 +246,7 @@
                 <a href="#" class="fas fa-eye"></a>
             </div>
             <div class="img">
-                <img src="~/Content/Images/raspred.jpg" alt="">
+                <img src="~/Content/productimage/@Path.GetFileName(file)" />
             </div>
             <div class="content">
                 <h3>red berries chocolate cake</h3>
@@ -262,7 +268,7 @@
                 <a href="#" class="fas fa-eye"></a>
             </div>
             <div class="img">
-                <img src="~/Content/Images/redspar.jpg" alt="">
+                <img src="~/Content/productimage/@Path.GetFileName(file)" />
             </div>
             <div class="content">
                 <h3>strawberry red spar cake</h3>
@@ -284,7 +290,7 @@
                 <a href="#" class="fas fa-eye"></a>
             </div>
             <div class="img">
-                <img src="~/Content/Images/darkchoclate.jpg" alt="">
+                <img src="~/Content/productimage/@Path.GetFileName(file)" />
             </div>
             <div class="content">
                 <h3>dark chocolate nutella cake</h3>
@@ -297,8 +303,10 @@
                     <i class="far fa-star"></i>
                 </div>
             </div>
-        </div>
+        </div>*@
+        }
     </div>
+        
 </section>
  @*about section start*@
 <div class="heading">
@@ -334,9 +342,11 @@
 <section class="gallery">
     <h1 class="title"> our <span>gallery</span> <a href="#">view all >></a> </h1>
     <div class="box-container">
-
+        @foreach (var file in ViewBag.productimage)
+        {
         <div class="box">
-            <img src="~/Content/Images/gallery1.jpg" alt="">
+            @*<img src="~/Content/Images/gallery1.jpg" alt="">*@
+            <img src="~/Content/productimage/@Path.GetFileName(file)" />
             <div class="icons">
                 <a href="#" class="fas fa-eye"></a>
                 <a href="#" class="fas fa-heart"></a>
@@ -344,51 +354,53 @@
             </div>
         </div>
 
-        <div class="box">
-            <img src="~/Content/Images/gallery2.jpg" alt="">
-            <div class="icons">
-                <a href="#" class="fas fa-eye"></a>
-                <a href="#" class="fas fa-heart"></a>
-                <a href="#" class="fas fa-share-alt"></a>
+            @*<div class="box">
+                <img src="~/Content/Images/gallery2.jpg" alt="">
+                <div class="icons">
+                    <a href="#" class="fas fa-eye"></a>
+                    <a href="#" class="fas fa-heart"></a>
+                    <a href="#" class="fas fa-share-alt"></a>
+                </div>
             </div>
+
+            <div class="box">
+                <img src="~/Content/Images/gallery3.jpg" alt="">
+                <div class="icons">
+                    <a href="#" class="fas fa-eye"></a>
+                    <a href="#" class="fas fa-heart"></a>
+                    <a href="#" class="fas fa-share-alt"></a>
+                </div>
+            </div>
+
+            <div class="box">
+                <img src="~/Content/Images/gallery4.jpg" alt="">
+                <div class="icons">
+                    <a href="#" class="fas fa-eye"></a>
+                    <a href="#" class="fas fa-heart"></a>
+                    <a href="#" class="fas fa-share-alt"></a>
+                </div>
+            </div>
+
+            <div class="box">
+                <img src="~/Content/Images/gallery5.jpg" alt="">
+                <div class="icons">
+                    <a href="#" class="fas fa-eye"></a>
+                    <a href="#" class="fas fa-heart"></a>
+                    <a href="#" class="fas fa-share-alt"></a>
+                </div>
+            </div>
+
+            <div class="box">
+                <img src="~/Content/Images/gallery6.jpg" alt="">
+                <div class="icons">
+                    <a href="#" class="fas fa-eye"></a>
+                    <a href="#" class="fas fa-heart"></a>
+                    <a href="#" class="fas fa-share-alt"></a>
+                </div>
+            </div>*@
+        }
         </div>
 
-        <div class="box">
-            <img src="~/Content/Images/gallery3.jpg" alt="">
-            <div class="icons">
-                <a href="#" class="fas fa-eye"></a>
-                <a href="#" class="fas fa-heart"></a>
-                <a href="#" class="fas fa-share-alt"></a>
-            </div>
-        </div>
-
-        <div class="box">
-            <img src="~/Content/Images/gallery4.jpg" alt="">
-            <div class="icons">
-                <a href="#" class="fas fa-eye"></a>
-                <a href="#" class="fas fa-heart"></a>
-                <a href="#" class="fas fa-share-alt"></a>
-            </div>
-        </div>
-
-        <div class="box">
-            <img src="~/Content/Images/gallery5.jpg" alt="">
-            <div class="icons">
-                <a href="#" class="fas fa-eye"></a>
-                <a href="#" class="fas fa-heart"></a>
-                <a href="#" class="fas fa-share-alt"></a>
-            </div>
-        </div>
-
-        <div class="box">
-            <img src="~/Content/Images/gallery6.jpg" alt="">
-            <div class="icons">
-                <a href="#" class="fas fa-eye"></a>
-                <a href="#" class="fas fa-heart"></a>
-                <a href="#" class="fas fa-share-alt"></a>
-            </div>
-        </div>
-    </div>
 </section>
  @*client section start*@
 <div class="heading">

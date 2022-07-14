@@ -1142,6 +1142,7 @@
     <Content Include="Content\login.css" />
     <Content Include="Content\ModalCss.css" />
     <Content Include="Content\plugins.css" />
+    <Content Include="Content\Product Image\sa.jpg" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\standard.css" />
     <Content Include="Content\styles.css" />
@@ -1518,6 +1519,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Automappers\Profiles\" />
     <Folder Include="Content\assets\plugins\bootstrap-datepicker\css\" />
+    <Folder Include="Content\productimage\" />
     <Folder Include="private\ExcelFormat\" />
     <Folder Include="private\Import\" />
     <Folder Include="Uploads\" />

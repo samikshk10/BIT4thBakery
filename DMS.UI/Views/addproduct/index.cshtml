@@ -43,7 +43,8 @@
         <th>name</th>
         <th>category</th>
         <th>price</th>
-
+        <th>Image</th>
+        
         <th>mfddate</th>
         <th>Expdate</th>
 
@@ -58,6 +59,7 @@
     <td>@addproduct_table.pname</td>
     <td>@addproduct_table.pcategory</td>
     <td>@addproduct_table.pprice</td>
+    <td><img src="@(addproduct_table.pimage!=null?Url.Content(addproduct_table.pimage):"")" height="110" width="110"/></td>
     <td>@addproduct_table.pmfddate</td>
     <td>@addproduct_table.pexpdate</td>
     <td><a href="@Url.Action("edit", new {id=addproduct_table.pid})">EDIT</a></td>
