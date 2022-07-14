@@ -6,8 +6,8 @@
 }
 
 
-<a href="@Url.Action("Create")" style="color:green;">Add new Record</a>
-<h3>Database Table Display</h3>
+
+<h3>Display Product</h3>
 <style>
     th {
         border: 3px solid black;
@@ -31,10 +31,9 @@
     <lable>Search BY Name:</lable>
     <input type="text" name="namesearch" value=""  id="searchtxt" />
     <input type="submit" name="name" class="button" id="searchbtn"/>
-    <br />
-    <br />
+<a href="@Url.Action("index","addproduct")"><i class="fa fa-refresh fa-lg" id="refresh"></i></a>
 }
-<i class="fa fa-refresh" id="refresh" onclick="refreshtxt()"></i>
+
 
 
 <table class="table" border="1">
@@ -68,10 +67,9 @@
 </table>
 <script src="jquery-3.6.0.min.js"></script>
 <script>
-   function refeshtxt(){
-       document.getElementById('searchtxt').value = " ";
-       $("#searchtxt").click();
-   }
+    $('#refresh').click(function () {
+        $("#searchtxt").click();
+    })
 </script>
 
 <style>
