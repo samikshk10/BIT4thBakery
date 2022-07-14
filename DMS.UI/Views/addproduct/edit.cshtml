@@ -1,21 +1,26 @@
 ﻿
 @{
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
-    ViewBag.Title = "Product"; 
-    
+    ViewBag.Title = "edit";
+  
 }
 
 
 @using (Html.BeginForm("UpdateData", "addproduct"))
 {
-    <input type="hidden" name="id" value="@Model.pid" />
-    <label class="col-md-12">Name: </label>
+    <input type="hidden" name="pid" value="@Model.pid" />
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <label class="col-md-12">NAME</label>
     <div class="col-md-12">
         <input type="text" name="pname" value="" class="form-control" />
     </div>
 
 
-    <label class="col-md-12">category: </label>
+    <label class="col-md-12">CATEGORY </label>
     <div class="col-md-12">
         <input type="text" name="pcategory" value="" class="form-control" />
     </div>
@@ -24,6 +29,18 @@
     <label class="col-md-12">price: </label>
     <div class="col-md-12">
         <input type="text" name="pprice" value="" class="form-control" />
+    </div>
+    <label class="col-md-12">IMAGE </label>
+    <div class="col-md-12">
+        <input type="text" name="pimg" value="" class="form-control" />
+    </div>
+    <label class="col-md-12">EXPDATE: </label>
+    <div class="col-md-12">
+        <input type="date" name="pexpdate" value="" class="form-control" />
+    </div>
+    <label class="col-md-12">MFDATE</label>
+    <div class="col-md-12">
+        <input type="date" name="pmfddate" value="" class="form-control" />
     </div>
 
     <div class="col-md-12">
