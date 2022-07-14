@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>complete responsive cake website design</title>
+
+    <!-- font awesome cdn link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- custom css file link -->
+    <link rel="stylesheet" href="~/Content/css/style.css">
+
+    <link href="~/Content/css/signupstyle.css" rel="stylesheet" />
+
+</head>
+<body>
+
+    <!-- header section start page -->
+
+    <header class="header">
+        <a href="#" class="logo"> <i class="fas fa-shopping-basket"></i> SAMP BAKERY </a>
+
+        <nav class="navbar">
+            @Html.ActionLink("Home", "Index", "Home")
+            <a href="#category">Shop</a>
+            <a href="#about"> About Us</a>
+            <a href="#review">Review</a>
+            <a href="#blog">Blog</a>
+            <a href="#contact">Contact</a>
+            
+        </nav>
+        <div class="icons">
+            <div id="menu-btn" class="fas fa-bars"></div>
+            <div id="search-btn" class="fas fa-search"></div>
+
+            <div id="cart-btn" class="fas fa-shopping-cart"></div>
+            <a href="@Url.Action("index","Admin")"> <div id="login-btn" class="fas fa-user"></div></a>
+          
+
+        </div>
+     
+
+    </header>
+
+
+
+
+    @RenderBody()
+
+
+    
+
+    <section class="credit">created by Dailywebdesign || all rights reserved</section>
+
+
+
+    <script src="~/Content/css/scriptjs.js"></script>
+
+
+    <script src="~/Content/js/signupjs.js"></script>
+</body>
+<!-- end: BODY -->
+
+</html>

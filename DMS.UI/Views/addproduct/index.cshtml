@@ -1,0 +1,67 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = "Product";
+    int sn = 0;
+}
+
+
+<a href="@Url.Action("Create")" style="color:green;">Add new Record</a>
+<h3>Database Table Display</h3>
+<style>
+    th {
+        border: 3px solid black;
+        padding: 4px;
+        background-color: aquamarine;
+    }
+</style>
+
+<h2>Display</h2>
+@using (Html.BeginForm("index", "addproduct", FormMethod.Get))
+{
+    <select>
+        <option value="" name="id">ID</option>
+        <option value="" name="name">Name</option>
+        <option value="" name="address">Address</option>
+        <option value="" name="contact">Contact</option>
+    </select>
+}
+@using (Html.BeginForm("index", "employee", FormMethod.Post))
+{
+    <lable>Search BY Name:</lable>
+    <input type="text" name="name" value="" class="namee" />
+    <input type="submit" value="search" class="button" />
+    <br />
+    <br />
+}
+
+<table class="table" border="1">
+    <tr>
+        <th>SN</th>
+        <th>id</th>
+        <th>name</th>
+        <th>category</th>
+        <th>price</th>
+       
+        <th>mfddate</th>
+        <th>Expdate</th>
+
+        <th>edit</th>
+    </tr>
+    @foreach (var addproduct_table in Model)
+    {
+        <tr>
+            <td>@(++sn)</td>
+            <td>@addproduct_table.pid</td>
+            <td>@addproduct_table.pname</td>
+            <td>@addproduct_table.pcategory</td>
+            <td>@addproduct_table.pprice</td>
+            <td>@addproduct_table.pmfddate</td>
+            <td>@addproduct_table.pexpdate</td>
+            <td><a href="@Url.Action("Edit", new {pid=addproduct_table.pid})">Edit</a></td>
+        </tr>
+    }
+</table>
+
+
+

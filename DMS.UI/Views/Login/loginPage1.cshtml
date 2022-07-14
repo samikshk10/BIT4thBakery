@@ -1,0 +1,289 @@
+﻿
+@{
+   
+    ViewBag.Title = "loginPage";
+                Layout = null; 
+    }
+
+
+
+
+
+<html lang="en">
+<head>
+
+    <link rel="stylesheet" href="~/Content/cssforloginPage/styleForLoginPage.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Signika+Negative:wght@300&display=swap" rel="stylesheet">
+    <title>Login Page</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .mainBody {
+            width: 100%;
+            height: 753px;
+            background-color: aquamarine;
+            display: flex;
+        }
+
+        .loginBox {
+            width: 65%;
+            height: 753px;
+            background-color: #F6F7FC;
+        }
+
+        .imageBox {
+            width: 35%;
+            height: 753px;
+            background-color: orange;
+        }
+
+            .imageBox img {
+                height: 753px;
+                width: 537px;
+            }
+
+        .formBox {
+            height: 670px;
+            width: 50%;
+            background-color: #FFFFFF;
+            margin-top: 40px;
+            margin-left: 250px;
+            border-color: #DDDEE3;
+            box-shadow: 0 0 15px 0 #DDDEE3;
+            padding-top: 0.1px;
+        }
+
+        .forLogo {
+            width: 30%;
+            height: 150px;
+            background-color: #696969;
+            margin-top: 30px;
+            margin-left: 170px;
+        }
+
+        .forLoginText {
+            height: 50px;
+            width: 100%;
+            padding-top: 5px;
+        }
+
+            .forLoginText p {
+                text-align: center;
+                font-size: 30px;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                color: #696969;
+            }
+
+        .forerror {
+            height: 50px;
+            width: 80%;
+            background-color: #FFE0DD;
+            margin-left: 50px;
+            border-radius: 10px;
+            padding-top: 13px;
+            display: flex;
+            border: 1px solid #D84943;
+            visibility: hidden;
+        }
+
+
+        .icon {
+            margin-left: 50px;
+            font-size: 20px;
+            color: #D84943;
+            margin-top: 1px;
+            visibility: hidden;
+        }
+
+        .text {
+            margin-left: 20px;
+            color: #D84943;
+            font-size: 20px;
+        }
+
+        .forform {
+            height: 300px;
+            width: 80%;
+            margin-top: 5px;
+            margin-left: 50px;
+        }
+
+            .forform label {
+                font-size: 25px;
+                color: #696969;
+            }
+
+            .forform input {
+                width: 100%;
+                height: 50px;
+                border-radius: 10px;
+                font-size: 20px;
+                background-color: #EFEFEF;
+                border-color: #696969;
+                border-style: none;
+            }
+
+
+            .forform button {
+                width: 100%;
+                height: 50px;
+                border-radius: 10px;
+                font-size: 20px;
+                background-color: #696969;
+                border-color: #696969;
+                color: white;
+            }
+
+        .forgetPassword {
+            margin-top: 10px;
+            margin-left: 280px;
+        }
+
+            .forgetPassword a {
+                text-decoration: none;
+                color: #696969;
+            }
+
+                .forgetPassword a:hover {
+                    text-decoration: underline;
+                }
+
+        .forform input:active {
+            border-color: #696969;
+            box-shadow: 0 0 8px 0 #696969;
+        }
+
+        .createAccount {
+            width: 100%;
+            height: 100px;
+            display: flex;
+            padding-top: 20px;
+        }
+
+        .create1 a {
+            text-decoration: none;
+            font-size: 20px;
+            color: #E7A14A;
+        }
+
+            .create1 a:hover {
+                text-decoration: underline;
+            }
+
+        button:hover {
+            background-color: black;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="mainBody">
+        <div class="loginBox">
+            <div class="formBox">
+                <div class="forLogo">
+
+                </div>
+                <div class="forLoginText">
+                    <p>Sign in to GameLand</p>
+                </div>
+                <div class="forerror" id="errorBox">
+                    <div class="icon" id="errorIcon">
+                        <i class="fa fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="text">
+                        <p id="errorMessage"></p>
+                    </div>
+
+
+                </div>
+                <div class="forForm">
+
+                    @using (Html.BeginForm("check", "Sugarcane", FormMethod.Post, new { id = "mainform" }))
+                    {
+        <label>Username</label>
+                        <br />
+                                        <input type="text" name="userName" id="userName" />
+                                                        <br />
+                                                                        <br />
+                                                                                        <label>Password</label>
+                                                                                                        <br />
+                                                                                                                        <input type="password" name="password" id="password" />
+                                                                                                                                        <br />
+                                                                                                                                                        <div class="forgetPassword">
+                                                                                                                                                            <a href="#">Forget Password?</a>
+                                                                                                                                                        </div>
+                                                                                                                                                                        <br />
+                                                                                                                                                                                        <button onclick="return checkEmpty()">Sign In</button>}
+
+                </div>
+                <div class="createAccount">
+                    <div style="margin-left:120px">
+                        <p style="font-size: 20px; color: #696969 ">New to GameLand?</p>
+                    </div>
+                    <div class="create1" style="margin-left:5px;">
+                        <a href="@Url.Action("createAccount","forCreateAccount")">Create Account</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="imageBox">
+            <img src="~/Content/image/fifa.jpg.jpg" />
+        </div>
+    </div>
+    <script>
+        checkNamePassword();
+        function checkEmpty() {
+            let getUserName = document.getElementById("userName").value;
+            let getPassword = document.getElementById("password").value;
+            if (getPassword == '' && getUserName == '') {
+                document.getElementById("errorBox").style.visibility = "Visible";
+                document.getElementById("errorMessage").innerHTML = "Empty User Name and Password "
+                document.getElementById("errorIcon").style.visibility = "Visible";
+                return false;
+
+            }
+            else if (getPassword == '')
+            {
+                document.getElementById("errorBox").style.visibility = "Visible";
+                document.getElementById("errorMessage").innerHTML = "Password cannot be empty "
+                document.getElementById("errorIcon").style.visibility = "Visible";
+
+                return false;
+            }
+            else if (getUserName == '')
+            {
+                document.getElementById("errorBox").style.visibility = "Visible";
+                document.getElementById("errorMessage").innerHTML = "User Name cannot be empty "
+                document.getElementById("errorIcon").style.visibility = "Visible";
+
+            }
+            else {
+                $("#mainform").submit();
+            }
+
+        }
+        function checkNamePassword()
+        {
+            if ("@Session["error"]" == "false") {
+                document.getElementById("errorBox").style.visibility = "Visible";
+                document.getElementById("errorMessage").innerHTML = "Incorrect User Name or Password";
+                document.getElementById("errorIcon").style.visibility = "Visible";
+            }
+
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+

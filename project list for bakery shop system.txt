@@ -1,0 +1,15 @@
+order add
+order delete
+order view
+add to cart
+total
+sign in/out
+searching
+categories
+product 
+gallery view
+admin panel
+add to favourites
+view all
+share
+blog

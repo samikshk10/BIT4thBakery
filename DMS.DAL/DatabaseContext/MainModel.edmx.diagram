@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="91e4e0ae02704f6ba6e551c2de244760" Name="Diagram1" ZoomLevel="92">
+        <EntityTypeShape EntityType="fosModel.bra01branches" Width="1.5" PointX="0.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="fosModel.cfg01configurations" Width="1.5" PointX="5.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="fosModel.customer" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="fosModel.dep01department" Width="1.5" PointX="0.75" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="fosModel.des01designations" Width="1.5" PointX="0.75" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="fosModel.emp01employee" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="fosModel.lvl01employee_levels" Width="1.5" PointX="0.75" PointY="16.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="fosModel.producttable" Width="1.5" PointX="2.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="fosModel.test" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="fosModel.UserCode" Width="1.5" PointX="7.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="fosModel.usr05users" Width="1.5" PointX="5.25" PointY="2.25" IsExpanded="true" />
+        <AssociationConnector Association="fosModel.FK_emp01employee_bra01branches" ManuallyRouted="false" />
+        <AssociationConnector Association="fosModel.FK_usr05users_bra01branches" ManuallyRouted="false" />
+        <AssociationConnector Association="fosModel.FK_emp01employee_dep01department" ManuallyRouted="false" />
+        <AssociationConnector Association="fosModel.FK_emp01employee_des01designations" ManuallyRouted="false" />
+        <AssociationConnector Association="fosModel.FK_emp01employee_lvl01employee_levels" ManuallyRouted="false" />
+        <AssociationConnector Association="fosModel.FK_usr05users_emp01employee" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
