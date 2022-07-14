@@ -311,6 +311,7 @@
     <Compile Include="Controllers\Main\AdminController.cs" />
     <Compile Include="Controllers\Main\AtocController.cs" />
     <Compile Include="Controllers\Main\ConfigurationController.cs" />
+    <Compile Include="Controllers\Main\favouriteController.cs" />
     <Compile Include="Controllers\Main\JavaScriptController.cs" />
     <Compile Include="Controllers\Main\LoginController.cs" />
     <Compile Include="Controllers\Main\RolePermissionController.cs" />
@@ -1082,6 +1083,7 @@
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
     <Content Include="Content\dropzone.css" />
+    <Content Include="Content\favimg\img1.jpg" />
     <Content Include="Content\font-awesome-4.7.0\css\font-awesome.css" />
     <Content Include="Content\font-awesome-4.7.0\css\font-awesome.min.css" />
     <Content Include="Content\font-awesome-4.7.0\fonts\fontawesome-webfont.svg" />
@@ -1513,6 +1515,7 @@
     <Content Include="Views\Login\loginPage1.cshtml" />
     <Content Include="Views\usersignup\index.cshtml" />
     <Content Include="Views\usersignup\views.cshtml" />
+    <Content Include="Views\favourite\index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
