@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="fosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="fosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="bra01branches">
           <Key>
             <PropertyRef Name="bra01uin" />
@@ -136,6 +136,17 @@
           <Property Name="pmfddate" Type="date" />
           <Property Name="pexpdate" Type="date" />
         </EntityType>
+        <EntityType Name="regcustomer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cfullname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="caddress" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="cpno" Type="nvarchar" MaxLength="14" Nullable="false" />
+          <Property Name="cemail" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="cpassword" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="test">
           <Key>
             <PropertyRef Name="id" />
@@ -255,6 +266,7 @@
           <EntitySet Name="emp01employee" EntityType="Self.emp01employee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="lvl01employee_levels" EntityType="Self.lvl01employee_levels" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="producttable" EntityType="Self.producttable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="regcustomer" EntityType="Self.regcustomer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="test" EntityType="Self.test" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserCodes" EntityType="Self.UserCodes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="usr05users" EntityType="Self.usr05users" Schema="dbo" store:Type="Tables" />
@@ -283,8 +295,7 @@
             <End Role="usr05users" EntitySet="usr05users" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="fosModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -577,7 +588,19 @@
             <End Role="emp01employee" EntitySet="emp01employee" />
             <End Role="usr05users" EntitySet="usr05users" />
           </AssociationSet>
+          <EntitySet Name="regcustomers" EntityType="fosModel.regcustomer" />
         </EntityContainer>
+        <EntityType Name="regcustomer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cfullname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="caddress" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="cpno" Type="String" Nullable="false" MaxLength="14" FixedLength="false" Unicode="true" />
+          <Property Name="cemail" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="cpassword" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -760,6 +783,18 @@
                 <ScalarProperty Name="usr05updated_by" ColumnName="usr05updated_by" />
                 <ScalarProperty Name="usr05emp01uin" ColumnName="usr05emp01uin" />
                 <ScalarProperty Name="usr05can_view_all_branch" ColumnName="usr05can_view_all_branch" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="regcustomers">
+            <EntityTypeMapping TypeName="fosModel.regcustomer">
+              <MappingFragment StoreEntitySet="regcustomer">
+                <ScalarProperty Name="cpassword" ColumnName="cpassword" />
+                <ScalarProperty Name="cemail" ColumnName="cemail" />
+                <ScalarProperty Name="cpno" ColumnName="cpno" />
+                <ScalarProperty Name="caddress" ColumnName="caddress" />
+                <ScalarProperty Name="cfullname" ColumnName="cfullname" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

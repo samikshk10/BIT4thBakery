@@ -36,5 +36,6 @@ namespace DMS.DAL.DatabaseContext
         public virtual DbSet<test> tests { get; set; }
         public virtual DbSet<UserCode> UserCodes { get; set; }
         public virtual DbSet<usr05users> usr05users { get; set; }
+        public virtual DbSet<regcustomer> regcustomers { get; set; }
     }
 }

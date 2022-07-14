@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="91e4e0ae02704f6ba6e551c2de244760" Name="Diagram1" ZoomLevel="92">
+      <Diagram DiagramId="91e4e0ae02704f6ba6e551c2de244760" Name="Diagram1" ZoomLevel="88">
         <EntityTypeShape EntityType="fosModel.bra01branches" Width="1.5" PointX="0.75" PointY="2" IsExpanded="true" />
         <EntityTypeShape EntityType="fosModel.cfg01configurations" Width="1.5" PointX="5.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="fosModel.customer" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
@@ -22,6 +22,7 @@
         <AssociationConnector Association="fosModel.FK_emp01employee_des01designations" ManuallyRouted="false" />
         <AssociationConnector Association="fosModel.FK_emp01employee_lvl01employee_levels" ManuallyRouted="false" />
         <AssociationConnector Association="fosModel.FK_usr05users_emp01employee" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="fosModel.regcustomer" Width="1.5" PointX="10.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
