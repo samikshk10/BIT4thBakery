@@ -35,32 +35,39 @@ namespace DMS.Controllers.Main
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-        public ActionResult edit(int pid)
+        public ActionResult edit(int id)
         {
-            producttable old_data = db.producttables.Find(pid);//find data using primary key
+            producttable data = db.producttables.Find(id);//find data using primary key
             //employee_table data = db.employee_table.FirstOrDefault(x => x.id == id); want to find not from id but from other
-            return View(old_data); 
+            return View(data); 
         }
-        [HttpPost]
-        public ActionResult UpdateData(producttable producttable)
+
+        public ActionResult updatedata(producttable producttable)
         {
             db.Entry(producttable).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("Index");
 
         }
-
-        //public ActionResult Index(string name)
-        //{
-        //    var results = db.producttables.Where(x => x.pname == name).ToList();
-        //    return View(results);
-        //}
+        public ActionResult deletedata(int pid)
+        {
+            producttable data = db.producttables.Find(pid);
+            db.producttables.Remove(data);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        [HttpPost]
+        public ActionResult Index(string namesearch)
+        {
+           var results = db.producttables.Where(x => x.pname == namesearch).ToList();
+          return View(results);
+        }
         //[HttpPost]
         //public ActionResult Index(int id, string name)
         //{
         //    var result = db.producttables.Where(x => x.pid == id).ToList();
         //    return View(result);
-          
+
         //}
     }
 }
