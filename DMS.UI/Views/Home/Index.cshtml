@@ -1,10 +1,77 @@
 
 
+<style>
+    .cart {
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: center;
+        background: #f3e7d9;
+        position: fixed;
+        top: 0px;
+        right: 0px;
+        width: 20%;
+        padding: 0;
+        margin: 0;
+        align-content: flex-start;
+        height: 100%;
+        
+        overflow: scroll;
+    }
 
+    .cart > div{
+        flex:1 0 100%;
+        padding-top:20px;
+        padding-bottom:0px;
+        padding-left:50px;
+        
+    }
+    .cart >h3{
+        text-align:center;
+        font-size:30px;
+        height:60px;
+        border-bottom:2px solid black;
+        padding:10px;
+    }
+    .totalAmount{
+        margin-right:50px;
+        display:block;
+        text-align:right;
+        font-size:15px;
+    }
 
+    .cross{
+        position:fixed;
+        top:2px;
+        right:25px;
+    }
+    .cross:hover{
+        cursor:pointer;
+    }
+   
+    .active{
+        z-index:1000;
+    }
+    .totalAmtLabel {
+        font-size: 20px;
+        border-top: 2px solid black;
+    }
+</style>
     @*Go To Top Button*@
 <button id="goToTop" onclick="goTop()"><i class="fa fa-angle-up fa-lg"></i></button>
  @*Home Section*@
+<div class="cart" style="display:none;">
+    <img src="~/Content/Images/cross-png.png" style="width:15px;height:15px;" class="cross"alt ="">
+    <h3>Your Cart</h3>
+
+
+    <div class="concl">
+
+
+        <span class="totalAmtLabel"> Total Amount</span>
+
+        <span class="totalAmount"></span>
+    </div>
+</div>
 <section class="home" id="home">
     <div class="slides-container">
 
@@ -153,7 +220,7 @@
 
         @*<div class="box">
             <div class="icons">
-                <a href="#" class="fas fa-shopping-cart"></a>
+                <a  class="fas fa-shopping-cart"></a>
                 <a href="#" class="fas fa-heart"></a>
                 <a href="#" class="fas fa-eye"></a>
             </div>
@@ -175,7 +242,7 @@
 
         <div class="box">
             <div class="icons">
-                <a href="#" class="fas fa-shopping-cart"></a>
+                <a class="fas fa-shopping-cart"></a>
                 <a href="#" class="fas fa-heart"></a>
                 <a href="#" class="fas fa-eye"></a>
             </div>
@@ -197,7 +264,7 @@
 
         <div class="box">
             <div class="icons">
-                <a href="#" class="fas fa-shopping-cart"></a>
+                <a class="fas fa-shopping-cart"></a>
                 <a href="#" class="fas fa-heart"></a>
                 <a href="#" class="fas fa-eye"></a>
             </div>
@@ -219,7 +286,7 @@
 
         <div class="box">
             <div class="icons">
-                <a href="#" class="fas fa-shopping-cart"></a>
+                <a class="fas fa-shopping-cart"></a>
                 <a href="#" class="fas fa-heart"></a>
                 <a href="#" class="fas fa-eye"></a>
             </div>
@@ -241,7 +308,7 @@
 
         <div class="box">
             <div class="icons">
-                <a href="#" class="fas fa-shopping-cart"></a>
+                <a class="fas fa-shopping-cart"></a>
                 <a href="#" class="fas fa-heart"></a>
                 <a href="#" class="fas fa-eye"></a>
             </div>
@@ -263,7 +330,7 @@
 
         <div class="box">
             <div class="icons">
-                <a href="#" class="fas fa-shopping-cart"></a>
+                <a class="fas fa-shopping-cart"></a>
                 <a href="#" class="fas fa-heart"></a>
                 <a href="#" class="fas fa-eye"></a>
             </div>
@@ -285,7 +352,7 @@
 
         <div class="box">
             <div class="icons">
-                <a href="#" class="fas fa-shopping-cart"></a>
+                <a class="fas fa-shopping-cart"></a>
                 <a href="#" class="fas fa-heart"></a>
                 <a href="#" class="fas fa-eye"></a>
             </div>
@@ -703,4 +770,65 @@
 
 
 <div class="space"></div>
+<script>
+    //box chainxa
+    let totalAmount = 0;
+    const cartVar = document.querySelector('.cart');
+    let count = 0;
+    const Products = document.querySelectorAll('.fa-shopping-cart');
+    let crossEl = document.querySelector('.cross');
+    Products.forEach(function (each) {
 
+        each.addEventListener('click', function (e) {
+            console.log('clicked');
+            if (count === 0) {
+                cartVar.style.display = "flex";
+                cartVar.classList.add("active");
+                count = 1;
+
+
+
+            }
+            let button = e.target;
+            let Item = button.parentElement.parentElement;
+            let imgEl = Item.querySelector('.img').getElementsByTagName('img')[0].getAttribute('src');
+            let titleEl = Item.querySelector('.content').children[0].innerText;
+            let priceEl = Item.querySelector('.content').children[1].innerText.replace('$', '');
+            let totalAmountEl = document.querySelector('.totalAmount');
+            console.log('total amount el' + totalAmountEl);
+            console.log(priceEl);
+            console.log(imgEl);
+            console.log(titleEl);
+            console.log(cartVar);
+            console.log(cartVar.children[1].children[1]);
+            CartDisplay(imgEl, titleEl, priceEl);
+            function CartDisplay(imageEl, titleEl, priceEl) {
+                const array = `<div class="cart-box"> 
+               <div class="img">
+                <img src="${imgEl}" alt="" style="width:150px; height:100px;">
+                </div>
+                <h3>${titleEl} </h3>
+                 <div class="price" style="font-size:14px;">Rs. ${priceEl}</div>
+                </div>`;
+                cartVar.getElementsByTagName('h3')[0].insertAdjacentHTML('afterend', array);
+
+                totalAmount = totalAmount + Number(priceEl);
+                totalAmount = Number(totalAmount.toFixed(2));
+                console.log(totalAmount);
+                console.log(totalAmountEl)
+                totalAmountEl.innerText = 'Rs. ' + totalAmount;
+                console.log(totalAmount);
+            }
+
+        })
+    })
+
+    crossEl.addEventListener('click', function () {
+       
+        cartVar.classList.remove('active');
+        cartVar.style.display = 'none';
+        count = 0;
+    })
+
+
+</script>
