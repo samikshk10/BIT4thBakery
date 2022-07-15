@@ -11,16 +11,10 @@ namespace DMS.DAL.DatabaseContext
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class regcustomer
     {
-       
         public int id { get; set; }
-
-        [Required(ErrorMessage = "This field is Required")]
-        [Display(Name ="cfullname")]
-    
         public string cfullname { get; set; }
         public string caddress { get; set; }
         public string cpno { get; set; }

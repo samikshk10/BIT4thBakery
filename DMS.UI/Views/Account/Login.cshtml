@@ -37,6 +37,14 @@
                                 <div class="">
                                     <div class="">
                                         <span class="input-icon">
+                                            <label>Is Admin</label>
+                                            <input type="checkbox" value="true" name="IsAdmin" />
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="">
+                                    <div class="">
+                                        <span class="input-icon">
                                             @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @Id = "username", @placeholder = "User Name" } })
                                             <i class="fa fa-user "></i>
                                         </span>

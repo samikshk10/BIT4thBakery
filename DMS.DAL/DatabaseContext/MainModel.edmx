@@ -141,11 +141,11 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="cfullname" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="caddress" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="cpno" Type="nvarchar" MaxLength="14" Nullable="false" />
-          <Property Name="cemail" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="cpassword" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="cfullname" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="caddress" Type="varchar" MaxLength="55" Nullable="false" />
+          <Property Name="cpno" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="cemail" Type="varchar" MaxLength="55" Nullable="false" />
+          <Property Name="cpassword" Type="varchar" MaxLength="55" Nullable="false" />
         </EntityType>
         <EntityType Name="test">
           <Key>
@@ -184,6 +184,7 @@
           <Property Name="usr05updated_by" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="usr05emp01uin" Type="int" />
           <Property Name="usr05can_view_all_branch" Type="bit" Nullable="false" />
+          <Property Name="isadmin" Type="bit" />
         </EntityType>
         <Association Name="FK_emp01employee_bra01branches">
           <End Role="bra01branches" Type="Self.bra01branches" Multiplicity="1" />
@@ -318,7 +319,7 @@
           <Property Name="bra01updated_date_eng" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="bra01updated_date_nep" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
           <NavigationProperty Name="emp01employee" Relationship="Self.FK_emp01employee_bra01branches" FromRole="bra01branches" ToRole="emp01employee" />
-          <NavigationProperty Name="usr05users" Relationship="Self.FK_usr05users_bra01branches" FromRole="bra01branches" ToRole="usr05users" />
+          <NavigationProperty Name="usr05users" Relationship="fosModel.FK_usr05users_bra01branches" FromRole="bra01branches" ToRole="usr05users" />
         </EntityType>
         <EntityType Name="cfg01configurations">
           <Key>
@@ -408,7 +409,7 @@
           <NavigationProperty Name="dep01department" Relationship="Self.FK_emp01employee_dep01department" FromRole="emp01employee" ToRole="dep01department" />
           <NavigationProperty Name="des01designations" Relationship="Self.FK_emp01employee_des01designations" FromRole="emp01employee" ToRole="des01designations" />
           <NavigationProperty Name="lvl01employee_levels" Relationship="Self.FK_emp01employee_lvl01employee_levels" FromRole="emp01employee" ToRole="lvl01employee_levels" />
-          <NavigationProperty Name="usr05users" Relationship="Self.FK_usr05users_emp01employee" FromRole="emp01employee" ToRole="usr05users" />
+          <NavigationProperty Name="usr05users" Relationship="fosModel.FK_usr05users_emp01employee" FromRole="emp01employee" ToRole="usr05users" />
         </EntityType>
         <EntityType Name="lvl01employee_levels">
           <Key>
@@ -462,24 +463,6 @@
           <Property Name="code" Type="Int64" Nullable="false" />
           <Property Name="CodeUsed" Type="Boolean" Nullable="false" />
         </EntityType>
-        <EntityType Name="usr05users">
-          <Key>
-            <PropertyRef Name="usr05userId" />
-          </Key>
-          <Property Name="usr05userId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="usr05bra01uin" Type="Int32" Nullable="false" />
-          <Property Name="usr05type" Type="Byte" Nullable="false" />
-          <Property Name="usr05status" Type="Boolean" Nullable="false" />
-          <Property Name="usr05deleted" Type="Boolean" Nullable="false" />
-          <Property Name="usr05created_date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="usr05created_by" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="usr05updated_date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="usr05updated_by" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="usr05emp01uin" Type="Int32" />
-          <Property Name="usr05can_view_all_branch" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="bra01branches" Relationship="Self.FK_usr05users_bra01branches" FromRole="usr05users" ToRole="bra01branches" />
-          <NavigationProperty Name="emp01employee" Relationship="Self.FK_usr05users_emp01employee" FromRole="usr05users" ToRole="emp01employee" />
-        </EntityType>
         <Association Name="FK_emp01employee_bra01branches">
           <End Role="bra01branches" Type="Self.bra01branches" Multiplicity="1" />
           <End Role="emp01employee" Type="Self.emp01employee" Multiplicity="*" />
@@ -489,18 +472,6 @@
             </Principal>
             <Dependent Role="emp01employee">
               <PropertyRef Name="emp01bra01uin" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_usr05users_bra01branches">
-          <End Role="bra01branches" Type="Self.bra01branches" Multiplicity="1" />
-          <End Role="usr05users" Type="Self.usr05users" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="bra01branches">
-              <PropertyRef Name="bra01uin" />
-            </Principal>
-            <Dependent Role="usr05users">
-              <PropertyRef Name="usr05bra01uin" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -540,18 +511,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_usr05users_emp01employee">
-          <End Role="emp01employee" Type="Self.emp01employee" Multiplicity="0..1" />
-          <End Role="usr05users" Type="Self.usr05users" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="emp01employee">
-              <PropertyRef Name="emp01uin" />
-            </Principal>
-            <Dependent Role="usr05users">
-              <PropertyRef Name="usr05emp01uin" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="MainEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="bra01branches" EntityType="Self.bra01branches" />
           <EntitySet Name="cfg01configurations" EntityType="Self.cfg01configurations" />
@@ -563,14 +522,9 @@
           <EntitySet Name="producttables" EntityType="Self.producttable" />
           <EntitySet Name="tests" EntityType="Self.test" />
           <EntitySet Name="UserCodes" EntityType="Self.UserCode" />
-          <EntitySet Name="usr05users" EntityType="Self.usr05users" />
           <AssociationSet Name="FK_emp01employee_bra01branches" Association="Self.FK_emp01employee_bra01branches">
             <End Role="bra01branches" EntitySet="bra01branches" />
             <End Role="emp01employee" EntitySet="emp01employee" />
-          </AssociationSet>
-          <AssociationSet Name="FK_usr05users_bra01branches" Association="Self.FK_usr05users_bra01branches">
-            <End Role="bra01branches" EntitySet="bra01branches" />
-            <End Role="usr05users" EntitySet="usr05users" />
           </AssociationSet>
           <AssociationSet Name="FK_emp01employee_dep01department" Association="Self.FK_emp01employee_dep01department">
             <End Role="dep01department" EntitySet="dep01department" />
@@ -584,24 +538,72 @@
             <End Role="lvl01employee_levels" EntitySet="lvl01employee_levels" />
             <End Role="emp01employee" EntitySet="emp01employee" />
           </AssociationSet>
-          <AssociationSet Name="FK_usr05users_emp01employee" Association="Self.FK_usr05users_emp01employee">
+          <EntitySet Name="regcustomers" EntityType="fosModel.regcustomer" />
+          <EntitySet Name="usr05users" EntityType="fosModel.usr05users" />
+          <AssociationSet Name="FK_usr05users_bra01branches" Association="fosModel.FK_usr05users_bra01branches">
+            <End Role="bra01branches" EntitySet="bra01branches" />
+            <End Role="usr05users" EntitySet="usr05users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_usr05users_emp01employee" Association="fosModel.FK_usr05users_emp01employee">
             <End Role="emp01employee" EntitySet="emp01employee" />
             <End Role="usr05users" EntitySet="usr05users" />
           </AssociationSet>
-          <EntitySet Name="regcustomers" EntityType="fosModel.regcustomer" />
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="regcustomer">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="cfullname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="caddress" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="cpno" Type="String" Nullable="false" MaxLength="14" FixedLength="false" Unicode="true" />
-          <Property Name="cemail" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="cpassword" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="cfullname" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="caddress" Type="String" Nullable="false" MaxLength="55" FixedLength="false" Unicode="false" />
+          <Property Name="cpno" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="cemail" Type="String" Nullable="false" MaxLength="55" FixedLength="false" Unicode="false" />
+          <Property Name="cpassword" Type="String" Nullable="false" MaxLength="55" FixedLength="false" Unicode="false" />
         </EntityType>
-      </Schema>
+        <EntityType Name="usr05users">
+          <Key>
+            <PropertyRef Name="usr05userId" />
+          </Key>
+          <Property Name="usr05userId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="usr05bra01uin" Type="Int32" Nullable="false" />
+          <Property Name="usr05type" Type="Byte" Nullable="false" />
+          <Property Name="usr05status" Type="Boolean" Nullable="false" />
+          <Property Name="usr05deleted" Type="Boolean" Nullable="false" />
+          <Property Name="usr05created_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="usr05created_by" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="usr05updated_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="usr05updated_by" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="usr05emp01uin" Type="Int32" />
+          <Property Name="usr05can_view_all_branch" Type="Boolean" Nullable="false" />
+          <Property Name="isadmin" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="bra01branches" Relationship="fosModel.FK_usr05users_bra01branches" FromRole="usr05users" ToRole="bra01branches" />
+          <NavigationProperty Name="emp01employee" Relationship="fosModel.FK_usr05users_emp01employee" FromRole="usr05users" ToRole="emp01employee" />
+        </EntityType>
+        <Association Name="FK_usr05users_bra01branches">
+          <End Type="fosModel.bra01branches" Role="bra01branches" Multiplicity="1" />
+          <End Type="fosModel.usr05users" Role="usr05users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="bra01branches">
+              <PropertyRef Name="bra01uin" />
+            </Principal>
+            <Dependent Role="usr05users">
+              <PropertyRef Name="usr05bra01uin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_usr05users_emp01employee">
+          <End Type="fosModel.emp01employee" Role="emp01employee" Multiplicity="0..1" />
+          <End Type="fosModel.usr05users" Role="usr05users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="emp01employee">
+              <PropertyRef Name="emp01uin" />
+            </Principal>
+            <Dependent Role="usr05users">
+              <PropertyRef Name="usr05emp01uin" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -769,23 +771,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="usr05users">
-            <EntityTypeMapping TypeName="fosModel.usr05users">
-              <MappingFragment StoreEntitySet="usr05users">
-                <ScalarProperty Name="usr05userId" ColumnName="usr05userId" />
-                <ScalarProperty Name="usr05bra01uin" ColumnName="usr05bra01uin" />
-                <ScalarProperty Name="usr05type" ColumnName="usr05type" />
-                <ScalarProperty Name="usr05status" ColumnName="usr05status" />
-                <ScalarProperty Name="usr05deleted" ColumnName="usr05deleted" />
-                <ScalarProperty Name="usr05created_date" ColumnName="usr05created_date" />
-                <ScalarProperty Name="usr05created_by" ColumnName="usr05created_by" />
-                <ScalarProperty Name="usr05updated_date" ColumnName="usr05updated_date" />
-                <ScalarProperty Name="usr05updated_by" ColumnName="usr05updated_by" />
-                <ScalarProperty Name="usr05emp01uin" ColumnName="usr05emp01uin" />
-                <ScalarProperty Name="usr05can_view_all_branch" ColumnName="usr05can_view_all_branch" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="regcustomers">
             <EntityTypeMapping TypeName="fosModel.regcustomer">
               <MappingFragment StoreEntitySet="regcustomer">
@@ -795,6 +780,24 @@
                 <ScalarProperty Name="caddress" ColumnName="caddress" />
                 <ScalarProperty Name="cfullname" ColumnName="cfullname" />
                 <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usr05users">
+            <EntityTypeMapping TypeName="fosModel.usr05users">
+              <MappingFragment StoreEntitySet="usr05users">
+                <ScalarProperty Name="isadmin" ColumnName="isadmin" />
+                <ScalarProperty Name="usr05can_view_all_branch" ColumnName="usr05can_view_all_branch" />
+                <ScalarProperty Name="usr05emp01uin" ColumnName="usr05emp01uin" />
+                <ScalarProperty Name="usr05updated_by" ColumnName="usr05updated_by" />
+                <ScalarProperty Name="usr05updated_date" ColumnName="usr05updated_date" />
+                <ScalarProperty Name="usr05created_by" ColumnName="usr05created_by" />
+                <ScalarProperty Name="usr05created_date" ColumnName="usr05created_date" />
+                <ScalarProperty Name="usr05deleted" ColumnName="usr05deleted" />
+                <ScalarProperty Name="usr05status" ColumnName="usr05status" />
+                <ScalarProperty Name="usr05type" ColumnName="usr05type" />
+                <ScalarProperty Name="usr05bra01uin" ColumnName="usr05bra01uin" />
+                <ScalarProperty Name="usr05userId" ColumnName="usr05userId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

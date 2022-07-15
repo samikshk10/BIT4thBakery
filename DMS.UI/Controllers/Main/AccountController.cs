@@ -112,122 +112,136 @@ namespace DMS.UI.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginViewModel model)
+        public async Task<ActionResult> Login(LoginViewModel model, bool? IsAdmin)
         {
             try
             {
-
                 SystemInfoForSession systemSession = new SystemInfoForSession();
-                systemSession.RoleId = null;
-                systemSession.UserName = null;
-                systemSession.UserId = null;
-                systemSession.IsAdmin = false;
-                //systemSession.RoleName = "";
-
-                if (!ModelState.IsValid)
+                if (IsAdmin == true)
                 {
 
-                    throw new Exception("Invalid Model State. Errors: " + ""
-                    //String.Join(',',
-                    //ModelState.Values
-                    // .Where(x => x.Errors.Count() > 0)
-                    // .Select(x => x.Errors)
-                    // .ToArray()
-                    //)
-                    );
-                }
-
-                var user = await _userManager.FindByNameAsync(model.Email);
-                if (user == null)
-                {
-                    throw new Exception("Invalid User Name.");
-                }
-                if (user != null)
-                {
-                    if (user.IsDelete == true)
+                    systemSession.RoleId = null;
+                    systemSession.UserName = null;
+                    systemSession.UserId = null;
+                    systemSession.IsAdmin = false;
+                    //systemSession.RoleName = "";
+                    if (!ModelState.IsValid)
                     {
-                        throw new Exception("User with deleted status cannot make login.");
+
+                        throw new Exception("Invalid Model State. Errors: " + ""
+                        //String.Join(',',
+                        //ModelState.Values
+                        // .Where(x => x.Errors.Count() > 0)
+                        // .Select(x => x.Errors)
+                        // .ToArray()
+                        //)
+                        );
                     }
-                    if (user.IsActive == false)
+
+                    var user = await _userManager.FindByNameAsync(model.Email);
+                    if (user == null)
                     {
-                        throw new Exception("User with inactive status cannot make login.");
+                        throw new Exception("Invalid User Name.");
                     }
-                    SignInStatus result = await _signInManager.PasswordSignInAsync(user.UserName, model.Password, model.RememberMe, shouldLockout: false);
-                    if (result.ToString() == "Success")
+                    if (user != null)
                     {
-                        var Role = user.Roles.FirstOrDefault();
-
-                        //if (Role == null)
-                        //{
-                        //    TempData["ErrMessage"] = "Role Are Not Set This User Please Contact Admin.";
-                        //    return RedirectToAction("Login", "Account");
-                        //}
-
-                        systemSession.UserId = user.Id;
-                        if (Role != null)  //// not using in 1st phase
+                        if (user.IsDelete == true)
                         {
-                            var roleStore = new RoleStore<IdentityRole>(_dbIdentityEntities);
-                            var roleMngr = new RoleManager<IdentityRole>(roleStore);
-
-                            var roles = roleMngr.Roles.ToList();
-
-                            systemSession.RoleIds = user.Roles.ToArray();
-                            systemSession.RoleInfoId = user.Roles.Select(s => s.RoleId).ToArray();
-                            //
-                            systemSession.RoleInfoEnum = roles.Where(x => systemSession.RoleInfoId.Contains(x.Id)).Select(s => s.Name).ToArray();
-                            //systemSession.RoleInfoNames = user.Roles.Select(s => s.).ToArray();
-
-                            systemSession.RoleId = Role.RoleId;
-
+                            throw new Exception("User with deleted status cannot make login.");
                         }
-                        IdentityEntities db = new IdentityEntities();
-
-                        var User = _dbMainEntities.usr05users
-                        .Include(x => x.bra01branches)
-                        .Include(x => x.emp01employee)
-                        .SingleOrDefault(x => x.usr05userId == user.Id);
-
-                        if (User != null)
+                        if (user.IsActive == false)
                         {
-                            if (User.usr05deleted == true)
+                            throw new Exception("User with inactive status cannot make login.");
+                        }
+                        SignInStatus result = await _signInManager.PasswordSignInAsync(user.UserName, model.Password, model.RememberMe, shouldLockout: false);
+                        if (result.ToString() == "Success")
+                        {
+                            var Role = user.Roles.FirstOrDefault();
+
+                            //if (Role == null)
+                            //{
+                            //    TempData["ErrMessage"] = "Role Are Not Set This User Please Contact Admin.";
+                            //    return RedirectToAction("Login", "Account");
+                            //}
+
+                            systemSession.UserId = user.Id;
+                            if (Role != null)  //// not using in 1st phase
                             {
-                                AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-                                throw new Exception("Invalid User Name.");
+                                var roleStore = new RoleStore<IdentityRole>(_dbIdentityEntities);
+                                var roleMngr = new RoleManager<IdentityRole>(roleStore);
+
+                                var roles = roleMngr.Roles.ToList();
+
+                                systemSession.RoleIds = user.Roles.ToArray();
+                                systemSession.RoleInfoId = user.Roles.Select(s => s.RoleId).ToArray();
+                                //
+                                systemSession.RoleInfoEnum = roles.Where(x => systemSession.RoleInfoId.Contains(x.Id)).Select(s => s.Name).ToArray();
+                                //systemSession.RoleInfoNames = user.Roles.Select(s => s.).ToArray();
+
+                                systemSession.RoleId = Role.RoleId;
+
                             }
-                            if (User.emp01employee != null)
+                            IdentityEntities db = new IdentityEntities();
+
+                            var User = _dbMainEntities.usr05users
+                            .Include(x => x.bra01branches)
+                            .Include(x => x.emp01employee)
+                            .SingleOrDefault(x => x.usr05userId == user.Id);
+
+                            if (User != null)
                             {
-                                systemSession.EmployeeId = User.usr05emp01uin.Value;
-                                systemSession.EmployeeName = User.emp01employee.emp01name;
+                                if (User.usr05deleted == true)
+                                {
+                                    AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+                                    throw new Exception("Invalid User Name.");
+                                }
+                                if (User.emp01employee != null)
+                                {
+                                    systemSession.EmployeeId = User.usr05emp01uin.Value;
+                                    systemSession.EmployeeName = User.emp01employee.emp01name;
+                                }
+
+                                systemSession.BranchId = User.usr05bra01uin;
+                                systemSession.BranchName = User.bra01branches.bra01name;
+                                systemSession.bra01branches = User.bra01branches;
+                                IsAdmin = User.isadmin;
+
                             }
+                            systemSession.UserName = user.UserName;
 
-                            systemSession.BranchId = User.usr05bra01uin;
-                            systemSession.BranchName = User.bra01branches.bra01name;
-                            systemSession.bra01branches = User.bra01branches;
-
-
+                            if (systemSession.DocHandlerID == 0)
+                            {
+                                //todo: log exception
+                            }
                         }
-                        systemSession.UserName = user.UserName;
-
-                        if (systemSession.DocHandlerID == 0)
+                        else
                         {
-                            //todo: log exception
+                            throw new Exception("User Name Or Password does not match.");
                         }
                     }
-                    else
+                    //add menu cache
+                    //_MenuService.AddMenuCache(systemSession.RoleInfoId);
+
+                }
+                else
+                {
+                    regcustomer checkUser = _dbMainEntities.regcustomers.FirstOrDefault(x => x.cemail == model.Email && x.cpassword == model.Password);
+                    if (checkUser == null)
                     {
-                        throw new Exception("User Name Or Password does not match.");
+                        throw new Exception("User Name or Password doesn't match");
                     }
+
+
+                    Session["cfullname"] = checkUser.cfullname;
                 }
                 Session["SystemInfoForSession"] = systemSession;
-                //add menu cache
-                //_MenuService.AddMenuCache(systemSession.RoleInfoId);
-
                 ViewHelper.cfg01configurations = _dbMainEntities.cfg01configurations.ToList();
 
-                if (model.returnUrl != null)
+                if (IsAdmin == true)
                 {
-                    return RedirectToLocal(model.returnUrl);
+                    return RedirectToAction("Index", "Admin");
                 }
+
                 return RedirectToAction("Dashboard", "Home");
 
             }
@@ -522,7 +536,7 @@ namespace DMS.UI.Controllers
                 }
 
                 DateTime current_date = DateTime.Now;
-                    var user = await _userManager.FindByNameAsync(model.UserName);
+                var user = await _userManager.FindByNameAsync(model.UserName);
                 var check_code = _UserCodesRepo.GetList().OrderByDescending(x => x.id).FirstOrDefault(x => x.user_id == user.Id && (DbFunctions.TruncateTime(x.requested_date) == DbFunctions.TruncateTime(current_date) || DbFunctions.TruncateTime(x.valid_till_date) == DbFunctions.TruncateTime(current_date)));
                 if (check_code != null)
                 {

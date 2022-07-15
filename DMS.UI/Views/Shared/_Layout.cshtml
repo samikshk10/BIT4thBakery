@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -142,7 +143,7 @@
             <a href="#review">Review</a>
             <a href="#blog">Blog</a>
             <a href="#contact">Contact</a>
-            
+
         </nav>
         <div class="icons">
             <div id="menu-btn" class="fas fa-bars"></div>
@@ -151,10 +152,18 @@
             <div id="cart-btn" class="fas fa-shopping-cart"></div>
             <a href="@Url.Action("index","Admin")"> <div id="login-btn" class="fas fa-user"></div></a>
 
-       
+
+            <p>
+                @if (Session["cfullname"] != null)
+                {
+                    <span> @((Session["cfullname"]).ToString())</span>
+                }
+            </p>
+
+
 
         </div>
-     
+
 
     </header>
 
@@ -164,7 +173,7 @@
     @RenderBody()
 
 
-    
+
 
     <section class="credit">created by Dailywebdesign || all rights reserved</section>
 
