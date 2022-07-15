@@ -36,13 +36,30 @@ namespace DMS.Controllers
         {
             return View();
         }
-
-
+      
         public ActionResult Index()
         {
-            return View();
-            //
+            List<producttable> all_data = db.producttables.ToList();
+            string path = Server.MapPath("~/Content/productimage");
+
+            string[] imagesfiles = Directory.GetFiles(path);
+            ViewBag.productimage = imagesfiles;
+            return View(all_data);
+            
         }
+        //[HttpGet]
+        //    public ActionResult Index(int id)
+        //{
+        //    producttable producttable = new producttable();
+        //    using (MainEntities db= new MainEntities())
+        //    {
+        //        producttable = db.producttables.Where(x => x.pid == id).FirstOrDefault();
+        //    }
+        //    return View(producttable);
+            
+        //}
+
+        
         //asdf
 
         public ActionResult About()

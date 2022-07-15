@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -29,8 +30,23 @@ namespace DMS.Controllers.Main
         {
             return View();
         }
-        public ActionResult SaveData(producttable producttable)
+        [HttpPost]
+        public ActionResult SaveData(producttable producttable, HttpPostedFileBase pimage)
         {
+            string path = Server.MapPath("~/Content/productimage");
+            string filename = pimage.FileName;
+            string newpath = path + "/" + filename;
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+            pimage.SaveAs(newpath);
+            producttable.pimage = "~/Content/productimage/" + filename;
+           
+
+
+
+
             db.producttables.Add(producttable);
             db.SaveChanges();
             return RedirectToAction("Index");

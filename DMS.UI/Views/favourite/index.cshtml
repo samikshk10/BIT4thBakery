@@ -1,0 +1,498 @@
+﻿
+@{
+    ViewBag.Title = "index";
+}
+@*ht://www.youtube.com/watch?v=OAPRagDr4pU
+    *@
+
+<style>
+    * {
+        font-family: sans-serif,sans-serif;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        outline: none;
+        border: none;
+        text-decoration: none;
+        transition: all .2s linear;
+        text-transform: capitalize;
+    }
+
+    html {
+        font-size: 62.5%;
+    }
+
+    body {
+        background: white;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 3rem 2rem;
+    }
+
+        .container .title {
+            font-size: 3.5rem;
+            color: #444;
+            margin-bottom: 3rem;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        .container .products-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit,minmax(30rem,1fr));
+            gap: 2rem;
+        }
+
+            .container .products-container .product {
+                text-align: center;
+                padding: 3rem 2rem;
+                background: white;
+                box-shadow: 0 .5rem 1rem rgba(0,0,0,.1);
+                outline: .1rem solid white;
+                outline-offset: -1.5rem;
+                cursor: pointer;
+            }
+
+                .container .products-container .product img {
+                    height: 25rem;
+                }
+
+                .container .products-container .product:hover {
+                    outline: .1rem solid #222;
+                    outline-offset: 0;
+                }
+
+                    .container .products-container .product:hover img {
+                        transition: ease-in;
+                    }
+
+                .container .products-container .product h3 {
+                    padding: 5rem 0;
+                    font-size: 2rem;
+                    color: #444;
+                }
+
+                .container .products-container .product:hover h3 {
+                    color: #27ae60;
+                }
+
+                .container .products-container .product .price {
+                    font-size: 2rem;
+                    color: #444;
+                }
+
+
+    .product-preview {
+        position: fixed;
+        top: 0;
+        left: 0;
+        min-height: 100vh;
+        width: 100%;
+        background: rgba(0,0,0,.8);
+        display: none;
+        align-items: center;
+        justify-content: center;
+    }
+
+        .product-preview .preview {
+            display: none;
+            padding: 2rem;
+            text-align: center;
+            background: white;
+            position: relative;
+            margin: 2rem;
+            width: 40rem;
+        }
+
+            .product-preview .preview .active {
+                display: inline-block;
+            }
+
+
+            .product-preview .preview img {
+                height: 30rem;
+            }
+
+            .product-preview .preview .fa-times {
+                position: absolute;
+                top: 1rem;
+                right: 1.5rem;
+                cursor: pointer;
+                color: #444;
+                font-size: 4rem;
+            }
+
+    product-preview .preview h3 {
+        color: #444;
+        padding: .5rem 0;
+        font-size: 2.5rem;
+    }
+
+    product-preview .preview .stars {
+        padding: 1rem 0;
+        font-size: 1.7rem;
+    }
+
+        product-preview .preview .stars i {
+            color: #27ae60;
+        }
+
+        product-preview .preview .stars span {
+            color: #999
+        }
+
+    product-preview .preview p {
+        line-height: 1.5;
+        padding: 1rem 0;
+        font-size: 1.6rem;
+        color: #777;
+    }
+
+    product-preview .preview .price {
+        padding: 1rem 0;
+        font-size: 2.5rem;
+        color: #27ae60;
+    }
+
+    product-preview .preview .buttons {
+        display: flex;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+        margin-top: 1rem;
+    }
+
+        product-preview .preview .buttons a {
+            flex: 1 1 16rem;
+            padding: 1rem;
+            font-size: 1.8rem;
+            color: #444;
+            border: .1rem solid #444;
+        }
+
+            product-preview .preview .buttons a.buy:hover {
+                background: #444;
+                color: white;
+            }
+
+            product-preview .preview .buttons a.cart:hover {
+                background: #111;
+            }
+</style>
+
+
+
+
+
+<script>
+
+</script>
+
+<body>
+
+    <div class="container">
+
+        <h3 class="title">PRODUCTS</h3>
+
+        <div class="products-container">
+            <div class="product" data-name="p-1">
+                <img src="~/Content/favimg/img1.jpg" alt="">
+                <h3>DONUT</h3>
+                <div class="price">Rs.20</div>
+            </div>
+
+            <div class="product" data-name="p-2">
+                <img src="~/Content/favimg/img1.jpg" alt="">
+                <h3>DONUT</h3>
+                <div class="price">Rs.20</div>
+            </div>
+
+
+            <div class="product" data-name="p-3">
+                <img src="~/Content/favimg/img1.jpg" alt="">
+                <h3>DONUT</h3>
+                <div class="price">Rs.20</div>
+            </div>
+
+            <div class="product" data-name="p-4">
+                <img src="~/Content/favimg/img1.jpg" alt="">
+                <h3>DONUT</h3>
+                <div class="price">Rs.20</div>
+            </div>
+
+            <div class="product" data-name="p-5">
+                <img src="~/Content/favimg/img1.jpg" alt="">
+                <h3>DONUT</h3>
+                <div class="price">Rs.20</div>
+            </div>
+
+            <div class="product" data-name="p-6">
+                <img src="~/Content/favimg/img1.jpg" alt="">
+                <h3>DONUT</h3>
+                <div class="price">Rs.20</div>
+            </div>
+
+            <div class="product" data-name="p-7">
+                <img src="~/Content/favimg/img1.jpg" alt="">
+                <h3>DONUT</h3>
+                <div class="price">Rs.20</div>
+            </div>
+
+            <div class="product" data-name="p-8">
+                <img src="~/Content/favimg/img1.jpg" alt="">
+                <h3>DONUT</h3>
+                <div class="price">Rs.20</div>
+            </div>
+
+            <div class="product" data-name="p-9">
+                <img src="~/Content/favimg/img1.jpg" alt="">
+                <h3>DONUT</h3>
+                <div class="price">Rs.20</div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="product-preview">
+        <div class="preview" data-target="p-1">
+            <i class="fas fa-times"></i>
+            <img src="~/Content/favimg/img1.jpg" alt="">
+            <h3>DONUT</h3>
+            <div class="stars">
+
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half"></i>
+                <span>(250)</span>
+            </div>
+
+
+            <p>DONUT worry about a thing</p>
+            <div class="price">20</div>
+            <div class="buttons">
+                <a href="#" class="buy">BUY NOW</a>
+                <a href="#" class="buy">ADD TO CART</a>
+            </div>
+        </div>
+
+
+        <div class="preview" data-target="p-2">
+            <i class="fas fa-times"></i>
+            <img src="~/Content/favimg/img1.jpg" alt="">
+            <h3>DONUT</h3>
+            <div class="stars">
+
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half"></i>
+                <span>(250)</span>
+            </div>
+
+
+            <p>DONUT worry about a thing</p>
+            <div class="price">20</div>
+            <div class="buttons">
+                <a href="#" class="buy">BUY NOW</a>
+                <a href="#" class="buy">ADD TO CART</a>
+            </div>
+        </div>
+
+
+
+        <div class="preview" data-target="p-3">
+            <i class="fas fa-times"></i>
+            <img src="~/Content/favimg/img1.jpg" alt="">
+            <h3>DONUT</h3>
+            <div class="stars">
+
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half"></i>
+                <span>(250)</span>
+            </div>
+
+
+            <p>DONUT worry about a thing</p>
+            <div class="price">20</div>
+            <div class="buttons">
+                <a href="#" class="buy">BUY NOW</a>
+                <a href="#" class="buy">ADD TO CART</a>
+            </div>
+        </div>
+
+
+
+        <div class="preview" data-target="p-4">
+            <i class="fas fa-times"></i>
+            <img src="~/Content/favimg/img1.jpg" alt="">
+            <h3>DONUT</h3>
+            <div class="stars">
+
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half"></i>
+                <span>(250)</span>
+            </div>
+
+
+            <p>DONUT worry about a thing</p>
+            <div class="price">20</div>
+            <div class="buttons">
+                <a href="#" class="buy">BUY NOW</a>
+                <a href="#" class="buy">ADD TO CART</a>
+            </div>
+        </div>
+
+
+
+
+
+        <div class="preview" data-target="p-5">
+            <i class="fas fa-times"></i>
+            <img src="~/Content/favimg/img1.jpg" alt="">
+            <h3>DONUT</h3>
+            <div class="stars">
+
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half"></i>
+                <span>(250)</span>
+            </div>
+
+
+            <p>DONUT worry about a thing</p>
+            <div class="price">20</div>
+            <div class="buttons">
+                <a href="#" class="buy">BUY NOW</a>
+                <a href="#" class="buy">ADD TO CART</a>
+            </div>
+        </div>
+
+
+
+
+
+
+        <div class="preview" data-target="p-6">
+            <i class="fas fa-times"></i>
+            <img src="~/Content/favimg/img1.jpg" alt="">
+            <h3>DONUT</h3>
+            <div class="stars">
+
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half"></i>
+                <span>(250)</span>
+            </div>
+
+
+            <p>DONUT worry about a thing</p>
+            <div class="price">20</div>
+            <div class="buttons">
+                <a href="#" class="buy">BUY NOW</a>
+                <a href="#" class="buy">ADD TO CART</a>
+            </div>
+        </div>
+
+
+
+
+
+
+        <div class="preview" data-target="p-7">
+            <i class="fas fa-times"></i>
+            <img src="~/Content/favimg/img1.jpg" alt="">
+            <h3>DONUT</h3>
+            <div class="stars">
+
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half"></i>
+                <span>(250)</span>
+            </div>
+
+
+            <p>DONUT worry about a thing</p>
+            <div class="price">20</div>
+            <div class="buttons">
+                <a href="#" class="buy">BUY NOW</a>
+                <a href="#" class="buy">ADD TO CART</a>
+            </div>
+        </div>
+
+
+
+
+
+
+        <div class="preview" data-target="p-8">
+            <i class="fas fa-times"></i>
+            <img src="~/Content/favimg/img1.jpg" alt="">
+            <h3>DONUT</h3>
+            <div class="stars">
+
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half"></i>
+                <span>(250)</span>
+            </div>
+
+
+            <p>DONUT worry about a thing</p>
+            <div class="price">20</div>
+            <div class="buttons">
+                <a href="#" class="buy">BUY NOW</a>
+                <a href="#" class="buy">ADD TO CART</a>
+            </div>
+        </div>
+
+
+
+
+
+
+        <div class="preview" data-target="p-9">
+            <i class="fas fa-times"></i>
+            <img src="~/Content/favimg/img1.jpg" alt="">
+            <h3>DONUT</h3>
+            <div class="stars">
+
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half"></i>
+                <span>(250)</span>
+            </div>
+
+
+            <p>DONUT worry about a thing</p>
+            <div class="price">20</div>
+            <div class="buttons">
+                <a href="#" class="buy">BUY NOW</a>
+                <a href="#" class="buy">ADD TO CART</a>
+            </div>
+        </div>
+
+
+    </div>
+
+</body>
