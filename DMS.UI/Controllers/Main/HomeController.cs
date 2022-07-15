@@ -36,7 +36,12 @@ namespace DMS.Controllers
         {
             return View();
         }
-      
+
+        public ActionResult profile()
+        {
+            return View("profile");
+        }
+
         public ActionResult Index()
         {
             List<producttable> all_data = db.producttables.ToList();
@@ -69,6 +74,17 @@ namespace DMS.Controllers
             ////
             /////
         }
+        public ActionResult viewallgallery()
+        {
+           
+            string path = Server.MapPath("~/Content/productimage");
+
+            string[] imagesfiles = Directory.GetFiles(path);
+            ViewBag.productimage = imagesfiles;
+           
+            return View("viewallgallery");
+        }
+    
 
         public ActionResult Blog()
         {
@@ -81,10 +97,20 @@ namespace DMS.Controllers
             return View();
         }
 
+        public ActionResult logout()
+        {
+            Session.Clear();
+           return RedirectToAction("index", "home");
+        }
+
+       
+
         public async Task<ActionResult> Dashboard()
         {
             return RedirectToAction("Index");////
         }
+
+
 
        
 

@@ -1,0 +1,69 @@
+﻿
+@{
+    ViewBag.Title = "viewallgallery";
+}
+<link rel="stylesheet" href="~/Content/css/style.css">
+
+<link href="~/Content/css/signupstyle.css" rel="stylesheet" />
+
+
+<div class="box-container">
+    @foreach (var file in ViewBag.productimage)
+    {
+        <div class="box">
+            @*<img src="~/Content/Images/gallery1.jpg" alt="">*@
+            <img src="~/Content/productimage/@Path.GetFileName(file)" />
+            <div class="icons">
+                <a href="#" class="fas fa-eye"></a>
+                <a href="#" class="fas fa-heart"></a>
+                <a href="#" class="fas fa-share-alt"></a>
+            </div>
+        </div>
+
+        @*<div class="box">
+                <img src="~/Content/Images/gallery2.jpg" alt="">
+                <div class="icons">
+                    <a href="#" class="fas fa-eye"></a>
+                    <a href="#" class="fas fa-heart"></a>
+                    <a href="#" class="fas fa-share-alt"></a>
+                </div>
+            </div>
+
+            <div class="box">
+                <img src="~/Content/Images/gallery3.jpg" alt="">
+                <div class="icons">
+                    <a href="#" class="fas fa-eye"></a>
+                    <a href="#" class="fas fa-heart"></a>
+                    <a href="#" class="fas fa-share-alt"></a>
+                </div>
+            </div>
+
+            <div class="box">
+                <img src="~/Content/Images/gallery4.jpg" alt="">
+                <div class="icons">
+                    <a href="#" class="fas fa-eye"></a>
+                    <a href="#" class="fas fa-heart"></a>
+                    <a href="#" class="fas fa-share-alt"></a>
+                </div>
+            </div>
+
+            <div class="box">
+                <img src="~/Content/Images/gallery5.jpg" alt="">
+                <div class="icons">
+                    <a href="#" class="fas fa-eye"></a>
+                    <a href="#" class="fas fa-heart"></a>
+                    <a href="#" class="fas fa-share-alt"></a>
+                </div>
+            </div>
+
+            <div class="box">
+                <img src="~/Content/Images/gallery6.jpg" alt="">
+                <div class="icons">
+                    <a href="#" class="fas fa-eye"></a>
+                    <a href="#" class="fas fa-heart"></a>
+                    <a href="#" class="fas fa-share-alt"></a>
+                </div>
+            </div>*@
+    }
+</div>
+

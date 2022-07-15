@@ -1137,6 +1137,7 @@
     <Content Include="Content\Images\strawberry2.jpg" />
     <Content Include="Content\Images\up-arrow-svgrepo-com.svg" />
     <Content Include="Content\Images\brown.jpg" />
+    <Content Include="Content\Images\userimage.png" />
     <Content Include="Content\Images\welcome.jpg" />
     <Content Include="Content\Images\wheat.jpg" />
     <Content Include="Content\js\signupjs.js" />
@@ -1517,6 +1518,8 @@
     <Content Include="Views\usersignup\index.cshtml" />
     <Content Include="Views\usersignup\views.cshtml" />
     <Content Include="Views\favourite\index.cshtml" />
+    <Content Include="Views\Home\profile.cshtml" />
+    <Content Include="Views\Home\viewallgallery.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

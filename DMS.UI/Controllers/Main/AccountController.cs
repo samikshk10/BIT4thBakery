@@ -231,8 +231,16 @@ namespace DMS.UI.Controllers
                         throw new Exception("User Name or Password doesn't match");
                     }
 
-
+                    Session["cid"] = checkUser.id;
                     Session["cfullname"] = checkUser.cfullname;
+                    Session["caddress"] = checkUser.caddress;
+                    Session["cpno"] = checkUser.cpno;
+                    Session["cemail"] = checkUser.cemail;
+                    
+
+
+
+
                 }
                 Session["SystemInfoForSession"] = systemSession;
                 ViewHelper.cfg01configurations = _dbMainEntities.cfg01configurations.ToList();

@@ -407,10 +407,11 @@
 </section>
  @*gallery section start*@
 <section class="gallery">
-    <h1 class="title"> our <span>gallery</span> <a href="#">view all >></a> </h1>
+    <h1 class="title"> our <span>gallery</span> <a href="@Url.Action("viewallgallery","home")">view all >></a> </h1>
     <div class="box-container">
         @foreach (var file in ViewBag.productimage)
         {
+           
         <div class="box">
             @*<img src="~/Content/Images/gallery1.jpg" alt="">*@
             <img src="~/Content/productimage/@Path.GetFileName(file)" />

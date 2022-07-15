@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "profile";
+}
+
+<form class="form-detail">
+    <h2>Register Form</h2>
+    <div class="form-row">
+        <Label>Name:</Label>
+        <h2> @Session["cfullname"].ToString();</h2>
+    </div> 
+    <div class="form-row">
+        <Label>Address:</Label>
+        <h2> @Session["caddress"].ToString();</h2>
+    </div>
+    <div class="form-row">
+        <Label>Phone number:</Label>
+        <h2> @Session["cpno"].ToString();</h2>
+    </div>
+    <div class="form-row">
+        <Label>Email:</Label>
+        <h2> @Session["cemail"].ToString();</h2>
+    </div> 
+ 
+
+   
+   
+    <div class="form-row-last">
+        <input type="submit" class="register" value="Register" onclick="validate()">
+    </div>
+</form>
