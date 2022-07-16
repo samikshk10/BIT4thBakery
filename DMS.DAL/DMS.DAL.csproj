@@ -252,6 +252,14 @@
     <Compile Include="Migrations\202207150337542_tablessssss.Designer.cs">
       <DependentUpon>202207150337542_tablessssss.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202207160808088_edit customer photo.cs" />
+    <Compile Include="Migrations\202207160808088_edit customer photo.Designer.cs">
+      <DependentUpon>202207160808088_edit customer photo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202207161050514_added order table.cs" />
+    <Compile Include="Migrations\202207161050514_added order table.Designer.cs">
+      <DependentUpon>202207161050514_added order table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
@@ -355,6 +363,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202207150337542_tablessssss.resx">
       <DependentUpon>202207150337542_tablessssss.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207160808088_edit customer photo.resx">
+      <DependentUpon>202207160808088_edit customer photo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207161050514_added order table.resx">
+      <DependentUpon>202207161050514_added order table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

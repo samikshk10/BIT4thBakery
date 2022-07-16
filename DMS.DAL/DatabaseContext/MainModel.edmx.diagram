@@ -19,10 +19,10 @@
         <AssociationConnector Association="fosModel.FK_emp01employee_dep01department" ManuallyRouted="false" />
         <AssociationConnector Association="fosModel.FK_emp01employee_des01designations" ManuallyRouted="false" />
         <AssociationConnector Association="fosModel.FK_emp01employee_lvl01employee_levels" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="fosModel.regcustomer" Width="1.5" PointX="10.375" PointY="0.75" />
         <EntityTypeShape EntityType="fosModel.usr05users" Width="1.5" PointX="5.25" PointY="2.125" />
         <AssociationConnector Association="fosModel.FK_usr05users_bra01branches" />
         <AssociationConnector Association="fosModel.FK_usr05users_emp01employee" />
+        <EntityTypeShape EntityType="fosModel.regcustomer" Width="1.5" PointX="10.375" PointY="0.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

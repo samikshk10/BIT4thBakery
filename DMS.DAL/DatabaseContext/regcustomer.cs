@@ -20,5 +20,6 @@ namespace DMS.DAL.DatabaseContext
         public string cpno { get; set; }
         public string cemail { get; set; }
         public string cpassword { get; set; }
+        public string cphoto { get; set; }
     }
 }

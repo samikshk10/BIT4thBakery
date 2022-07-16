@@ -8,6 +8,8 @@ using DMS.ViewModels;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
@@ -23,6 +25,7 @@ namespace DMS.Controllers
         private MainEntities db;
         private SystemInfoForSession _ActiveSession;
         private IBranchesRepo _BranchesRepo;
+        MainEntities dba = new MainEntities();
 
         public HomeController(MainEntities _db, IBranchesRepo BranchesRepo)
         {
@@ -36,10 +39,47 @@ namespace DMS.Controllers
         {
             return View();
         }
-
+      
         public ActionResult profile()
         {
-            return View("profile");
+            
+            //List<producttable> all_data = db.producttables.ToList();
+            //return View(all_data);
+            
+            return View();
+
+        }
+        [HttpPost]
+        public ActionResult SavePhoto(regcustomer regcustomer, HttpPostedFileBase cphoto)
+        {
+            string path = Server.MapPath("~/Content/customerimage");
+            string filename = cphoto.FileName;
+            string newpath = path + "/" + filename;
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+            cphoto.SaveAs(newpath);
+
+              int customerId = Convert.ToInt32(Session["cid"]);
+            regcustomer.cphoto = ("~/Content/customerimage/" + filename);
+            string aa = regcustomer.cphoto;
+            //var customerData = db.regcustomers.Where(x => x.id == customerId).FirstOrDefault();
+            int idd = Convert.ToInt32(Session["id"]);
+            //db.Entry(regcustomer).State = System.Data.Entity.EntityState.Modified;
+            //db.SaveChanges();
+            string mainconn = ConfigurationManager.ConnectionStrings["IdentityConnection"].ConnectionString;
+            SqlConnection sqlconn = new SqlConnection(mainconn);
+            
+            string sqlquery = "update regcustomer set cphoto='" + aa + "'where id='" + idd + "'";
+            sqlconn.Open();
+            SqlCommand sqlcomm=new SqlCommand(sqlquery, sqlconn);
+            sqlcomm.Parameters.AddWithValue("@cphoto", "a");
+            sqlcomm.ExecuteNonQuery();
+
+
+
+            return RedirectToAction("profile", "home");
         }
 
         public ActionResult Index()

@@ -21,5 +21,6 @@ namespace DMS.DAL.DatabaseContext
         public string pimage { get; set; }
         public Nullable<System.DateTime> pmfddate { get; set; }
         public Nullable<System.DateTime> pexpdate { get; set; }
+
     }
 }

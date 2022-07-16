@@ -2,6 +2,7 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "profile";
+    int cid = @Convert.ToInt32(@Session["cid"]);
 }
 
 <style>
@@ -26,6 +27,15 @@
 </style>
 <div class="form-container">
     <h1 class="profiletitle">My Profile Information</h1>
+
+    @using (Html.BeginForm("SavePhoto", "Home", FormMethod.Post, new { @class = "", @enctype = "multipart/form-data" }))
+    {
+
+        <input type="file" value="Choose a image" name="cphoto" class="form-control"/>
+        <input type="submit" value="Save Image" class="form-control"/>
+    }
+
+
     <div class="form-row">
         <h2><Label class="profilehead">Name:</Label></h2>
         <h3 class="profilebody"> @Session["cfullname"].ToString()</h3>

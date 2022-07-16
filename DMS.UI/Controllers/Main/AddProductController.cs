@@ -42,7 +42,7 @@ namespace DMS.Controllers.Main
             }
             pimage.SaveAs(newpath);
             producttable.pimage = "~/Content/productimage/" + filename;
-           
+         
 
 
 
