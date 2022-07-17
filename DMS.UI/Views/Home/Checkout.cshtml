@@ -41,7 +41,7 @@ else
 
 
                                 <tr class="text-center">
-                                    <td class="product-remove"><a href="@Url.Action("remove","home",new { id=producttable.pid})"><span class="ion-ios-close"></span></a></td>
+                                    <td class="product-remove"><a href="@Url.Action("remove", "home", new { id = producttable.pid })"><span class="ion-ios-close"></span></a></td>
 
                                     <td class="image-prod"><div class="img" style="background-image:url(images/product-3.jpg);"></div></td>
 
@@ -109,20 +109,11 @@ else
                     </p>
                     <p class="d-flex">
                         <span>Delivery</span>
-                        <span>$0.00</span>
-                    </p>
-                    <p class="d-flex">
-                        <span>Discount</span>
-                        <span>$3.00</span>
-                    </p>
-                    <hr>
-                    <p class="d-flex total-price">
-                        <span>Total</span>
-                        <span>Rs.@TempData["total"]</span>
-                    </p>
-                </div>
-                <p><a href="checkout.html" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
+                <p><a href="@Url.Action("Checkou", "home")" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
+
+
             </div>
         </div>
     </div>
+        </div>
 }

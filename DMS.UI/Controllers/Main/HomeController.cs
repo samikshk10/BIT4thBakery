@@ -39,7 +39,7 @@ namespace DMS.Controllers
 
         public ActionResult AccessDeniedPage()
         {
-            
+
             return View();
         }
 
@@ -48,16 +48,16 @@ namespace DMS.Controllers
 
         //    db.ordertables.Add(ordertable);
         //    db.SaveChanges();
-           
+
         //    return RedirectToAction("index", "home");
         //}
-    
+
         public ActionResult profile()
         {
-            
+
             //List<producttable> all_data = db.producttables.ToList();
             //return View(all_data);
-            
+
             return View();
 
         }
@@ -73,7 +73,7 @@ namespace DMS.Controllers
             }
             cphoto.SaveAs(newpath);
 
-              int customerId = Convert.ToInt32(Session["cid"]);
+            int customerId = Convert.ToInt32(Session["cid"]);
             regcustomer.cphoto = ("~/Content/customerimage/" + filename);
             string aa = regcustomer.cphoto;
             //var customerData = db.regcustomers.Where(x => x.id == customerId).FirstOrDefault();
@@ -82,10 +82,10 @@ namespace DMS.Controllers
             //db.SaveChanges();
             string mainconn = ConfigurationManager.ConnectionStrings["IdentityConnection"].ConnectionString;
             SqlConnection sqlconn = new SqlConnection(mainconn);
-            
+
             string sqlquery = "update regcustomer set cphoto='" + aa + "'where id='" + idd + "'";
             sqlconn.Open();
-            SqlCommand sqlcomm=new SqlCommand(sqlquery, sqlconn);
+            SqlCommand sqlcomm = new SqlCommand(sqlquery, sqlconn);
             sqlcomm.Parameters.AddWithValue("@cphoto", "a");
             sqlcomm.ExecuteNonQuery();
 
@@ -96,11 +96,11 @@ namespace DMS.Controllers
 
         public ActionResult Index()
         {
-            if(TempData["cart"]!=null)
+            if (TempData["cart"] != null)
             {
                 double x = 0;
                 List<Cart> li2 = TempData["cart"] as List<Cart>;
-                foreach(var item in li2)
+                foreach (var item in li2)
                 {
                     x += item.bill;
                 }
@@ -109,7 +109,7 @@ namespace DMS.Controllers
             }
 
             TempData.Keep();
-            
+
 
             List<producttable> all_data = db.producttables.ToList();
             string path = Server.MapPath("~/Content/productimage");
@@ -117,7 +117,7 @@ namespace DMS.Controllers
             string[] imagesfiles = Directory.GetFiles(path);
             ViewBag.productimage = imagesfiles;
             return View(all_data);
-            
+
         }
 
         [HttpGet]
@@ -125,18 +125,19 @@ namespace DMS.Controllers
         {
             var query = db.producttables.Where(x => x.pid == id).SingleOrDefault();
             return View(query);
-        } 
+        }
         [HttpPost]
-        public ActionResult Single(int id,int qty)
+        public ActionResult Single(int id, int qty)
         {
             producttable p = db.producttables.Where(x => x.pid == id).SingleOrDefault();
             Cart c = new Cart();
+            
             c.pid = id;
             c.pname = p.pname;
             c.price = Convert.ToDouble(p.pprice);
             c.qty = Convert.ToInt32(qty);
             c.bill = c.price * c.qty;
-            if (TempData["cart"]== null)
+            if (TempData["cart"] == null)
             {
                 li.Add(c);
                 TempData["cart"] = li;
@@ -145,16 +146,16 @@ namespace DMS.Controllers
             {
                 List<Cart> li2 = TempData["cart"] as List<Cart>;
                 int flag = 0;
-                foreach(var item in li2)
+                foreach (var item in li2)
                 {
-                    if(item.pid==c.pid)
+                    if (item.pid == c.pid)
                     {
                         item.qty += c.qty;
                         item.bill += c.bill;
                         flag = 1;
                     }
                 }
-                if(flag==0)
+                if (flag == 0)
                 {
                     li2.Add(c);
                 }
@@ -168,6 +169,52 @@ namespace DMS.Controllers
         {
             TempData.Keep();
             return View();
+        }
+
+        public ActionResult Checkou()
+        {
+            List<Cart> li2 = TempData["cart"] as List<Cart>;
+
+            if (ModelState.IsValid)
+            {
+                foreach (var item in li2)
+                {
+                    ordertable ot = new ordertable();
+                    var random = new Random();
+                    const string Chars = "ABCDEFGHIJKLMNPOQRSTUVWXYZ0123456789";
+                    var result = new string(
+                        Enumerable.Repeat(Chars, 9)
+                            .Select(s => s[random.Next(s.Length)])
+                            .ToArray());
+
+                    ot.pid = item.pid;
+                    ot.odate = System.DateTime.Now;
+
+
+                    ot.oid = "#" + result;
+                    ot.oqty = item.qty;
+                    ot.oprice = Convert.ToDecimal(item.price);
+                    ot.oamount = Convert.ToDecimal(item.bill);
+                    ot.id = Convert.ToInt32(Session["cid"]);
+                    db.ordertables.Add(ot);
+                    db.SaveChanges();
+
+
+
+
+                }
+                TempData.Remove("total");
+                TempData.Remove("cart");
+                TempData.Remove("item_count");
+                TempData["msg"] = "order place successfully";
+                return RedirectToAction("index");
+            }
+           
+                TempData.Keep();
+            return View("Checkout");
+
+                
+            
         }
 
         public ActionResult remove(int? id)

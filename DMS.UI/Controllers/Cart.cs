@@ -13,5 +13,7 @@ namespace DMS.Controllers
         public double price { get; set; }
 
         public double bill { get; set; }
+
+       
     }
 }

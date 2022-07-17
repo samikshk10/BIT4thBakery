@@ -20,6 +20,7 @@ namespace DMS.DAL.DatabaseContext
         public decimal oprice { get; set; }
         public decimal oamount { get; set; }
         public int pid { get; set; }
+        public Nullable<System.DateTime> odate { get; set; }
     
         public virtual regcustomer regcustomer { get; set; }
         public virtual producttable producttable { get; set; }

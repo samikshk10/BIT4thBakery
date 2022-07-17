@@ -134,6 +134,7 @@
           <Property Name="oprice" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="oamount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="pid" Type="int" Nullable="false" />
+          <Property Name="odate" Type="date" />
         </EntityType>
         <EntityType Name="producttable">
           <Key>
@@ -670,6 +671,7 @@
           <Property Name="oprice" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="oamount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="pid" Type="Int32" Nullable="false" />
+          <Property Name="odate" Type="DateTime" Precision="0" />
           <NavigationProperty Name="regcustomer" Relationship="fosModel.FK__ordertable__id__4F47C5E3" FromRole="ordertable" ToRole="regcustomer" />
           <NavigationProperty Name="producttable" Relationship="fosModel.FK__ordertable__pid__607251E5" FromRole="ordertable" ToRole="producttable" />
         </EntityType>
@@ -899,6 +901,7 @@
           <EntitySetMapping Name="ordertables">
             <EntityTypeMapping TypeName="fosModel.ordertable">
               <MappingFragment StoreEntitySet="ordertable">
+                <ScalarProperty Name="odate" ColumnName="odate" />
                 <ScalarProperty Name="pid" ColumnName="pid" />
                 <ScalarProperty Name="oamount" ColumnName="oamount" />
                 <ScalarProperty Name="oprice" ColumnName="oprice" />
