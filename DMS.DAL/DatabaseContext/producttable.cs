@@ -14,6 +14,12 @@ namespace DMS.DAL.DatabaseContext
     
     public partial class producttable
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public producttable()
+        {
+            this.ordertables = new HashSet<ordertable>();
+        }
+    
         public int pid { get; set; }
         public string pname { get; set; }
         public string pcategory { get; set; }
@@ -21,6 +27,8 @@ namespace DMS.DAL.DatabaseContext
         public string pimage { get; set; }
         public Nullable<System.DateTime> pmfddate { get; set; }
         public Nullable<System.DateTime> pexpdate { get; set; }
-
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ordertable> ordertables { get; set; }
     }
 }

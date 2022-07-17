@@ -1,0 +1,45 @@
+﻿
+
+@model DMS.DAL.DatabaseContext.producttable
+
+@{ 
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .top{
+        position:absolute;
+        top: 40%;
+    }
+
+
+    .image{
+        height: 250px;
+        width: 100%;
+    }
+</style>
+
+<div class="container top">
+@using (Html.BeginForm())
+{
+    <div class="row">
+        <div class="col-lg-6">
+            <input type="hidden" name="id" value="@Model.pid" />
+            <img src="@Url.Content(Model.pimage)" alt="Alternate Text" class="image" />
+        </div>
+
+        <div class="col-lg-6">
+
+
+            <h2>@Model.pname</h2>
+
+            <h2>@Model.pprice</h2>
+            <input type="number" name="qty" value="" placeholder="Enter Qty" min="1" max="10" />
+            <input type="submit" name="" value="Add to Cart" class="btn btn-warning" />
+
+        </div>
+    </div>
+}
+</div>
+
+

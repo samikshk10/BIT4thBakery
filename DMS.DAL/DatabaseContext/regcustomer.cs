@@ -14,6 +14,12 @@ namespace DMS.DAL.DatabaseContext
     
     public partial class regcustomer
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public regcustomer()
+        {
+            this.ordertables = new HashSet<ordertable>();
+        }
+    
         public int id { get; set; }
         public string cfullname { get; set; }
         public string caddress { get; set; }
@@ -21,5 +27,8 @@ namespace DMS.DAL.DatabaseContext
         public string cemail { get; set; }
         public string cpassword { get; set; }
         public string cphoto { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ordertable> ordertables { get; set; }
     }
 }

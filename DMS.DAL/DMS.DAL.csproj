@@ -125,6 +125,7 @@
     <Compile Include="DatabaseContext\bra01branches.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DatabaseContext\Cart.cs" />
     <Compile Include="DatabaseContext\cfg01configurations.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
@@ -160,6 +161,9 @@
       <DependentUpon>MainModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="DatabaseContext\MetaData\EmployeeMD.cs" />
+    <Compile Include="DatabaseContext\ordertable.cs">
+      <DependentUpon>MainModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DatabaseContext\PartialClasses.cs" />
     <Compile Include="DatabaseContext\producttable.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
@@ -260,6 +264,10 @@
     <Compile Include="Migrations\202207161050514_added order table.Designer.cs">
       <DependentUpon>202207161050514_added order table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202207170506072_added column product.cs" />
+    <Compile Include="Migrations\202207170506072_added column product.Designer.cs">
+      <DependentUpon>202207170506072_added column product.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
@@ -323,6 +331,7 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="DatabaseContext\Models\" />
     <Folder Include="DB Script\" />
     <Folder Include="Services\" />
     <Folder Include="ViewModel\" />
@@ -369,6 +378,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202207161050514_added order table.resx">
       <DependentUpon>202207161050514_added order table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207170506072_added column product.resx">
+      <DependentUpon>202207170506072_added column product.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

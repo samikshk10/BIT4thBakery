@@ -207,10 +207,12 @@
         {
             <div class="box">
                 <div class="icons">
-                    <a href="#" class="fas fa-shopping-cart"></a>
+                    <a href="@Url.Action("Single","Home",new { id=@file.pid })" class="fas fa-shopping-cart"></a>
                     <a href="#" class="fas fa-heart"></a>
                     <a href="#" class="fas fa-eye"></a>
                 </div>
+
+                @*<a href="@Url.Action("Single","home",new { id=file.pid })"></a>*@
                 <div class="img">
                   <img src="@Url.Content(file.pimage)" />
 
@@ -219,7 +221,7 @@
 
                 
                 <div class="content">
-
+                 
 
                     <h3>@file.pname</h3>
                     Rs &nbsp; <div class="price">@file.pprice</div>
@@ -425,6 +427,8 @@
         <div class="box">
             @*<img src="~/Content/Images/gallery1.jpg" alt="">*@
             <img src="~/Content/productimage/@Path.GetFileName(file)" />
+
+            
             <div class="icons">
                 <a href="#" class="fas fa-eye"></a>
                 <a href="#" class="fas fa-heart"></a>
@@ -781,9 +785,9 @@
 
 
 <div class="space"></div>
-<script>
+@*<script>
     //box chainxa
-    let totalAmount = 0;
+    <!--let totalAmount = 0;
     const cartVar = document.querySelector('.cart');
     let count = 0;
     const Products = document.querySelectorAll('.fa-shopping-cart');
@@ -806,29 +810,48 @@
             let titleEl = Item.querySelector('.content').children[0].innerText;
             let priceEl = Item.querySelector('.content').children[1].innerText.replace('$', '');
             let totalAmountEl = document.querySelector('.totalAmount');
+
+            let IdEl = +document.getElementById("hiddenid").value;
+
+
             console.log('total amount el' + totalAmountEl);
             console.log(priceEl);
             console.log(imgEl);
             console.log(titleEl);
             console.log(cartVar);
             console.log(cartVar.children[1].children[1]);
-            CartDisplay(imgEl, titleEl, priceEl);
-            function CartDisplay(imageEl, titleEl, priceEl) {
+            CartDisplay(imgEl, titleEl, priceEl,IdEl);
+            function CartDisplay(imageEl, titleEl, priceEl,IdEl) {
                 const array = `<div class="cart-box"> 
                <div class="img">
                 <img src="${imgEl}" alt="" style="width:150px; height:100px;">
                 </div>
                 <h3>${titleEl} </h3>
                  <div class="price" style="font-size:14px;">Rs. ${priceEl}</div>
-                </div>`;
-                cartVar.getElementsByTagName('h3')[0].insertAdjacentHTML('afterend', array);
+                </div>`;-->
 
+                @*viewbag.title = titleEl;
+                viewbag.price = priceEl;
+                viewbag.quantity = 1;
+                viewbag.amount = 1;
+                viewbag.cid =@Convert.ToInt32(@Session["cid"]);
+
+
+                <!--cartVar.getElementsByTagName('h3')[0].insertAdjacentHTML('afterend', array);
+
+                
                 totalAmount = totalAmount + Number(priceEl);
                 totalAmount = Number(totalAmount.toFixed(2));
                 console.log(totalAmount);
                 console.log(totalAmountEl)
                 totalAmountEl.innerText = 'Rs. ' + totalAmount;
                 console.log(totalAmount);
+
+
+                
+
+
+
             }
 
         })
@@ -839,7 +862,8 @@
         cartVar.classList.remove('active');
         cartVar.style.display = 'none';
         count = 0;
-    })
+    })-->
 
 
 </script>
+    *@

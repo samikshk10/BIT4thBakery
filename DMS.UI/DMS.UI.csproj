@@ -303,6 +303,9 @@
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="App_Start\UserManagement.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\Cart.cs" />
+    <Compile Include="Controllers\Class1.cs" />
+    <Compile Include="Controllers\item.cs" />
     <Compile Include="Controllers\Main\AccountController.cs" />
     <Compile Include="Controllers\Base\BaseControllerV1Controller.cs" />
     <Compile Include="Controllers\Base\_BaseAuthenticatedController.cs" />
@@ -345,6 +348,7 @@
     <Compile Include="Helpers\ViewHelper.cs" />
     <Compile Include="Helpers\ViewRendererHelper.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Class1.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -920,6 +924,7 @@
     <Content Include="Content\bootstrap-timepicker.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\cartstyle.css" />
     <Content Include="Content\css\main.js" />
     <Content Include="Content\css\registrationstyle.css" />
     <Content Include="Content\css\style.css" />
@@ -1520,6 +1525,8 @@
     <Content Include="Views\favourite\index.cshtml" />
     <Content Include="Views\Home\profile.cshtml" />
     <Content Include="Views\Home\viewallgallery.cshtml" />
+    <Content Include="Views\Home\Single.cshtml" />
+    <Content Include="Views\Home\Checkout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

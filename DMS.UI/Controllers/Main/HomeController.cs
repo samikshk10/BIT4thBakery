@@ -17,6 +17,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
+
 namespace DMS.Controllers
 {
     [AllowAnonymous]//change
@@ -27,6 +28,7 @@ namespace DMS.Controllers
         private IBranchesRepo _BranchesRepo;
         MainEntities dba = new MainEntities();
 
+        List<Cart> li = new List<Cart>();
         public HomeController(MainEntities _db, IBranchesRepo BranchesRepo)
         {
             _ActiveSession = SessionHelper.GetSession();
@@ -37,9 +39,19 @@ namespace DMS.Controllers
 
         public ActionResult AccessDeniedPage()
         {
+            
             return View();
         }
-      
+
+        //public ActionResult ordernow(ordertable ordertable)
+        //{
+
+        //    db.ordertables.Add(ordertable);
+        //    db.SaveChanges();
+           
+        //    return RedirectToAction("index", "home");
+        //}
+    
         public ActionResult profile()
         {
             
@@ -84,6 +96,21 @@ namespace DMS.Controllers
 
         public ActionResult Index()
         {
+            if(TempData["cart"]!=null)
+            {
+                double x = 0;
+                List<Cart> li2 = TempData["cart"] as List<Cart>;
+                foreach(var item in li2)
+                {
+                    x += item.bill;
+                }
+                TempData["total"] = x;
+                TempData["item_count"] = li2.Count();
+            }
+
+            TempData.Keep();
+            
+
             List<producttable> all_data = db.producttables.ToList();
             string path = Server.MapPath("~/Content/productimage");
 
@@ -91,6 +118,69 @@ namespace DMS.Controllers
             ViewBag.productimage = imagesfiles;
             return View(all_data);
             
+        }
+
+        [HttpGet]
+        public ActionResult Single(int id)
+        {
+            var query = db.producttables.Where(x => x.pid == id).SingleOrDefault();
+            return View(query);
+        } 
+        [HttpPost]
+        public ActionResult Single(int id,int qty)
+        {
+            producttable p = db.producttables.Where(x => x.pid == id).SingleOrDefault();
+            Cart c = new Cart();
+            c.pid = id;
+            c.pname = p.pname;
+            c.price = Convert.ToDouble(p.pprice);
+            c.qty = Convert.ToInt32(qty);
+            c.bill = c.price * c.qty;
+            if (TempData["cart"]== null)
+            {
+                li.Add(c);
+                TempData["cart"] = li;
+            }
+            else
+            {
+                List<Cart> li2 = TempData["cart"] as List<Cart>;
+                int flag = 0;
+                foreach(var item in li2)
+                {
+                    if(item.pid==c.pid)
+                    {
+                        item.qty += c.qty;
+                        item.bill += c.bill;
+                        flag = 1;
+                    }
+                }
+                if(flag==0)
+                {
+                    li2.Add(c);
+                }
+                TempData["cart"] = li2;
+            }
+            TempData.Keep();
+            return RedirectToAction("index");
+        }
+
+        public ActionResult Checkout()
+        {
+            TempData.Keep();
+            return View();
+        }
+
+        public ActionResult remove(int? id)
+        {
+            if(TempData["cart"]==null)
+            {
+                TempData.Remove("total");
+                TempData.Remove("cart");
+            }
+            else
+            {
+                List<Cart> li2= TempData
+            }
         }
         //[HttpGet]
         //    public ActionResult Index(int id)
@@ -101,10 +191,10 @@ namespace DMS.Controllers
         //        producttable = db.producttables.Where(x => x.pid == id).FirstOrDefault();
         //    }
         //    return View(producttable);
-            
+
         //}
 
-        
+
         //asdf
 
         public ActionResult About()

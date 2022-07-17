@@ -124,6 +124,17 @@
           <Property Name="lvl01updated_date_nep" Type="char" MaxLength="10" Nullable="false" />
           <Property Name="lvl01updated_date_eng" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="ordertable">
+          <Key>
+            <PropertyRef Name="oid" />
+          </Key>
+          <Property Name="oid" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="oqty" Type="int" Nullable="false" />
+          <Property Name="oprice" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="oamount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="pid" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="producttable">
           <Key>
             <PropertyRef Name="pid" />
@@ -187,6 +198,30 @@
           <Property Name="usr05can_view_all_branch" Type="bit" Nullable="false" />
           <Property Name="isadmin" Type="bit" />
         </EntityType>
+        <Association Name="FK__ordertable__id__4F47C5E3">
+          <End Role="regcustomer" Type="Self.regcustomer" Multiplicity="1" />
+          <End Role="ordertable" Type="Self.ordertable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="regcustomer">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ordertable">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ordertable__pid__607251E5">
+          <End Role="producttable" Type="Self.producttable" Multiplicity="1" />
+          <End Role="ordertable" Type="Self.ordertable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="producttable">
+              <PropertyRef Name="pid" />
+            </Principal>
+            <Dependent Role="ordertable">
+              <PropertyRef Name="pid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_emp01employee_bra01branches">
           <End Role="bra01branches" Type="Self.bra01branches" Multiplicity="1" />
           <End Role="emp01employee" Type="Self.emp01employee" Multiplicity="*" />
@@ -267,11 +302,20 @@
           <EntitySet Name="des01designations" EntityType="Self.des01designations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="emp01employee" EntityType="Self.emp01employee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="lvl01employee_levels" EntityType="Self.lvl01employee_levels" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ordertable" EntityType="Self.ordertable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="producttable" EntityType="Self.producttable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="regcustomer" EntityType="Self.regcustomer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="test" EntityType="Self.test" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserCodes" EntityType="Self.UserCodes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="usr05users" EntityType="Self.usr05users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__ordertable__id__4F47C5E3" Association="Self.FK__ordertable__id__4F47C5E3">
+            <End Role="regcustomer" EntitySet="regcustomer" />
+            <End Role="ordertable" EntitySet="ordertable" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ordertable__pid__607251E5" Association="Self.FK__ordertable__pid__607251E5">
+            <End Role="producttable" EntitySet="producttable" />
+            <End Role="ordertable" EntitySet="ordertable" />
+          </AssociationSet>
           <AssociationSet Name="FK_emp01employee_bra01branches" Association="Self.FK_emp01employee_bra01branches">
             <End Role="bra01branches" EntitySet="bra01branches" />
             <End Role="emp01employee" EntitySet="emp01employee" />
@@ -441,6 +485,7 @@
           <Property Name="pimage" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="pmfddate" Type="DateTime" Precision="0" />
           <Property Name="pexpdate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="ordertables" Relationship="fosModel.FK__ordertable__pid__607251E5" FromRole="producttable" ToRole="ordertable" />
         </EntityType>
         <EntityType Name="test">
           <Key>
@@ -549,6 +594,15 @@
             <End Role="usr05users" EntitySet="usr05users" />
           </AssociationSet>
           <EntitySet Name="regcustomers" EntityType="fosModel.regcustomer" />
+          <EntitySet Name="ordertables" EntityType="fosModel.ordertable" />
+          <AssociationSet Name="FK__ordertable__id__4F47C5E3" Association="fosModel.FK__ordertable__id__4F47C5E3">
+            <End Role="regcustomer" EntitySet="regcustomers" />
+            <End Role="ordertable" EntitySet="ordertables" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ordertable__pid__607251E5" Association="fosModel.FK__ordertable__pid__607251E5">
+            <End Role="producttable" EntitySet="producttables" />
+            <End Role="ordertable" EntitySet="ordertables" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="usr05users">
           <Key>
@@ -604,7 +658,45 @@
           <Property Name="cemail" Type="String" Nullable="false" MaxLength="55" FixedLength="false" Unicode="false" />
           <Property Name="cpassword" Type="String" Nullable="false" MaxLength="55" FixedLength="false" Unicode="false" />
           <Property Name="cphoto" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ordertables" Relationship="fosModel.FK__ordertable__id__4F47C5E3" FromRole="regcustomer" ToRole="ordertable" />
         </EntityType>
+        <EntityType Name="ordertable">
+          <Key>
+            <PropertyRef Name="oid" />
+          </Key>
+          <Property Name="oid" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="oqty" Type="Int32" Nullable="false" />
+          <Property Name="oprice" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="oamount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="pid" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="regcustomer" Relationship="fosModel.FK__ordertable__id__4F47C5E3" FromRole="ordertable" ToRole="regcustomer" />
+          <NavigationProperty Name="producttable" Relationship="fosModel.FK__ordertable__pid__607251E5" FromRole="ordertable" ToRole="producttable" />
+        </EntityType>
+        <Association Name="FK__ordertable__id__4F47C5E3">
+          <End Type="fosModel.regcustomer" Role="regcustomer" Multiplicity="1" />
+          <End Type="fosModel.ordertable" Role="ordertable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="regcustomer">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ordertable">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ordertable__pid__607251E5">
+          <End Type="fosModel.producttable" Role="producttable" Multiplicity="1" />
+          <End Type="fosModel.ordertable" Role="ordertable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="producttable">
+              <PropertyRef Name="pid" />
+            </Principal>
+            <Dependent Role="ordertable">
+              <PropertyRef Name="pid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -801,6 +893,18 @@
                 <ScalarProperty Name="caddress" ColumnName="caddress" />
                 <ScalarProperty Name="cfullname" ColumnName="cfullname" />
                 <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ordertables">
+            <EntityTypeMapping TypeName="fosModel.ordertable">
+              <MappingFragment StoreEntitySet="ordertable">
+                <ScalarProperty Name="pid" ColumnName="pid" />
+                <ScalarProperty Name="oamount" ColumnName="oamount" />
+                <ScalarProperty Name="oprice" ColumnName="oprice" />
+                <ScalarProperty Name="oqty" ColumnName="oqty" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="oid" ColumnName="oid" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
