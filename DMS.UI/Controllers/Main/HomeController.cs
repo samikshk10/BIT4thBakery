@@ -179,8 +179,18 @@ namespace DMS.Controllers
             }
             else
             {
-                List<Cart> li2= TempData
+                List<Cart> li2 = TempData["cart"] as List<Cart>;
+                Cart c = li2.Where(x => x.pid == id).SingleOrDefault();
+                li2.Remove(c);
+                double s = 0;
+                foreach(var item in li2)
+                {
+                    s += item.bill;
+                }
+                TempData["total"] = s;
+
             }
+            return RedirectToAction("index");
         }
         //[HttpGet]
         //    public ActionResult Index(int id)
