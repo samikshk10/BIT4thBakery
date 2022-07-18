@@ -180,6 +180,16 @@
 
         <span class="totalAmount"></span>
     </div>
+
+    @*@using (Html.BeginForm("SaveOrder","Home"))
+            {
+                
+        <input type="submit" onclick="return confirm("do you want to place order")"/>
+            }*@
+  
+   
+
+
 </div>
 <section class="home" id="home">
     <div class="slides-container">
@@ -319,8 +329,8 @@
 
 
                     <h3>@file.pname</h3>
-                    <div class="price">Rs &nbsp;@file.pprice</div>
-                  
+                    Rs &nbsp; <div class="price">@file.pprice</div>
+
                 </div>
             </div>
 

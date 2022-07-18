@@ -29,5 +29,6 @@ namespace DMS.DAL.DatabaseContext
         [Required]
         [Range(8, 14, ErrorMessage = "please enter number between 8 to 12")]
         public string cpassword { get; set; }
+        public string cphoto { get; set; }
     }
 }

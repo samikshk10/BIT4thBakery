@@ -25,7 +25,7 @@ namespace DMS.DAL.DatabaseContext
         public string usr05updated_by { get; set; }
         public Nullable<int> usr05emp01uin { get; set; }
         public bool usr05can_view_all_branch { get; set; }
-        public bool isadmin { get; set; }
+        public Nullable<bool> isadmin { get; set; }
     
         public virtual bra01branches bra01branches { get; set; }
         public virtual emp01employee emp01employee { get; set; }

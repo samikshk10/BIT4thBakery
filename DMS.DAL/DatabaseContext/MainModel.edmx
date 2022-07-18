@@ -146,6 +146,7 @@
           <Property Name="cpno" Type="varchar" MaxLength="16" Nullable="false" />
           <Property Name="cemail" Type="varchar" MaxLength="55" Nullable="false" />
           <Property Name="cpassword" Type="varchar" MaxLength="55" Nullable="false" />
+          <Property Name="cphoto" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="test">
           <Key>
@@ -538,7 +539,6 @@
             <End Role="lvl01employee_levels" EntitySet="lvl01employee_levels" />
             <End Role="emp01employee" EntitySet="emp01employee" />
           </AssociationSet>
-          <EntitySet Name="regcustomers" EntityType="fosModel.regcustomer" />
           <EntitySet Name="usr05users" EntityType="fosModel.usr05users" />
           <AssociationSet Name="FK_usr05users_bra01branches" Association="fosModel.FK_usr05users_bra01branches">
             <End Role="bra01branches" EntitySet="bra01branches" />
@@ -548,18 +548,8 @@
             <End Role="emp01employee" EntitySet="emp01employee" />
             <End Role="usr05users" EntitySet="usr05users" />
           </AssociationSet>
+          <EntitySet Name="regcustomers" EntityType="fosModel.regcustomer" />
           </EntityContainer>
-        <EntityType Name="regcustomer">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="cfullname" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="caddress" Type="String" Nullable="false" MaxLength="55" FixedLength="false" Unicode="false" />
-          <Property Name="cpno" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
-          <Property Name="cemail" Type="String" Nullable="false" MaxLength="55" FixedLength="false" Unicode="false" />
-          <Property Name="cpassword" Type="String" Nullable="false" MaxLength="55" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="usr05users">
           <Key>
             <PropertyRef Name="usr05userId" />
@@ -575,7 +565,7 @@
           <Property Name="usr05updated_by" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="usr05emp01uin" Type="Int32" />
           <Property Name="usr05can_view_all_branch" Type="Boolean" Nullable="false" />
-          <Property Name="isadmin" Type="Boolean" Nullable="false" />
+          <Property Name="isadmin" Type="Boolean" />
           <NavigationProperty Name="bra01branches" Relationship="fosModel.FK_usr05users_bra01branches" FromRole="usr05users" ToRole="bra01branches" />
           <NavigationProperty Name="emp01employee" Relationship="fosModel.FK_usr05users_emp01employee" FromRole="usr05users" ToRole="emp01employee" />
         </EntityType>
@@ -603,6 +593,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="regcustomer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cfullname" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="caddress" Type="String" Nullable="false" MaxLength="55" FixedLength="false" Unicode="false" />
+          <Property Name="cpno" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="cemail" Type="String" Nullable="false" MaxLength="55" FixedLength="false" Unicode="false" />
+          <Property Name="cpassword" Type="String" Nullable="false" MaxLength="55" FixedLength="false" Unicode="false" />
+          <Property Name="cphoto" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -771,18 +773,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="regcustomers">
-            <EntityTypeMapping TypeName="fosModel.regcustomer">
-              <MappingFragment StoreEntitySet="regcustomer">
-                <ScalarProperty Name="cpassword" ColumnName="cpassword" />
-                <ScalarProperty Name="cemail" ColumnName="cemail" />
-                <ScalarProperty Name="cpno" ColumnName="cpno" />
-                <ScalarProperty Name="caddress" ColumnName="caddress" />
-                <ScalarProperty Name="cfullname" ColumnName="cfullname" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="usr05users">
             <EntityTypeMapping TypeName="fosModel.usr05users">
               <MappingFragment StoreEntitySet="usr05users">
@@ -798,6 +788,19 @@
                 <ScalarProperty Name="usr05type" ColumnName="usr05type" />
                 <ScalarProperty Name="usr05bra01uin" ColumnName="usr05bra01uin" />
                 <ScalarProperty Name="usr05userId" ColumnName="usr05userId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="regcustomers">
+            <EntityTypeMapping TypeName="fosModel.regcustomer">
+              <MappingFragment StoreEntitySet="regcustomer">
+                <ScalarProperty Name="cphoto" ColumnName="cphoto" />
+                <ScalarProperty Name="cpassword" ColumnName="cpassword" />
+                <ScalarProperty Name="cemail" ColumnName="cemail" />
+                <ScalarProperty Name="cpno" ColumnName="cpno" />
+                <ScalarProperty Name="caddress" ColumnName="caddress" />
+                <ScalarProperty Name="cfullname" ColumnName="cfullname" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

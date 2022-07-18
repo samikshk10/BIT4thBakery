@@ -1,31 +1,58 @@
 ﻿
 @{
+    Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "profile";
+    int cid = @Convert.ToInt32(@Session["cid"]);
 }
 
-<form class="form-detail">
-    <h2>Register Form</h2>
+<style>
+   .form-container{
+       position: absolute;
+       top:20%;
+       margin: 0 0 0 50px;
+
+   }
+
+   .profiletitle{
+       font-size: 35px;
+   }
+
+   .profilehead{
+       font-size: 20px;
+   }
+
+   .profilebody{
+       font-size: 16px;
+   }
+</style>
+<div class="form-container">
+    <h1 class="profiletitle">My Profile Information</h1>
+
+    @using (Html.BeginForm("SavePhoto", "Home", FormMethod.Post, new { @class = "", @enctype = "multipart/form-data" }))
+    {
+
+        <input type="file" value="Choose a image" name="cphoto" class="form-control"/>
+        <input type="submit" value="Save Image" class="form-control"/>
+    }
+
+
     <div class="form-row">
-        <Label>Name:</Label>
-        <h2> @Session["cfullname"].ToString();</h2>
-    </div> 
-    <div class="form-row">
-        <Label>Address:</Label>
-        <h2> @Session["caddress"].ToString();</h2>
+        <h2><Label class="profilehead">Name:</Label></h2>
+        <h3 class="profilebody"> @Session["cfullname"].ToString()</h3>
     </div>
     <div class="form-row">
-        <Label>Phone number:</Label>
-        <h2> @Session["cpno"].ToString();</h2>
+        <h2><Label class="profilehead">Address:</Label></h2>
+        <h3 class="profilebody"> @Session["caddress"].ToString()</h3>
     </div>
     <div class="form-row">
-        <Label>Email:</Label>
-        <h2> @Session["cemail"].ToString();</h2>
-    </div> 
+        <h2><Label class="profilehead">Phone number:</Label></h2>
+        <h3 class="profilebody"> @Session["cpno"].ToString()</h3>
+    </div>
+    <div class="form-row">
+        <h2 class="profilehead"><Label>Email:</Label></h2>
+        <h3 class="profilebody"> @Session["cemail"].ToString()</h3>
+    </div>
+</div>
  
 
-   
-   
-    <div class="form-row-last">
-        <input type="submit" class="register" value="Register" onclick="validate()">
-    </div>
-</form>
+
