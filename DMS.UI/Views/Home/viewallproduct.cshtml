@@ -1,0 +1,52 @@
+﻿
+<section class="products">
+
+
+    <style>
+        .products{
+            position:absolute;
+            top:50%;
+        }
+    </style>
+
+    <div class="box-container">
+
+        @foreach (var file in Model)
+        {
+            <div class="box">
+                <div class="icons">
+                    <a href="@Url.Action("Single","Home",new { id=@file.pid })" class="fas fa-shopping-cart" id="cartaddbtn"></a>
+                    <a href="#" class="fas fa-heart"></a>
+                    <a href="#" class="fas fa-eye"></a>
+                </div>
+
+                @*<a href="@Url.Action("Single","home",new { id=file.pid })"></a>*@
+                <div class="img">
+                    <img src="@Url.Content(file.pimage)" />
+                </div>
+                @if (Session["cid"] == null)
+                {
+                    <script>
+                    document.getElementById("cartaddbtn").onclick = function () {
+                        alert("please login to add to cart");
+                        return false;
+                    }
+                    </script>
+                }
+
+
+                <div class="content">
+
+
+                    <h3>@file.pname</h3>
+                    Rs &nbsp; <div class="price">@file.pprice</div>
+
+                </div>
+            </div>
+
+
+        
+        }
+    </div>
+
+</section>

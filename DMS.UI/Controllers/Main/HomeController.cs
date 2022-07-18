@@ -93,7 +93,12 @@ namespace DMS.Controllers
 
             return RedirectToAction("profile", "home");
         }
-
+        public ActionResult viewallproduct()
+        {
+            List<producttable> all_data = db.producttables.ToList();
+            return View(all_data);
+           
+        }
         public ActionResult Index()
         {
             if (TempData["cart"] != null)

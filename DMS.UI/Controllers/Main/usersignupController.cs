@@ -33,7 +33,6 @@ namespace DMS.Controllers.Main
             return View();
         }
 
-
         public ActionResult SaveData(regcustomer regcustomer)
         {
            
@@ -46,5 +45,11 @@ namespace DMS.Controllers.Main
             return RedirectToAction("Index", "home");
         }
 
+        [HttpPost]
+        public ActionResult Index(string namesearch)
+        {
+            var results = db.regcustomers.Where(x => x.cfullname == namesearch).ToList();
+            return View(results);
+        }
     }
 }

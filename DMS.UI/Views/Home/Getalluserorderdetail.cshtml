@@ -7,10 +7,27 @@
 }
 
 <h2>My Orders</h2>
+<link href="~/Content/adminfiles/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<style>
+    td{
+        font-size:18px;
+    }
+    th {
+        font-size: 20px;
+    }
+    caption{
+        caption-side:top;
+        font-size:40px;
+        text-align:center;
+        text-decoration:underline;
+        color:black;
 
+    }
+</style>
 
-<table class="table" style="position:absolute;top: 50%;">
-    <tr>
+<table class="table table-striped" style="position:absolute;top: 15%;">
+<caption ><h2 >MY ORDERS DETAILS</h2></caption>
+    <tr style="background-color:aquamarine">
      
         <th>
             @Html.DisplayNameFor(model => model.user)
@@ -26,7 +43,7 @@
         <th>
             @Html.DisplayNameFor(model => model.payment)
         </th>
-        <th>Action</th>
+      
     </tr>
 
     @foreach (var item in Model)

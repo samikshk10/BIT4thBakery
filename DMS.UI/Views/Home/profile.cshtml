@@ -24,6 +24,17 @@
    .profilebody{
        font-size: 16px;
    }
+
+   input[type="submit"]{
+       padding: 10px 10px 10px 10px;
+       border-radius:50px;
+       width:100px;
+   }
+
+   input[type="submit"]:hover{
+       cursor:pointer;
+
+   }
 </style>
 <div class="form-container">
     <h1 class="profiletitle">My Profile Information</h1>
@@ -32,12 +43,12 @@
     {
 
         <input type="file" value="Choose a image" name="cphoto" class="form-control"/>
-        <input type="submit" value="Save Image" class="form-control"/>
+        <input type="submit" value="Save" class="form-control"/>
     }
 
 
     <div class="form-row">
-        <h2><Label class="profilehead">Name:</Label></h2>
+        <h2><Label class="profilehead">Name:</Label></h2>  
         <h3 class="profilebody"> @Session["cfullname"].ToString()</h3>
     </div>
     <div class="form-row">

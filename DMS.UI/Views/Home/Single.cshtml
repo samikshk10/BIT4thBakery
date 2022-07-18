@@ -9,7 +9,8 @@
 <style>
     .top{
         position:absolute;
-        top: 40%;
+        top: 20%;
+        left:40%;
     }
 
 
@@ -17,12 +18,18 @@
         height: 250px;
         width: 100%;
     }
+    input[type=submit] {
+       position:relative;
+       left:3rem;
+    }
 </style>
 
 <div class="container top">
 @using (Html.BeginForm())
 {
-    <div class="row">
+    <div class="row" style="line-height:50px;">
+        <div class="col-lg-12">
+
         <div class="col-lg-6">
             <input type="hidden" name="id" value="@Model.pid" />
             <img src="@Url.Content(Model.pimage)" alt="Alternate Text" class="image" />
@@ -31,12 +38,13 @@
         <div class="col-lg-6">
 
 
-            <h2>@Model.pname</h2>
+            <h2 class="name" style="font-size:25px; text-align:center;">@Model.pname</h2>
 
-            <h2>@Model.pprice</h2>
-            <input type="number" name="qty" value="" placeholder="Enter Qty" min="1" max="10" />
-            <input type="submit" name="" value="Add to Cart" class="btn btn-warning" />
+            <h2 style="font-size:22px; text-align:center;">Rs @Model.pprice</h2>
+            <input type="number" name="qty" value="" style="width:100%; height:100%;text-align:center; font-size:25px;"placeholder="Enter Quantity" min="1" max="10" size="30" required /><br />
+            <input type="submit" name=""  value="Add to Cart" class="btn btn-warning" />
 
+        </div>
         </div>
     </div>
 }

@@ -2,12 +2,12 @@
 <link href="~/Content/css/cartstyle.css" rel="stylesheet" />
 
 
-
+<link href="~/Content/adminfiles/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 
 @if (TempData["total"] == null)
 {
-    <h1>Cart is empty</h1>
-    <a href="@Url.Action("index", "home")">GO back</a>
+    <h1 style="position:absolute; top:50%;left:40%;"> Your Cart is empty!!!!!</h1>
+   
 }
 else
 {
@@ -15,6 +15,14 @@ else
         .faaa {
             position: absolute;
             top: 20%;
+        }
+        td{
+            font-size:18px!important;
+            font-weight:300 !important;
+        }
+        th {
+            font-size: 20px !important;
+            font-weight:bold !important;
         }
     </style>
     <div class="container faaa">
@@ -26,12 +34,13 @@ else
                     <table class="table">
                         <thead class="thead-primary">
                             <tr class="text-center">
-                                <th></th>
+                                
                                 <th>ID</th>
                                 <th>Product name</th>
                                 <th>Price</th>
                                 <th>Quantity</th>
                                 <th>Total</th>
+                                <th>Remove</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -40,33 +49,35 @@ else
                             {
 
 
-                                <tr class="text-center">
-                                    <td class="product-remove"><a href="@Url.Action("remove", "home", new { id = producttable.pid })"><span class="ion-ios-close"></span></a></td>
-
-                                    <td class="image-prod"><div class="img" style="background-image:url(images/product-3.jpg);"></div></td>
+                            <tr class="text-center">
 
 
-                                    <td class="product-name">
-                                        <h3>@producttable.pid</h3>
-
-                                    </td>
+                                @*<td class="image-prod"><div class="img" style="background-image:url(images/product-3.jpg);"></div></td>*@
 
 
-                                    <td class="product-name">
-                                        <h3>@producttable.pname</h3>
+                                <td >
+                                    <h3>@producttable.pid</h3>
 
-                                    </td>
-
-                                    <td class="price">@producttable.price</td>
-
-                                    <td class="quantity">
-                                        @producttable.qty
+                                </td>
 
 
-                                    </td>
+                                <td >
+                                    <h3>@producttable.pname</h3>
 
-                                    <td class="total">@producttable.bill</td>
-                                </tr><!-- END TR-->
+                                </td>
+
+                                <td class="price">@producttable.price</td>
+
+                                <td class="quantity">
+                                    @producttable.qty
+
+
+                                </td>
+
+
+                                <td class="total">@producttable.bill</td>
+                                <td class="product-remove"><a href="@Url.Action("remove", "home", new { id = producttable.pid })"><span class="fa fa-trash fa-lg "></span></a></td>
+                            </tr><!-- END TR-->
                             }
                             <!--<tr class="text-center">
                                 <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
@@ -103,16 +114,13 @@ else
             <div class="col-lg-4 mt-5 cart-wrap ftco-animate">
                 <div class="cart-total mb-3">
                     <h3>Cart Totals</h3>
-                    <p class="d-flex">
-                        <span>Subtotal</span>
-                        <span>$20.60</span>
-                    </p>
-                    <p class="d-flex">
-                        <span>Delivery</span>
-                <p><a href="@Url.Action("Checkou", "home")" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
+                    <h2>Total: <span style="font-size:20px; white-space:nowrap">Rs @TempData["total"]</span></h2>
 
 
-            </div>
+                    <p><a href="@Url.Action("Checkou", "home")" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
+
+
+                </div>
         </div>
     </div>
         </div>

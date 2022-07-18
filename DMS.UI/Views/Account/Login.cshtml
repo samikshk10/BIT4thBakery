@@ -21,14 +21,14 @@
 
 
 
-                        <img src="~/Content/Images/bakeryshopimage.jpg" class="img-responsive"/>
+                        <img src="~/Content/Images/bakeryshopimage.jpg" style="height:300px; width:500px;" class ="img-responsive"/>
                     </div>
                     
                 </div>
                 <div class="col-sm-6">
                     <div class="">
                         <h3 align="center">
-                            Main Project
+                            LOGIN
                         </h3>
                         <form class="form-login" action="index.html">
                             @Html.Raw(FlashBag.showMessage())
@@ -67,9 +67,19 @@
                                             </button>
                                             @*<button onclick="@Url.Action("index","usersignup")" class="registers btn btn-blue btn-block" id="rbtn">Register Now&nbsp;&nbsp;<i style="font-size: 16px;" class="fa fa-arrow-circle-up"></i></button>*@
                                             <br>
-                                            
+                                            <style>
+                                                .registers{
+                                                    padding: 7px 9px ;
+                   
+                                                    width:130px;
+                                                    position:relative;
+                                                    top:-5rem;
+                                                    font-size:13px;
+                                                   
+                                                }
+                                            </style>
                                             @*<a href="@Url.Action("ForgotPassword","Account")" class="forget_pass" target="">Forgot Password?</a>*@
-                                            <a href="@Url.Action("index","usersignup")" class="registers">Register Now</a>
+                                            <a href="@Url.Action("index","usersignup")" class="registers btn btn-success" >Register Now <i class="fa fa-arrow-circle-up"></i></a>
 
 
                                         </div>

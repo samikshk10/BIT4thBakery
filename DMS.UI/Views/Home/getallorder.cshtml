@@ -1,0 +1,81 @@
+﻿@model IEnumerable<DMS.DAL.DatabaseContext.getallorder>
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = "view all order";
+   
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.cfullname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.user)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pro_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cpno)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.caddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.oprice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.oqty)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.oamount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.odate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cemail)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.cfullname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.user)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.pro_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cpno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.caddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.oprice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.oqty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.oamount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.odate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cemail)
+            </td>
+
+
+        </tr>
+    }
+
+</table>

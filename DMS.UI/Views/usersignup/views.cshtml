@@ -7,22 +7,22 @@
 }
 
 @*@using (Html.BeginForm("index", "addproduct", FormMethod.Get))
-{
-    <select>
-        <option value="" name="id">ID</option>
-        <option value="" name="name">Name</option>
-        <option value="" name="address">Address</option>
-        <option value="" name="contact">Contact</option>
-    </select>
-}
-@using (Html.BeginForm("index", "employee", FormMethod.Post))
-{
-    <lable>Search BY Name:</lable>
-    <input type="text" name="name" value="" class="namee" />
-    <input type="submit" value="search" class="button" />
-    <br />
-    <br />
-}*@
+    {
+        <select>
+            <option value="" name="id">ID</option>
+            <option value="" name="name">Name</option>
+            <option value="" name="address">Address</option>
+            <option value="" name="contact">Contact</option>
+        </select>
+    }
+    @using (Html.BeginForm("index", "employee", FormMethod.Post))
+    {
+        <lable>Search BY Name:</lable>
+        <input type="text" name="name" value="" class="namee" />
+        <input type="submit" value="search" class="button" />
+        <br />
+        <br />
+    }*@
 <style>
     th {
         border: 3px solid black;
@@ -31,6 +31,13 @@
     }
 </style>
 
+@using (Html.BeginForm("views","usersignup", FormMethod.Post))
+{
+    <lable>Search BY Name:</lable>
+    <input type="text" name="namesearch" value="" id="searchtxt"/>
+    <input type="submit" name="name" class="button" id="searchbtn"/>
+    <a href="@Url.Action("views","usersignup") "><i class="fa fa-refresh fa-lg" id="refresh"></i></a>
+}
 <table class="table" border="1">
     <tr>
         <th>SN</th>
@@ -40,7 +47,7 @@
         <th>PNO</th>
 
         <th>Email</th>
-        
+
         @*<th>edit</th>*@
     </tr>
     @foreach (var regcustomer in Model)
@@ -52,7 +59,7 @@
             <td>@regcustomer.caddress</td>
             <td>@regcustomer.cpno</td>
             <td>@regcustomer.cemail</td>
-            
+
             @*<td><a href="@Url.Action("Edit", new {pid=addproduct_table.pid})">Edit</a></td>*@
         </tr>
     }
