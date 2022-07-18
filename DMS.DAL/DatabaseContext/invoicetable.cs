@@ -12,25 +12,21 @@ namespace DMS.DAL.DatabaseContext
     using System;
     using System.Collections.Generic;
     
-    public partial class regcustomer
+    public partial class invoicetable
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public regcustomer()
+        public invoicetable()
         {
-            this.invoicetables = new HashSet<invoicetable>();
             this.ordertables = new HashSet<ordertable>();
         }
     
+        public string invoiceid { get; set; }
         public int id { get; set; }
-        public string cfullname { get; set; }
-        public string caddress { get; set; }
-        public string cpno { get; set; }
-        public string cemail { get; set; }
-        public string cpassword { get; set; }
-        public string cphoto { get; set; }
+        public decimal bill { get; set; }
+        public string payment { get; set; }
+        public System.DateTime invoicedate { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<invoicetable> invoicetables { get; set; }
+        public virtual regcustomer regcustomer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ordertable> ordertables { get; set; }
     }

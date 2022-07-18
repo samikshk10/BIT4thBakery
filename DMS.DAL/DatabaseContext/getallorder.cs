@@ -12,19 +12,17 @@ namespace DMS.DAL.DatabaseContext
     using System;
     using System.Collections.Generic;
     
-    public partial class ordertable
+    public partial class getallorder
     {
-        public string oid { get; set; }
-        public int id { get; set; }
-        public int oqty { get; set; }
+        public string cfullname { get; set; }
+        public int user { get; set; }
+        public string pro_name { get; set; }
+        public string cpno { get; set; }
+        public string caddress { get; set; }
         public decimal oprice { get; set; }
+        public int oqty { get; set; }
         public decimal oamount { get; set; }
-        public int pid { get; set; }
         public Nullable<System.DateTime> odate { get; set; }
-        public string invoiceid { get; set; }
-    
-        public virtual invoicetable invoicetable { get; set; }
-        public virtual regcustomer regcustomer { get; set; }
-        public virtual producttable producttable { get; set; }
+        public string cemail { get; set; }
     }
 }

@@ -163,9 +163,6 @@ svg {
     vertical-align: middle;
 }
 
-table {
-    border-collapse: collapse;
-}
 
 caption {
     padding-top: 0.75rem;
@@ -173,10 +170,6 @@ caption {
     color: #6c757d;
     text-align: left;
     caption-side: bottom;
-}
-
-th {
-    text-align: inherit;
 }
 
 label {
@@ -987,11 +980,7 @@ h6, .h6 {
     overflow-x: scroll;
 }
 
-.table {
-    min-width: 1000px !important;
-    width: 100%;
-    text-align: center;
-}
+
 
     .table th {
         font-weight: 500;

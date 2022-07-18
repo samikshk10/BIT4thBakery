@@ -173,14 +173,33 @@ namespace DMS.Controllers
 
         public ActionResult Checkou()
         {
-            List<Cart> li2 = TempData["cart"] as List<Cart>;
+
 
             if (ModelState.IsValid)
             {
+
+                List<Cart> li2 = TempData["cart"] as List<Cart>;
+                var random = new Random();
+                const string Charss = "0123456789";
+                var result1 = new string(
+                    Enumerable.Repeat(Charss, 5)
+                        .Select(s => s[random.Next(s.Length)])
+                        .ToArray());
+                invoicetable iv = new invoicetable();
+                iv.id = Convert.ToInt32(Session["cid"].ToString());
+                iv.invoicedate = System.DateTime.Now;
+                iv.bill = Convert.ToDecimal(TempData["total"]);
+                iv.payment = "cash";
+                iv.invoiceid = result1;
+                db.invoicetables.Add(iv);
+                db.SaveChanges();
+
+
                 foreach (var item in li2)
                 {
+                    
                     ordertable ot = new ordertable();
-                    var random = new Random();
+                  
                     const string Chars = "ABCDEFGHIJKLMNPOQRSTUVWXYZ0123456789";
                     var result = new string(
                         Enumerable.Repeat(Chars, 9)
@@ -190,7 +209,7 @@ namespace DMS.Controllers
                     ot.pid = item.pid;
                     ot.odate = System.DateTime.Now;
 
-
+                    ot.invoiceid = iv.invoiceid;
                     ot.oid = "#" + result;
                     ot.oqty = item.qty;
                     ot.oprice = Convert.ToDecimal(item.price);
@@ -290,6 +309,11 @@ namespace DMS.Controllers
            return RedirectToAction("index", "home");
         }
 
+        public ActionResult Getalluserorderdetail(int id)
+        {
+            var query = db.getallorderusers.Where(x => x.id == id).ToList();
+            return View(query);
+        }
        
 
         public async Task<ActionResult> Dashboard()

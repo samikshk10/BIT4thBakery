@@ -107,6 +107,16 @@
           <Property Name="emp01updated_date_nep" Type="char" MaxLength="10" Nullable="false" />
           <Property Name="emp01update_date_eng" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="invoicetable">
+          <Key>
+            <PropertyRef Name="invoiceid" />
+          </Key>
+          <Property Name="invoiceid" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="bill" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="payment" Type="varchar" MaxLength="55" />
+          <Property Name="invoicedate" Type="date" Nullable="false" />
+        </EntityType>
         <EntityType Name="lvl01employee_levels">
           <Key>
             <PropertyRef Name="lvl01uin" />
@@ -135,6 +145,7 @@
           <Property Name="oamount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="pid" Type="int" Nullable="false" />
           <Property Name="odate" Type="date" />
+          <Property Name="invoiceid" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="producttable">
           <Key>
@@ -199,6 +210,72 @@
           <Property Name="usr05can_view_all_branch" Type="bit" Nullable="false" />
           <Property Name="isadmin" Type="bit" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'fos.dbo.getallorders' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="getallorders">
+          <Key>
+            <PropertyRef Name="cfullname" />
+            <PropertyRef Name="user" />
+            <PropertyRef Name="pro_name" />
+            <PropertyRef Name="cpno" />
+            <PropertyRef Name="caddress" />
+            <PropertyRef Name="oprice" />
+            <PropertyRef Name="oqty" />
+            <PropertyRef Name="oamount" />
+            <PropertyRef Name="cemail" />
+          </Key>
+          <Property Name="cfullname" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="user" Type="int" Nullable="false" />
+          <Property Name="pro_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="cpno" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="caddress" Type="varchar" MaxLength="55" Nullable="false" />
+          <Property Name="oprice" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="oqty" Type="int" Nullable="false" />
+          <Property Name="oamount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="odate" Type="date" />
+          <Property Name="cemail" Type="varchar" MaxLength="55" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'fos.dbo.getallorderusers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="getallorderusers">
+          <Key>
+            <PropertyRef Name="invoiceId" />
+            <PropertyRef Name="id" />
+            <PropertyRef Name="user" />
+            <PropertyRef Name="bill" />
+            <PropertyRef Name="invoicedate" />
+          </Key>
+          <Property Name="invoiceId" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="user" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="bill" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="payment" Type="varchar" MaxLength="55" />
+          <Property Name="invoicedate" Type="date" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__invoicetable__id__6DCC4D03">
+          <End Role="regcustomer" Type="Self.regcustomer" Multiplicity="1" />
+          <End Role="invoicetable" Type="Self.invoicetable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="regcustomer">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="invoicetable">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ordertabl__invoi__6EC0713C">
+          <End Role="invoicetable" Type="Self.invoicetable" Multiplicity="0..1" />
+          <End Role="ordertable" Type="Self.ordertable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="invoicetable">
+              <PropertyRef Name="invoiceid" />
+            </Principal>
+            <Dependent Role="ordertable">
+              <PropertyRef Name="invoiceid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__ordertable__id__4F47C5E3">
           <End Role="regcustomer" Type="Self.regcustomer" Multiplicity="1" />
           <End Role="ordertable" Type="Self.ordertable" Multiplicity="*" />
@@ -302,6 +379,7 @@
           <EntitySet Name="dep01department" EntityType="Self.dep01department" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="des01designations" EntityType="Self.des01designations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="emp01employee" EntityType="Self.emp01employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="invoicetable" EntityType="Self.invoicetable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="lvl01employee_levels" EntityType="Self.lvl01employee_levels" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ordertable" EntityType="Self.ordertable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="producttable" EntityType="Self.producttable" Schema="dbo" store:Type="Tables" />
@@ -309,6 +387,38 @@
           <EntitySet Name="test" EntityType="Self.test" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserCodes" EntityType="Self.UserCodes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="usr05users" EntityType="Self.usr05users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="getallorders" EntityType="Self.getallorders" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [getallorders].[cfullname] AS [cfullname], 
+    [getallorders].[user] AS [user], 
+    [getallorders].[pro_name] AS [pro_name], 
+    [getallorders].[cpno] AS [cpno], 
+    [getallorders].[caddress] AS [caddress], 
+    [getallorders].[oprice] AS [oprice], 
+    [getallorders].[oqty] AS [oqty], 
+    [getallorders].[oamount] AS [oamount], 
+    [getallorders].[odate] AS [odate], 
+    [getallorders].[cemail] AS [cemail]
+    FROM [dbo].[getallorders] AS [getallorders]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="getallorderusers" EntityType="Self.getallorderusers" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [getallorderusers].[invoiceId] AS [invoiceId], 
+    [getallorderusers].[id] AS [id], 
+    [getallorderusers].[user] AS [user], 
+    [getallorderusers].[bill] AS [bill], 
+    [getallorderusers].[payment] AS [payment], 
+    [getallorderusers].[invoicedate] AS [invoicedate]
+    FROM [dbo].[getallorderusers] AS [getallorderusers]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__invoicetable__id__6DCC4D03" Association="Self.FK__invoicetable__id__6DCC4D03">
+            <End Role="regcustomer" EntitySet="regcustomer" />
+            <End Role="invoicetable" EntitySet="invoicetable" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ordertabl__invoi__6EC0713C" Association="Self.FK__ordertabl__invoi__6EC0713C">
+            <End Role="invoicetable" EntitySet="invoicetable" />
+            <End Role="ordertable" EntitySet="ordertable" />
+          </AssociationSet>
           <AssociationSet Name="FK__ordertable__id__4F47C5E3" Association="Self.FK__ordertable__id__4F47C5E3">
             <End Role="regcustomer" EntitySet="regcustomer" />
             <End Role="ordertable" EntitySet="ordertable" />
@@ -595,7 +705,16 @@
             <End Role="usr05users" EntitySet="usr05users" />
           </AssociationSet>
           <EntitySet Name="regcustomers" EntityType="fosModel.regcustomer" />
+          <EntitySet Name="invoicetables" EntityType="fosModel.invoicetable" />
           <EntitySet Name="ordertables" EntityType="fosModel.ordertable" />
+          <AssociationSet Name="FK__invoicetable__id__6DCC4D03" Association="fosModel.FK__invoicetable__id__6DCC4D03">
+            <End Role="regcustomer" EntitySet="regcustomers" />
+            <End Role="invoicetable" EntitySet="invoicetables" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ordertabl__invoi__6EC0713C" Association="fosModel.FK__ordertabl__invoi__6EC0713C">
+            <End Role="invoicetable" EntitySet="invoicetables" />
+            <End Role="ordertable" EntitySet="ordertables" />
+          </AssociationSet>
           <AssociationSet Name="FK__ordertable__id__4F47C5E3" Association="fosModel.FK__ordertable__id__4F47C5E3">
             <End Role="regcustomer" EntitySet="regcustomers" />
             <End Role="ordertable" EntitySet="ordertables" />
@@ -604,6 +723,8 @@
             <End Role="producttable" EntitySet="producttables" />
             <End Role="ordertable" EntitySet="ordertables" />
           </AssociationSet>
+          <EntitySet Name="getallorders" EntityType="fosModel.getallorder" />
+          <EntitySet Name="getallorderusers" EntityType="fosModel.getallorderuser" />
           </EntityContainer>
         <EntityType Name="usr05users">
           <Key>
@@ -659,7 +780,20 @@
           <Property Name="cemail" Type="String" Nullable="false" MaxLength="55" FixedLength="false" Unicode="false" />
           <Property Name="cpassword" Type="String" Nullable="false" MaxLength="55" FixedLength="false" Unicode="false" />
           <Property Name="cphoto" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="invoicetables" Relationship="fosModel.FK__invoicetable__id__6DCC4D03" FromRole="regcustomer" ToRole="invoicetable" />
           <NavigationProperty Name="ordertables" Relationship="fosModel.FK__ordertable__id__4F47C5E3" FromRole="regcustomer" ToRole="ordertable" />
+        </EntityType>
+        <EntityType Name="invoicetable">
+          <Key>
+            <PropertyRef Name="invoiceid" />
+          </Key>
+          <Property Name="invoiceid" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="bill" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="payment" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
+          <Property Name="invoicedate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="regcustomer" Relationship="fosModel.FK__invoicetable__id__6DCC4D03" FromRole="invoicetable" ToRole="regcustomer" />
+          <NavigationProperty Name="ordertables" Relationship="fosModel.FK__ordertabl__invoi__6EC0713C" FromRole="invoicetable" ToRole="ordertable" />
         </EntityType>
         <EntityType Name="ordertable">
           <Key>
@@ -672,9 +806,35 @@
           <Property Name="oamount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="pid" Type="Int32" Nullable="false" />
           <Property Name="odate" Type="DateTime" Precision="0" />
+          <Property Name="invoiceid" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="invoicetable" Relationship="fosModel.FK__ordertabl__invoi__6EC0713C" FromRole="ordertable" ToRole="invoicetable" />
           <NavigationProperty Name="regcustomer" Relationship="fosModel.FK__ordertable__id__4F47C5E3" FromRole="ordertable" ToRole="regcustomer" />
           <NavigationProperty Name="producttable" Relationship="fosModel.FK__ordertable__pid__607251E5" FromRole="ordertable" ToRole="producttable" />
         </EntityType>
+        <Association Name="FK__invoicetable__id__6DCC4D03">
+          <End Type="fosModel.regcustomer" Role="regcustomer" Multiplicity="1" />
+          <End Type="fosModel.invoicetable" Role="invoicetable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="regcustomer">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="invoicetable">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ordertabl__invoi__6EC0713C">
+          <End Type="fosModel.invoicetable" Role="invoicetable" Multiplicity="0..1" />
+          <End Type="fosModel.ordertable" Role="ordertable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="invoicetable">
+              <PropertyRef Name="invoiceid" />
+            </Principal>
+            <Dependent Role="ordertable">
+              <PropertyRef Name="invoiceid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__ordertable__id__4F47C5E3">
           <End Type="fosModel.regcustomer" Role="regcustomer" Multiplicity="1" />
           <End Type="fosModel.ordertable" Role="ordertable" Multiplicity="*" />
@@ -699,6 +859,44 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="getallorder">
+          <Key>
+            <PropertyRef Name="cfullname" />
+            <PropertyRef Name="user" />
+            <PropertyRef Name="pro_name" />
+            <PropertyRef Name="cpno" />
+            <PropertyRef Name="caddress" />
+            <PropertyRef Name="oprice" />
+            <PropertyRef Name="oqty" />
+            <PropertyRef Name="oamount" />
+            <PropertyRef Name="cemail" />
+          </Key>
+          <Property Name="cfullname" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="user" Type="Int32" Nullable="false" />
+          <Property Name="pro_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="cpno" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="caddress" Type="String" Nullable="false" MaxLength="55" FixedLength="false" Unicode="false" />
+          <Property Name="oprice" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="oqty" Type="Int32" Nullable="false" />
+          <Property Name="oamount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="odate" Type="DateTime" Precision="0" />
+          <Property Name="cemail" Type="String" Nullable="false" MaxLength="55" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="getallorderuser">
+          <Key>
+            <PropertyRef Name="invoiceId" />
+            <PropertyRef Name="id" />
+            <PropertyRef Name="user" />
+            <PropertyRef Name="bill" />
+            <PropertyRef Name="invoicedate" />
+          </Key>
+          <Property Name="invoiceId" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="user" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="bill" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="payment" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
+          <Property Name="invoicedate" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -898,9 +1096,21 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="invoicetables">
+            <EntityTypeMapping TypeName="fosModel.invoicetable">
+              <MappingFragment StoreEntitySet="invoicetable">
+                <ScalarProperty Name="invoicedate" ColumnName="invoicedate" />
+                <ScalarProperty Name="payment" ColumnName="payment" />
+                <ScalarProperty Name="bill" ColumnName="bill" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="invoiceid" ColumnName="invoiceid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="ordertables">
             <EntityTypeMapping TypeName="fosModel.ordertable">
               <MappingFragment StoreEntitySet="ordertable">
+                <ScalarProperty Name="invoiceid" ColumnName="invoiceid" />
                 <ScalarProperty Name="odate" ColumnName="odate" />
                 <ScalarProperty Name="pid" ColumnName="pid" />
                 <ScalarProperty Name="oamount" ColumnName="oamount" />
@@ -908,6 +1118,34 @@
                 <ScalarProperty Name="oqty" ColumnName="oqty" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="oid" ColumnName="oid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="getallorders">
+            <EntityTypeMapping TypeName="fosModel.getallorder">
+              <MappingFragment StoreEntitySet="getallorders">
+                <ScalarProperty Name="cemail" ColumnName="cemail" />
+                <ScalarProperty Name="odate" ColumnName="odate" />
+                <ScalarProperty Name="oamount" ColumnName="oamount" />
+                <ScalarProperty Name="oqty" ColumnName="oqty" />
+                <ScalarProperty Name="oprice" ColumnName="oprice" />
+                <ScalarProperty Name="caddress" ColumnName="caddress" />
+                <ScalarProperty Name="cpno" ColumnName="cpno" />
+                <ScalarProperty Name="pro_name" ColumnName="pro_name" />
+                <ScalarProperty Name="user" ColumnName="user" />
+                <ScalarProperty Name="cfullname" ColumnName="cfullname" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="getallorderusers">
+            <EntityTypeMapping TypeName="fosModel.getallorderuser">
+              <MappingFragment StoreEntitySet="getallorderusers">
+                <ScalarProperty Name="invoicedate" ColumnName="invoicedate" />
+                <ScalarProperty Name="payment" ColumnName="payment" />
+                <ScalarProperty Name="bill" ColumnName="bill" />
+                <ScalarProperty Name="user" ColumnName="user" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="invoiceId" ColumnName="invoiceId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

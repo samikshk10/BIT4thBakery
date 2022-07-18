@@ -142,6 +142,15 @@
     <Compile Include="DatabaseContext\emp01employee.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DatabaseContext\getallorder.cs">
+      <DependentUpon>MainModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseContext\getallorderuser.cs">
+      <DependentUpon>MainModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseContext\invoicetable.cs">
+      <DependentUpon>MainModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DatabaseContext\lvl01employee_levels.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
@@ -276,6 +285,26 @@
     <Compile Include="Migrations\202207171320216_view.Designer.cs">
       <DependentUpon>202207171320216_view.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202207171510329_invoice table add.cs" />
+    <Compile Include="Migrations\202207171510329_invoice table add.Designer.cs">
+      <DependentUpon>202207171510329_invoice table add.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202207171523420_getallorderusers view.cs" />
+    <Compile Include="Migrations\202207171523420_getallorderusers view.Designer.cs">
+      <DependentUpon>202207171523420_getallorderusers view.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202207171551354_create invoice.cs" />
+    <Compile Include="Migrations\202207171551354_create invoice.Designer.cs">
+      <DependentUpon>202207171551354_create invoice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202207171601068_getorderuser.cs" />
+    <Compile Include="Migrations\202207171601068_getorderuser.Designer.cs">
+      <DependentUpon>202207171601068_getorderuser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202207171636219_getuserorderdetails.cs" />
+    <Compile Include="Migrations\202207171636219_getuserorderdetails.Designer.cs">
+      <DependentUpon>202207171636219_getuserorderdetails.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
@@ -395,6 +424,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202207171320216_view.resx">
       <DependentUpon>202207171320216_view.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207171510329_invoice table add.resx">
+      <DependentUpon>202207171510329_invoice table add.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207171523420_getallorderusers view.resx">
+      <DependentUpon>202207171523420_getallorderusers view.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207171551354_create invoice.resx">
+      <DependentUpon>202207171551354_create invoice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207171601068_getorderuser.resx">
+      <DependentUpon>202207171601068_getorderuser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207171636219_getuserorderdetails.resx">
+      <DependentUpon>202207171636219_getuserorderdetails.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

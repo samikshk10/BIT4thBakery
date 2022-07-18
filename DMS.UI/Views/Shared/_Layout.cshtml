@@ -155,12 +155,16 @@
                 }
             </style>
             <a href="@Url.Action("Checkout","home")">
-                     <div id="cart-btn" class="fas fa-shopping-cart"></div></a>
-            @if (TempData["item_count"] == null)
+                     <div id="cart-btn" class="fas fa-shopping-cart" onclick="aa"></div></a>
+            
+
+
+
+            @if (TempData["item_count"] == null && Session["cid"] != null)
             {
                 <sup>[0]</sup>
             }
-            else
+           @if(TempData["item_count"]!=null && Session["cid"]!=null)
             {
         <sup>[@TempData["item_count"]]</sup>
             }
@@ -328,7 +332,7 @@
                                     </li>
                                     <li>
 
-                                        <a href="@Url.Action("orderdetails","Home")">My Orders</a>
+                                        <a href="@Url.Action("Getalluserorderdetail","Home",new {id=Session["cid"] })">My Orders</a>
                                     </li>
 
                                     <li>
@@ -346,6 +350,12 @@
                     {
                         <script>
                             document.getElementById("login-btn").style.display = "block";
+                            document.getElementById("cart-btn").onclick = function () {
+                                alert("Please login to view cart");
+                                return false;
+                            }
+                              
+
                         </script>
                     }
                 </p>

@@ -207,7 +207,7 @@
         {
             <div class="box">
                 <div class="icons">
-                    <a href="@Url.Action("Single","Home",new { id=@file.pid })" class="fas fa-shopping-cart"></a>
+                    <a href="@Url.Action("Single","Home",new { id=@file.pid })" class="fas fa-shopping-cart" id="cartaddbtn"></a>
                     <a href="#" class="fas fa-heart"></a>
                     <a href="#" class="fas fa-eye"></a>
                 </div>
@@ -218,8 +218,17 @@
 
 
                 </div>
+                @if (Session["cid"] == null)
+                {
+                <script>
+                    document.getElementById("cartaddbtn").onclick = function () {
+                        alert("please login to add to cart");
+                        return false;
+                    }
+                    </script>
+                }
 
-                
+
                 <div class="content">
                  
 

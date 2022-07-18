@@ -23,9 +23,14 @@
         <AssociationConnector Association="fosModel.FK_usr05users_bra01branches" />
         <AssociationConnector Association="fosModel.FK_usr05users_emp01employee" />
         <EntityTypeShape EntityType="fosModel.regcustomer" Width="1.5" PointX="10.375" PointY="0.75" />
-        <EntityTypeShape EntityType="fosModel.ordertable" Width="1.5" PointX="12.625" PointY="4.125" />
+        <EntityTypeShape EntityType="fosModel.invoicetable" Width="1.5" PointX="12.625" PointY="1" />
+        <EntityTypeShape EntityType="fosModel.ordertable" Width="1.5" PointX="14.875" PointY="4" />
+        <AssociationConnector Association="fosModel.FK__invoicetable__id__6DCC4D03" />
+        <AssociationConnector Association="fosModel.FK__ordertabl__invoi__6EC0713C" />
         <AssociationConnector Association="fosModel.FK__ordertable__id__4F47C5E3" />
         <AssociationConnector Association="fosModel.FK__ordertable__pid__607251E5" />
+        <EntityTypeShape EntityType="fosModel.getallorder" Width="1.5" PointX="10.375" PointY="4.75" />
+        <EntityTypeShape EntityType="fosModel.getallorderuser" Width="1.5" PointX="5.375" PointY="10.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
