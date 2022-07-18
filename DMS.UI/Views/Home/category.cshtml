@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewBag.Title = "category";
+}
+
+<style>
+  
+</style>
+
+<<section class="products" id="gg">
+
+  
+
+    <div class="box-container">
+
+        @foreach (var file in Model)
+        {
+            <div class="box" >
+                <div class="icons">
+                    <a href="#" class="fas fa-shopping-cart"></a>
+                    <a href="#" class="fas fa-heart"></a>
+                    <a href="#" class="fas fa-eye"></a>
+                </div>
+                <div class="img">
+                    <img src="@Url.Content(file.pimage)" />
+                </div>
+
+
+                <div class="content">
+
+
+                    <h3>@file.pname</h3>
+                    <div class="price">Rs &nbsp;@file.pprice</div>
+
+                </div>
+            </div>
+
+        }
+    </div>
+
+</section>
+
+
+

@@ -55,6 +55,115 @@
         font-size: 20px;
         border-top: 2px solid black;
     }
+
+    .popup{
+        position:fixed;
+        top:50%;
+        left:50%;
+        transform:translate(-50%,-50%)scale(0);
+        width:80%;
+        max-width:800px;
+        height:90vh;
+        max-height:800px;
+        border-radius:20px;
+        background:blue;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        z-index:5;
+        overflow:hidden;
+        transition:1s;
+        opacity:0;
+    }
+
+    .pop,active{
+        transform:translate(-50%,-50%)scale(1);
+        opacity:1;
+    }
+
+    .popup.active.close-btn,
+    .popup.active.image-name,
+    .popup.active.index,
+    .popup.active.large-img,
+    .popup.active.arrow-btn{
+        opacity:1;
+        transition:opacity 0.5s;
+        transition-delay:1s
+    }
+
+
+    .top-bar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 50px;
+        background: #000;
+        color: #fff;
+        text-align: center;
+        line-height: 50px;
+        font-weight: 300;
+    }
+    .image-name{
+        opacity:0;
+    }
+
+    .close-btn{
+        opacity:0;
+        position:absolute;
+        top:15px;
+        right:20px;
+        width:20px;
+        height:20px;
+        border-radius:50%;
+        background:#f00;
+        cursor:pointer;
+
+    }
+
+
+    .arrow-btn{
+        opacity:0;
+        position:absolute;
+        top:50%;
+        transform:translateY(-50%);
+        padding:10px;
+        border-radius:50%;
+        border:none;
+        background:none;
+        cursor:pointer;
+    }
+
+    .left-arrow{
+        left:10px;
+        transform:translateY(-50%) rotate(180deg);
+
+    }
+
+    .right-arrow{
+        right:10px;
+    }
+    .arrow-btn:hover{
+        background:white;
+    }
+
+    .index{
+        position:absolute;
+        bottom:10px;
+        right:10px;
+        font-size:80px;
+        font-weight:100;
+        color:rgba(255,255,255,0.4);
+        opacity:0;
+    }
+    .large-img{
+        margin-top:5%;
+        width:80%;
+        height:80%;
+        object-fit:contain;
+        opacity:0;
+    }
+
 </style>
     @*Go To Top Button*@
 <button id="goToTop" onclick="goTop()"><i class="fa fa-angle-up fa-lg"></i></button>
@@ -78,7 +187,7 @@
         <div class="slide active">
             <div class="content">
                 <span>Have a Cake-A-Licious</span>
-                <h3>upto 50% off</h3>
+                <h3> A party without cake is just a meeting </h3>
                 <a href="#" class="btn">Shop Now</a>
             </div>
             <div class="img">
@@ -203,8 +312,6 @@
                 </div>
                 <div class="img">
                   <img src="@Url.Content(file.pimage)" />
-
-
                 </div>
 
                 
@@ -217,7 +324,7 @@
                 </div>
             </div>
 
-
+    
         @*<div class="box">
             <div class="icons">
                 <a  class="fas fa-shopping-cart"></a>
@@ -411,16 +518,29 @@
     <div class="box-container">
         @foreach (var file in ViewBag.productimage)
         {
-           
-        <div class="box">
-            @*<img src="~/Content/Images/gallery1.jpg" alt="">*@
-            <img src="~/Content/productimage/@Path.GetFileName(file)" />
-            <div class="icons">
-                <a href="#" class="fas fa-eye"></a>
-                <a href="#" class="fas fa-heart"></a>
-                <a href="#" class="fas fa-share-alt"></a>
+
+            <div class="box">
+                @*<img src="~/Content/Images/gallery1.jpg" alt="">*@
+                <img src="~/Content/productimage/@Path.GetFileName(file)" />
+                <div class="icons">
+                    <a href="#pop" class="fas fa-eye"></a>
+                    <a href="#" class="fas fa-heart"></a>
+                    <a href="#" class="fas fa-share-alt"></a>
+                </div>
             </div>
-        </div>
+            <div class="popup" id="pop">
+                <div class="top-bar">
+                    <p class="image-name">img1.png</p>
+                    <span class="close-btn"></span>
+                </div>
+                <button class="arrow-btn left-arrow"><img src="~/Content/assets/images/icons8-arrow-50.png" /></button>
+                <button class="arrow-btn right-arrow"><img src="~/Content/assets/images/icons8-arrow-50.png" /></button>
+                @*image*@
+                @*<img src="~/Content/productimage/@Path.GetFileName(file)" class="large-img" />*@
+                <img src="~/Content/assets/images/color-2.png" class="large-img" />
+                <h1 class="index">01</h1>
+
+            </div>
 
             @*<div class="box">
                 <img src="~/Content/Images/gallery2.jpg" alt="">
@@ -467,7 +587,7 @@
                 </div>
             </div>*@
         }
-        </div>
+    </div>
 
 </section>
  @*client section start*@
@@ -592,7 +712,7 @@
                 </div>
                 <h3>blogs title page</h3>
                 <p>Lorem ipsum dolor sit amet, farhan aliqua. Ut enim ad minim veniam, quis</p>
-                <a href="#" class="btn">read more...</a>
+                
             </div>
         </div>
 
@@ -607,7 +727,7 @@
                 </div>
                 <h3>blogs title page</h3>
                 <p>Lorem ipsum dolor sit amet, farhan aliqua. Ut enim ad minim veniam, quis</p>
-                <a href="#" class="btn">read more...</a>
+               
             </div>
         </div>
 
@@ -622,7 +742,7 @@
                 </div>
                 <h3>blogs title page</h3>
                 <p>Lorem ipsum dolor sit amet, farhan aliqua. Ut enim ad minim veniam, quis</p>
-                <a href="#" class="btn">read more...</a>
+            
             </div>
         </div>
 
@@ -637,7 +757,7 @@
                 </div>
                 <h3>blogs title page</h3>
                 <p>Lorem ipsum dolor sit amet, farhan aliqua. Ut enim ad minim veniam, quis</p>
-                <a href="#" class="btn">read more...</a>
+               
             </div>
         </div>
 
@@ -652,7 +772,7 @@
                 </div>
                 <h3>blogs title page</h3>
                 <p>Lorem ipsum dolor sit amet, farhan aliqua. Ut enim ad minim veniam, quis</p>
-                <a href="#" class="btn">read more...</a>
+                
             </div>
         </div>
 
@@ -667,7 +787,7 @@
                 </div>
                 <h3>blogs title page</h3>
                 <p>Lorem ipsum dolor sit amet, farhan aliqua. Ut enim ad minim veniam, quis</p>
-                <a href="#" class="btn">read more...</a>
+                
             </div>
         </div>
 
@@ -749,7 +869,7 @@
             <h3>follow us</h3>
             <a href="#"> <i class="fab fa-facebook-f"></i> facebook </a>
             <a href="#"> <i class="fab fa-twitter"></i> twitter </a>
-            <a href="#"> <i class="fab fa-inst  agram"></i> instagram </a>
+            <a href="#"> <i class="fab fa-instagram"></i> instagram </a>
             <a href="#"> <i class="fab fa-linkedin"></i> linkedin </a>
             <a href="#"> <i class="fab fa-pinterest"></i> pinterest </a>
         </div>
@@ -830,6 +950,82 @@
         cartVar.style.display = 'none';
         count = 0;
     })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //gallery ko popup image ko lagi hai
+    const images = document.querySelectorAll('#pop');
+    //popup
+
+    const popup = document.querySelector('.popup');
+    const closebtn = document.querySelector('.close-btn');
+    const imagename = document.querySelector('.image-name');
+    const largeimage = document.querySelector('.large-img');
+    const imageindex = document.querySelector('.index');
+    const leftarrow = document.querySelector('.left-arrow');
+    const right = document.querySelector('.right-arrow');
+
+
+    let index = 0;
+
+    images.forEach((item, i) => {
+        item.addEventListener('click', () => {
+            popup.classList.toggle('active');
+            updateimage(i);
+            popup.classList.toggle('active');
+        })
+    })
+
+        const updateimage = (i) => {
+            let path = `img/img${i + 1}.png`;
+            largeimage.src = path;
+        imagename.innerHTML = path;
+            imageindex.innerHTML = `0${i + 1}`;
+            index=i;
+        }
+    closebtn.addEventListener('click', () => {
+        popup.classList.toggle('active');
+    })
+
+        leftarrow.addEventListener('click', ()=> {
+            if (index > 0) {
+                updateimage(index - 1);
+            }
+        })
+
+        leftright.addEventListener('click', () => {
+            if (index < image.length-1) {
+                updateimage(index + 1);
+            }
+        })
+  
+  
+
 
 
 </script>

@@ -467,6 +467,7 @@
     <Content Include="Content\assets\css\password_strength\password_strength.css" />
     <Content Include="Content\assets\css\_styles.css" />
     <Content Include="Content\assets\dm_img.jfif" />
+    <Content Include="Content\assets\images\icons8-arrow-50.png" />
     <Content Include="Content\assets\images\logo.png" />
     <Content Include="Content\assets\images\sample\f1.jpg" />
     <Content Include="Content\assets\images\sample\f2.jpg" />
@@ -1520,6 +1521,7 @@
     <Content Include="Views\favourite\index.cshtml" />
     <Content Include="Views\Home\profile.cshtml" />
     <Content Include="Views\Home\viewallgallery.cshtml" />
+    <Content Include="Views\Home\category.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

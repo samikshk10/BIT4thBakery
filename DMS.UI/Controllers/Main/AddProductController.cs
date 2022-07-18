@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 
 
+
 namespace DMS.Controllers.Main
 {
     public class addproductController : Controller
@@ -24,6 +25,7 @@ namespace DMS.Controllers.Main
         public ActionResult Index()
         {
             List<producttable> all_data = db.producttables.ToList();
+          
             return View(all_data);
         }
         public ActionResult Create()
@@ -33,24 +35,47 @@ namespace DMS.Controllers.Main
         [HttpPost]
         public ActionResult SaveData(producttable producttable, HttpPostedFileBase pimage)
         {
-            string path = Server.MapPath("~/Content/productimage");
-            string filename = pimage.FileName;
-            string newpath = path + "/" + filename;
-            if (!Directory.Exists(path))
-            {
-                Directory.CreateDirectory(path);
-            }
-            pimage.SaveAs(newpath);
-            producttable.pimage = "~/Content/productimage/" + filename;
-           
+
+            //if(db.producttables.Any(x=>x.pid==producttable.pid))
+            //{
+            //    ViewBag.message = "this id is not available";
+            //    return View();
+            //}
+            List<producttable> data = db.producttables.Where(x => x.pid == producttable.pid).ToList();
+            
+                if(data.Count> 0)
+                {
+                    TempData["message"] = "<script>alert('this order number already exist');</script>";
+                return View();
+                }
+                else
+                {
+
+                    string path = Server.MapPath("~/Content/productimage");
+                    string filename = pimage.FileName;
+                    string newpath = path + "/" + filename;
+                    if (!Directory.Exists(path))
+                    {
+                        Directory.CreateDirectory(path);
+                    }
+                    pimage.SaveAs(newpath);
+                    producttable.pimage = "~/Content/productimage/" + filename;
 
 
 
 
-            db.producttables.Add(producttable);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+
+                    db.producttables.Add(producttable);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                    
+                }
+            
+            
         }
+
+       
+       
         public ActionResult edit(int id)
         {
             producttable data = db.producttables.Find(id);//find data using primary key

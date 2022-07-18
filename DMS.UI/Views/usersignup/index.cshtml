@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@model DMS.DAL.DatabaseContext.regcustomer
+<!DOCTYPE html>
+
 <html>
 <head>
     <meta charset="utf-8">
@@ -8,10 +10,10 @@
     <!-- Font-->
     <link rel="stylesheet" type="text/css" href="css/nunito-font.css">
     <!-- Main Style Css -->
-
     <link href="~/Content/css/registrationstyle.css" rel="stylesheet" />
 </head>
 <body class="form-v6">
+  
     <div class="page-content">
         <div class="form-v6-content">
 
@@ -30,27 +32,29 @@
 
                 <div class="form-row">
                     <input type="text" name="cpno" id="phonenumber" class="input-text" placeholder="Your Phone Number" required>
+                    @Html.ValidationMessageFor(model => model.cpno, "", new { @class = "text-danger" })
                 </div>
 
                 <div class="form-row">
                     <input type="text" name="cemail" id="your-email" class="input-text" placeholder="Email Address" required>
+                    @Html.ValidationMessageFor(model => model.cemail, "", new { @class = "text-danger" })
                 </div>
                 <div class="form-row">
                     <input type="password" name="cpassword" id="password" class="input-text" placeholder="Password" required>
+                    @Html.ValidationMessageFor(model => model.cpassword, "", new { @class = "text-danger" })
                 </div>
                 @*<div class="form-row">
                         <input type="password" name="comfirm-password" id="comfirm-password" class="input-text" placeholder="Comfirm Password" required>
 
                     </div>*@
                 <div class="form-row-last">
-                    <input type="submit" class="register" value="Register" onclick="validate()">
+                    <input type="submit" class="register" value="Register" >
+                   
                 </div>
             </form>
         </div>
     </div>
-    <script>
-
-    </script>
+    
 </body>
 </html>
 <img src="~/Content/Product Image/sa.jpg" />
