@@ -11,7 +11,8 @@ namespace DMS.DAL.DatabaseContext
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class regcustomer
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,10 +23,18 @@ namespace DMS.DAL.DatabaseContext
         }
     
         public int id { get; set; }
+        [Required]
         public string cfullname { get; set; }
+        [Required]
         public string caddress { get; set; }
+        [Required]
+        [Range(10,14,ErrorMessage ="please enter number between 8 to 12")]
         public string cpno { get; set; }
+        [Required]
+        [RegularExpression("/^([A-Za-z0-9_./])+@([A-Za-z0-9_.])+.([A-Za-z]{2,4})$/;",ErrorMessage ="please enter the correct format")]
         public string cemail { get; set; }
+        [Required]
+        [Range(8, 14, ErrorMessage = "please enter number between 8 to 12")]
         public string cpassword { get; set; }
         public string cphoto { get; set; }
     

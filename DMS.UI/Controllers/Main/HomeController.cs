@@ -290,7 +290,15 @@ namespace DMS.Controllers
            
             return View("viewallgallery");
         }
-    
+
+        public ActionResult category()
+        {
+
+           List<producttable> all_data = db.producttables.ToList();
+            return View(all_data);
+           
+        }
+
 
         public ActionResult Blog()
         {

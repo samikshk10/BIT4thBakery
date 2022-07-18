@@ -1,13 +1,13 @@
 ﻿
 @{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
-    ViewBag.Title = "Product";
+    ViewBag.Title = "View Products";
     int sn = 0;
 }
 
 
 
-<h3>Display Product</h3>
+
 <style>
     th {
         border: 3px solid black;
@@ -16,7 +16,7 @@
     }
 </style>
 
-<h2>Display</h2>
+
 @*@using (Html.BeginForm("index", "addproduct", FormMethod.Get))
 {
     <select>
@@ -26,6 +26,8 @@
         <option value="" name="contact">Contact</option>
     </select>
 }*@
+
+<h2>@ViewBag.Count</h2>
 @using (Html.BeginForm("Index", "addproduct", FormMethod.Post))
 {
     <lable>Search BY Name:</lable>

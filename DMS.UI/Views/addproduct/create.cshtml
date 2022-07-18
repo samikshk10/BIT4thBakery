@@ -1,7 +1,7 @@
 ﻿
 @{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
-    ViewBag.Title = "Product";
+    ViewBag.Title = "Add Product";
 }
 
 <h2 style="text-align:center;">Add New Record</h2>
@@ -23,7 +23,15 @@
 
     <label class="col-md-12">CATEGORY</label>
     <div class="col-md-12">
-        <input type="text" name="pcategory" value="" class="form-control"  required/>
+        <select name="pcategory" style="width:150px; text-align:center">
+            <option style="display:none;"></option>
+            <option value="cake">cake</option>
+            <option value="flour">flour</option>
+            <option value="chocolate">chocolate</option>
+            <option value="cupcake">cupcake</option>
+            <option value="donut">donut</option>
+            <option value="sandwich">sandwich</option>
+        </select>
     </div>
 
 
@@ -46,7 +54,7 @@
     <div class="col-md-12">
         <input type="date" name="pexpdate" value="" class="form-control" />
     </div>
-
+    <label>@ViewBag.message</label>
     <div class="col-md-12">
         <input style="margin-top:12px;" type="submit" name="submit" class="btn btn-success" value="ADD" id="submit" />
     </div>
