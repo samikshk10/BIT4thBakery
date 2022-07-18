@@ -1,4 +1,9 @@
 
+@{ 
+    int count=0;
+    int counta = 0;
+   
+}
 
 <style>
     .cart {
@@ -14,81 +19,88 @@
         margin: 0;
         align-content: flex-start;
         height: 100%;
-        
         overflow: scroll;
     }
 
-    .cart > div{
-        flex:1 0 100%;
-        padding-top:20px;
-        padding-bottom:0px;
-        padding-left:50px;
-        
-    }
-    .cart >h3{
-        text-align:center;
-        font-size:30px;
-        height:60px;
-        border-bottom:2px solid black;
-        padding:10px;
-    }
-    .totalAmount{
-        margin-right:50px;
-        display:block;
-        text-align:right;
-        font-size:15px;
+        .cart > div {
+            flex: 1 0 100%;
+            padding-top: 20px;
+            padding-bottom: 0px;
+            padding-left: 50px;
+        }
+
+        .cart > h3 {
+            text-align: center;
+            font-size: 30px;
+            height: 60px;
+            border-bottom: 2px solid black;
+            padding: 10px;
+        }
+
+    .totalAmount {
+        margin-right: 50px;
+        display: block;
+        text-align: right;
+        font-size: 15px;
     }
 
-    .cross{
-        position:fixed;
-        top:2px;
-        right:25px;
+    .cross {
+        position: fixed;
+        top: 2px;
+        right: 25px;
     }
-    .cross:hover{
-        cursor:pointer;
+
+        .cross:hover {
+            cursor: pointer;
+        }
+
+    .active {
+        z-index: 1000;
     }
-   
-    .active{
-        z-index:1000;
-    }
+
     .totalAmtLabel {
         font-size: 20px;
         border-top: 2px solid black;
     }
 
-    .popup{
-        position:fixed;
-        top:50%;
-        left:50%;
-        transform:translate(-50%,-50%)scale(0);
-        width:80%;
-        max-width:800px;
-        height:90vh;
-        max-height:800px;
-        border-radius:20px;
-        background:blue;
-        display:flex;
-        justify-content:center;
-        align-items:center;
-        z-index:5;
-        overflow:hidden;
-        transition:1s;
-        opacity:0;
+    .popup {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%)scale(0);
+        width: 80%;
+        max-width: 800px;
+        height: 90vh;
+        max-height: 800px;
+        border-radius: 20px;
+        background: blue;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 5;
+        overflow: hidden;
+        transition: 1s;
+        opacity: 0;
     }
 
-    .pop,active{
-        transform:translate(-50%,-50%)scale(1);
-        opacity:1;
+    .pop, active {
+        transform: translate(-50%,-50%)scale(1);
+        opacity: 1;
     }
+    .viewhover:hover{
+        color:mediumslateblue !important;
+    }
+
+    
 
     .popup.active.close-btn,
     .popup.active.image-name,
     .popup.active.index,
     .popup.active.large-img,
-    .popup.active.arrow-btn{
-        opacity:1;
-        transition:opacity 0.5s;
-        transition-delay:1s
+    .popup.active.arrow-btn {
+        opacity: 1;
+        transition: opacity 0.5s;
+        transition-delay: 1s
     }
 
 
@@ -104,72 +116,72 @@
         line-height: 50px;
         font-weight: 300;
     }
-    .image-name{
-        opacity:0;
+
+    .image-name {
+        opacity: 0;
     }
 
-    .close-btn{
-        opacity:0;
-        position:absolute;
-        top:15px;
-        right:20px;
-        width:20px;
-        height:20px;
-        border-radius:50%;
-        background:#f00;
-        cursor:pointer;
-
+    .close-btn {
+        opacity: 0;
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: #f00;
+        cursor: pointer;
     }
 
 
-    .arrow-btn{
-        opacity:0;
-        position:absolute;
-        top:50%;
-        transform:translateY(-50%);
-        padding:10px;
-        border-radius:50%;
-        border:none;
-        background:none;
-        cursor:pointer;
+    .arrow-btn {
+        opacity: 0;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        padding: 10px;
+        border-radius: 50%;
+        border: none;
+        background: none;
+        cursor: pointer;
     }
 
-    .left-arrow{
-        left:10px;
-        transform:translateY(-50%) rotate(180deg);
-
+    .left-arrow {
+        left: 10px;
+        transform: translateY(-50%) rotate(180deg);
     }
 
-    .right-arrow{
-        right:10px;
-    }
-    .arrow-btn:hover{
-        background:white;
+    .right-arrow {
+        right: 10px;
     }
 
-    .index{
-        position:absolute;
-        bottom:10px;
-        right:10px;
-        font-size:80px;
-        font-weight:100;
-        color:rgba(255,255,255,0.4);
-        opacity:0;
-    }
-    .large-img{
-        margin-top:5%;
-        width:80%;
-        height:80%;
-        object-fit:contain;
-        opacity:0;
+    .arrow-btn:hover {
+        background: white;
     }
 
+    .index {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        font-size: 80px;
+        font-weight: 100;
+        color: rgba(255,255,255,0.4);
+        opacity: 0;
+    }
+
+    .large-img {
+        margin-top: 5%;
+        width: 80%;
+        height: 80%;
+        object-fit: contain;
+        opacity: 0;
+    }
 </style>
-    @*Go To Top Button*@
+@*Go To Top Button*@
 <button id="goToTop" onclick="goTop()"><i class="fa fa-angle-up fa-lg"></i></button>
- @*Home Section*@
+@*Home Section*@
 <div class="cart" style="display:none;">
-    <img src="~/Content/Images/cross-png.png" style="width:15px;height:15px;" class="cross"alt ="">
+    <img src="~/Content/Images/cross-png.png" style="width:15px;height:15px;" class="cross" alt="">
     <h3>Your Cart</h3>
 
 
@@ -183,11 +195,11 @@
 
     @*@using (Html.BeginForm("SaveOrder","Home"))
             {
-                
+
         <input type="submit" onclick="return confirm("do you want to place order")"/>
             }*@
-  
-   
+
+
 
 
 </div>
@@ -264,14 +276,14 @@
     </div>
 
 </section>
- @*category start*@
+@*category start*@
 <div class="heading">
     <h1>our shop</h1>
 </div>
 
 <section class="category" id="category">
 
-    <h1 class="title"> our <span>category</span> <a href="#">view all >></a> </h1>
+    @*<h1 class="title"> our <span>category</span> <a href="#">view all >></a> </h1>*@
 
     <div class="box-container">
 
@@ -299,45 +311,58 @@
             <img src="~/Content/Images/wheat.jpg" alt="">
             <h3>Wheat</h3>
         </a>
-       
+
 
 
     </div>
 
 </section>
- @*products section*@
+@*products section*@
 <section class="products">
-
-    <h1 class="title"> our <span>products</span> <a href="@Url.Action("viewallproduct","Home")">view all >></a> </h1>
+ 
+    <h1 class="title"> our <span>products</span> <a href="@Url.Action("viewallproduct","Home")" class="viewhover">view all >></a> </h1>
 
     <div class="box-container">
-    
+
         @foreach (var file in Model)
         {
             <div class="box">
                 <div class="icons">
-                    <a href="@Url.Action("Single","Home",new { id=@file.pid })" class="fas fa-shopping-cart" id="cartaddbtn"></a>
+                    @if (Session["cid"] != null)
+                    {
+                        <a href="@Url.Action("Single","Home",new { id=@file.pid })" class="fas fa-shopping-cart cartaddbtn"></a>
+                    }
+                    else
+                    {
+                        <a class="fas fa-shopping-cart cartaddbtn"></a>
+
+                        <script>
+                            var el = document.querySelectorAll(".cartaddbtn"); // this element contains more than 1 DOMs.
+                            for (var i = 0; i < el.length; i++) {
+                                el[i].onclick = function () {
+                                    alert("Please login to add to cart");
+                                };
+                            }
+
+
+
+                        </script>
+                    }
+
+
                     <a href="#" class="fas fa-heart"></a>
                     <a href="#" class="fas fa-eye"></a>
                 </div>
 
                 @*<a href="@Url.Action("Single","home",new { id=file.pid })"></a>*@
                 <div class="img">
-                  <img src="@Url.Content(file.pimage)" />
+                    <img src="@Url.Content(file.pimage)" />
                 </div>
-                @if (Session["cid"] == null)
-                {
-                <script>
-                    document.getElementById("cartaddbtn").onclick = function () {
-                        alert("please login to add to cart");
-                        return false;
-                    }
-                    </script>
-                }
+
 
 
                 <div class="content">
-                 
+
 
                     <h3>@file.pname</h3>
                     Rs &nbsp; <div class="price">@file.pprice</div>
@@ -345,165 +370,20 @@
                 </div>
             </div>
 
-    
-        @*<div class="box">
-            <div class="icons">
-                <a  class="fas fa-shopping-cart"></a>
-                <a href="#" class="fas fa-heart"></a>
-                <a href="#" class="fas fa-eye"></a>
-            </div>
-            <div class="img">
-                <img src="~/Content/productimage/@Path.GetFileName(file)" />
-            </div>
-            <div class="content">
-                <h3>resh mellow sp color cake</h3>
-                <div class="price">$19.99</div>
-                <div class="stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="far fa-star"></i>
-                </div>
-            </div>
-        </div>
 
-        <div class="box">
-            <div class="icons">
-                <a class="fas fa-shopping-cart"></a>
-                <a href="#" class="fas fa-heart"></a>
-                <a href="#" class="fas fa-eye"></a>
-            </div>
-            <div class="img">
-                <img src="~/Content/productimage/@Path.GetFileName(file)" />
-            </div>
-            <div class="content">
-                <h3>Rose color sparkel cake</h3>
-                <div class="price">$19.99</div>
-                <div class="stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="far fa-star"></i>
-                </div>
-            </div>
-        </div>
 
-        <div class="box">
-            <div class="icons">
-                <a class="fas fa-shopping-cart"></a>
-                <a href="#" class="fas fa-heart"></a>
-                <a href="#" class="fas fa-eye"></a>
-            </div>
-            <div class="img">
-                <img src="~/Content/productimage/@Path.GetFileName(file)" />
-            </div>
-            <div class="content">
-                <h3>strawberry nutella cake</h3>
-                <div class="price">$19.99</div>
-                <div class="stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="far fa-star"></i>
-                </div>
-            </div>
-        </div>
-
-        <div class="box">
-            <div class="icons">
-                <a class="fas fa-shopping-cart"></a>
-                <a href="#" class="fas fa-heart"></a>
-                <a href="#" class="fas fa-eye"></a>
-            </div>
-            <div class="img">
-                <img src="~/Content/productimage/@Path.GetFileName(file)" />
-            </div>
-            <div class="content">
-                <h3>green bread spar cake</h3>
-                <div class="price">$19.99</div>
-                <div class="stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="far fa-star"></i>
-                </div>
-            </div>
-        </div>
-
-        <div class="box">
-            <div class="icons">
-                <a class="fas fa-shopping-cart"></a>
-                <a href="#" class="fas fa-heart"></a>
-                <a href="#" class="fas fa-eye"></a>
-            </div>
-            <div class="img">
-                <img src="~/Content/productimage/@Path.GetFileName(file)" />
-            </div>
-            <div class="content">
-                <h3>red berries chocolate cake</h3>
-                <div class="price">$19.99</div>
-                <div class="stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="far fa-star"></i>
-                </div>
-            </div>
-        </div>
-
-        <div class="box">
-            <div class="icons">
-                <a class="fas fa-shopping-cart"></a>
-                <a href="#" class="fas fa-heart"></a>
-                <a href="#" class="fas fa-eye"></a>
-            </div>
-            <div class="img">
-                <img src="~/Content/productimage/@Path.GetFileName(file)" />
-            </div>
-            <div class="content">
-                <h3>strawberry red spar cake</h3>
-                <div class="price">$19.99</div>
-                <div class="stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="far fa-star"></i>
-                </div>
-            </div>
-        </div>
-
-        <div class="box">
-            <div class="icons">
-                <a class="fas fa-shopping-cart"></a>
-                <a href="#" class="fas fa-heart"></a>
-                <a href="#" class="fas fa-eye"></a>
-            </div>
-            <div class="img">
-                <img src="~/Content/productimage/@Path.GetFileName(file)" />
-            </div>
-            <div class="content">
-                <h3>dark chocolate nutella cake</h3>
-                <div class="price">$19.99</div>
-                <div class="stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="far fa-star"></i>
-                </div>
-            </div>
-        </div>*@
+            counta++;
+            if (counta == 8)
+            {
+                break;
+            }
         }
+       
     </div>
-        
+
 </section>
- @*about section start*@
+
+@*about section start*@
 <div class="heading">
     <h1>About us</h1>
 </div>
@@ -511,7 +391,7 @@
 <section class="about" id="about">
     <div class="img">
 
-     
+
 
         <img src="~/Content/Images/aboutus.jpg" alt="">
 
@@ -533,74 +413,79 @@
         <a href="#" class="btn">read more</a>
     </div>
 </section>
- @*gallery section start*@
+@*gallery section start*@
+
 <section class="gallery">
-    <h1 class="title"> our <span>gallery</span> <a href="@Url.Action("viewallgallery","home")">view all >></a> </h1>
+    <h1 class="title"> our <span>gallery</span> <a href="@Url.Action("viewallgallery","home")" class="viewhover">view all >></a> </h1>
     <div class="box-container">
-        @foreach (var file in ViewBag.productimage)
+        @foreach (var file in ViewBag.galleryphoto)
         {
-           
-        <div class="box">
-            @*<img src="~/Content/Images/gallery1.jpg" alt="">*@
-            <img src="~/Content/productimage/@Path.GetFileName(file)" />
 
-            
-            <div class="icons">
-                <a href="#" class="fas fa-eye"></a>
-                <a href="#" class="fas fa-heart"></a>
-                <a href="#" class="fas fa-share-alt"></a>
+            <div class="box">
+             
+                <img src="~/Content/galleryphoto/@Path.GetFileName(file)" />
+
+
+                <div class="icons">
+                    <a href="#" class="fas fa-eye"></a>
+                    <a href="#" class="fas fa-heart"></a>
+                    <a href="#" class="fas fa-share-alt"></a>
+                </div>
             </div>
-        </div>
-
+            count++;
+            if (count == 6)
+            {
+                break;
+            }
             @*<div class="box">
-                <img src="~/Content/Images/gallery2.jpg" alt="">
-                <div class="icons">
-                    <a href="#" class="fas fa-eye"></a>
-                    <a href="#" class="fas fa-heart"></a>
-                    <a href="#" class="fas fa-share-alt"></a>
+                    <img src="~/Content/Images/gallery2.jpg" alt="">
+                    <div class="icons">
+                        <a href="#" class="fas fa-eye"></a>
+                        <a href="#" class="fas fa-heart"></a>
+                        <a href="#" class="fas fa-share-alt"></a>
+                    </div>
                 </div>
-            </div>
 
-            <div class="box">
-                <img src="~/Content/Images/gallery3.jpg" alt="">
-                <div class="icons">
-                    <a href="#" class="fas fa-eye"></a>
-                    <a href="#" class="fas fa-heart"></a>
-                    <a href="#" class="fas fa-share-alt"></a>
+                <div class="box">
+                    <img src="~/Content/Images/gallery3.jpg" alt="">
+                    <div class="icons">
+                        <a href="#" class="fas fa-eye"></a>
+                        <a href="#" class="fas fa-heart"></a>
+                        <a href="#" class="fas fa-share-alt"></a>
+                    </div>
                 </div>
-            </div>
 
-            <div class="box">
-                <img src="~/Content/Images/gallery4.jpg" alt="">
-                <div class="icons">
-                    <a href="#" class="fas fa-eye"></a>
-                    <a href="#" class="fas fa-heart"></a>
-                    <a href="#" class="fas fa-share-alt"></a>
+                <div class="box">
+                    <img src="~/Content/Images/gallery4.jpg" alt="">
+                    <div class="icons">
+                        <a href="#" class="fas fa-eye"></a>
+                        <a href="#" class="fas fa-heart"></a>
+                        <a href="#" class="fas fa-share-alt"></a>
+                    </div>
                 </div>
-            </div>
 
-            <div class="box">
-                <img src="~/Content/Images/gallery5.jpg" alt="">
-                <div class="icons">
-                    <a href="#" class="fas fa-eye"></a>
-                    <a href="#" class="fas fa-heart"></a>
-                    <a href="#" class="fas fa-share-alt"></a>
+                <div class="box">
+                    <img src="~/Content/Images/gallery5.jpg" alt="">
+                    <div class="icons">
+                        <a href="#" class="fas fa-eye"></a>
+                        <a href="#" class="fas fa-heart"></a>
+                        <a href="#" class="fas fa-share-alt"></a>
+                    </div>
                 </div>
-            </div>
 
-            <div class="box">
-                <img src="~/Content/Images/gallery6.jpg" alt="">
-                <div class="icons">
-                    <a href="#" class="fas fa-eye"></a>
-                    <a href="#" class="fas fa-heart"></a>
-                    <a href="#" class="fas fa-share-alt"></a>
-                </div>
-            </div>*@
+                <div class="box">
+                    <img src="~/Content/Images/gallery6.jpg" alt="">
+                    <div class="icons">
+                        <a href="#" class="fas fa-eye"></a>
+                        <a href="#" class="fas fa-heart"></a>
+                        <a href="#" class="fas fa-share-alt"></a>
+                    </div>
+                </div>*@
         }
     </div>
 
 </section>
- @*client section start*@
+@*client section start*@
 <div class="heading">
     <h1>client's review</h1>
 </div>
@@ -632,7 +517,7 @@
     </div>
 
 </section>
- @*review section start*@
+@*review section start*@
 <section class="review">
 
     <div class="box">
@@ -648,7 +533,7 @@
 
     <div class="box">
         <div class="user">
-            <img  src="~/Content/Images/review2.png" alt="">
+            <img src="~/Content/Images/review2.png" alt="">
             <div class="info">
                 <h3>jenna bey</h3>
                 <span>happ client</span>
@@ -702,7 +587,7 @@
     </div>
 
 </section>
- @*blog section start*@
+@*blog section start*@
 <div class="heading">
     <h1>our blogs</h1>
 </div>
@@ -722,7 +607,7 @@
                 </div>
                 <h3>blogs title page</h3>
                 <p>Lorem ipsum dolor sit amet, farhan aliqua. Ut enim ad minim veniam, quis</p>
-                
+
             </div>
         </div>
 
@@ -737,7 +622,7 @@
                 </div>
                 <h3>blogs title page</h3>
                 <p>Lorem ipsum dolor sit amet, farhan aliqua. Ut enim ad minim veniam, quis</p>
-               
+
             </div>
         </div>
 
@@ -752,7 +637,7 @@
                 </div>
                 <h3>blogs title page</h3>
                 <p>Lorem ipsum dolor sit amet, farhan aliqua. Ut enim ad minim veniam, quis</p>
-            
+
             </div>
         </div>
 
@@ -767,7 +652,7 @@
                 </div>
                 <h3>blogs title page</h3>
                 <p>Lorem ipsum dolor sit amet, farhan aliqua. Ut enim ad minim veniam, quis</p>
-               
+
             </div>
         </div>
 
@@ -782,7 +667,7 @@
                 </div>
                 <h3>blogs title page</h3>
                 <p>Lorem ipsum dolor sit amet, farhan aliqua. Ut enim ad minim veniam, quis</p>
-                
+
             </div>
         </div>
 
@@ -797,13 +682,13 @@
                 </div>
                 <h3>blogs title page</h3>
                 <p>Lorem ipsum dolor sit amet, farhan aliqua. Ut enim ad minim veniam, quis</p>
-                
+
             </div>
         </div>
 
     </div>
 </section>
- @*contect section start*@
+@*contect section start*@
 <div class="heading">
     <h1>Contact us</h1>
 </div>
@@ -812,14 +697,14 @@
     <div class="icons-container">
 
         <div class="icons">
-            <i  style="color:black" class="fa fa-phone"></i>
+            <i style="color:black" class="fa fa-phone"></i>
             <h3>our number</h3>
             <p>+9841414114</p>
             <p>+9814141414</p>
         </div>
 
         <div class="icons">
-            <i  style="color:black" class="fa fa-envelope"></i>
+            <i style="color:black" class="fa fa-envelope"></i>
             <h3>our email</h3>
             <p>abit@gmail.com</p>
             <p>samik@gmail.com</p>
@@ -902,84 +787,84 @@
 
 <div class="space"></div>
 @*<script>
-    //box chainxa
-    <!--let totalAmount = 0;
-    const cartVar = document.querySelector('.cart');
-    let count = 0;
-    const Products = document.querySelectorAll('.fa-shopping-cart');
-    let crossEl = document.querySelector('.cross');
-    Products.forEach(function (each) {
+        //box chainxa
+        <!--let totalAmount = 0;
+        const cartVar = document.querySelector('.cart');
+        let count = 0;
+        const Products = document.querySelectorAll('.fa-shopping-cart');
+        let crossEl = document.querySelector('.cross');
+        Products.forEach(function (each) {
 
-        each.addEventListener('click', function (e) {
-            console.log('clicked');
-            if (count === 0) {
-                cartVar.style.display = "flex";
-                cartVar.classList.add("active");
-                count = 1;
-
-
-
-            }
-            let button = e.target;
-            let Item = button.parentElement.parentElement;
-            let imgEl = Item.querySelector('.img').getElementsByTagName('img')[0].getAttribute('src');
-            let titleEl = Item.querySelector('.content').children[0].innerText;
-            let priceEl = Item.querySelector('.content').children[1].innerText.replace('$', '');
-            let totalAmountEl = document.querySelector('.totalAmount');
-
-            let IdEl = +document.getElementById("hiddenid").value;
-
-
-            console.log('total amount el' + totalAmountEl);
-            console.log(priceEl);
-            console.log(imgEl);
-            console.log(titleEl);
-            console.log(cartVar);
-            console.log(cartVar.children[1].children[1]);
-            CartDisplay(imgEl, titleEl, priceEl,IdEl);
-            function CartDisplay(imageEl, titleEl, priceEl,IdEl) {
-                const array = `<div class="cart-box"> 
-               <div class="img">
-                <img src="${imgEl}" alt="" style="width:150px; height:100px;">
-                </div>
-                <h3>${titleEl} </h3>
-                 <div class="price" style="font-size:14px;">Rs. ${priceEl}</div>
-                </div>`;-->
-
-                @*viewbag.title = titleEl;
-                viewbag.price = priceEl;
-                viewbag.quantity = 1;
-                viewbag.amount = 1;
-                viewbag.cid =@Convert.ToInt32(@Session["cid"]);
-
-
-                <!--cartVar.getElementsByTagName('h3')[0].insertAdjacentHTML('afterend', array);
-
-                
-                totalAmount = totalAmount + Number(priceEl);
-                totalAmount = Number(totalAmount.toFixed(2));
-                console.log(totalAmount);
-                console.log(totalAmountEl)
-                totalAmountEl.innerText = 'Rs. ' + totalAmount;
-                console.log(totalAmount);
-
-
-                
+            each.addEventListener('click', function (e) {
+                console.log('clicked');
+                if (count === 0) {
+                    cartVar.style.display = "flex";
+                    cartVar.classList.add("active");
+                    count = 1;
 
 
 
-            }
+                }
+                let button = e.target;
+                let Item = button.parentElement.parentElement;
+                let imgEl = Item.querySelector('.img').getElementsByTagName('img')[0].getAttribute('src');
+                let titleEl = Item.querySelector('.content').children[0].innerText;
+                let priceEl = Item.querySelector('.content').children[1].innerText.replace('$', '');
+                let totalAmountEl = document.querySelector('.totalAmount');
 
+                let IdEl = +document.getElementById("hiddenid").value;
+
+
+                console.log('total amount el' + totalAmountEl);
+                console.log(priceEl);
+                console.log(imgEl);
+                console.log(titleEl);
+                console.log(cartVar);
+                console.log(cartVar.children[1].children[1]);
+                CartDisplay(imgEl, titleEl, priceEl,IdEl);
+                function CartDisplay(imageEl, titleEl, priceEl,IdEl) {
+                    const array = `<div class="cart-box">
+                   <div class="img">
+                    <img src="${imgEl}" alt="" style="width:150px; height:100px;">
+                    </div>
+                    <h3>${titleEl} </h3>
+                     <div class="price" style="font-size:14px;">Rs. ${priceEl}</div>
+                    </div>`;-->
+
+                    @*viewbag.title = titleEl;
+                    viewbag.price = priceEl;
+                    viewbag.quantity = 1;
+                    viewbag.amount = 1;
+                    viewbag.cid =@Convert.ToInt32(@Session["cid"]);
+
+
+                    <!--cartVar.getElementsByTagName('h3')[0].insertAdjacentHTML('afterend', array);
+
+
+                    totalAmount = totalAmount + Number(priceEl);
+                    totalAmount = Number(totalAmount.toFixed(2));
+                    console.log(totalAmount);
+                    console.log(totalAmountEl)
+                    totalAmountEl.innerText = 'Rs. ' + totalAmount;
+                    console.log(totalAmount);
+
+
+
+
+
+
+                }
+
+            })
         })
-    })
 
-    crossEl.addEventListener('click', function () {
-       
-        cartVar.classList.remove('active');
-        cartVar.style.display = 'none';
-        count = 0;
-    })
+        crossEl.addEventListener('click', function () {
+
+            cartVar.classList.remove('active');
+            cartVar.style.display = 'none';
+            count = 0;
+        })
 
 
-</script>
-    *@
+    </script>
+*@

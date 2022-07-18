@@ -2,17 +2,22 @@
 @{
     ViewBag.Title = "viewallgallery";
 }
-<link rel="stylesheet" href="~/Content/css/style.css">
-
-<link href="~/Content/css/signupstyle.css" rel="stylesheet" />
 
 
+
+<style>
+    .gallery .box{
+        position: absolute;
+        top: 30%;
+    }
+    </style>>
+<section class="gallery">
 <div class="box-container">
-    @foreach (var file in ViewBag.productimage)
+    @foreach (var file in ViewBag.galleryphoto)
     {
         <div class="box">
             @*<img src="~/Content/Images/gallery1.jpg" alt="">*@
-            <img src="~/Content/productimage/@Path.GetFileName(file)" />
+            <img src="~/Content/galleryphoto/@Path.GetFileName(file)" />
             <div class="icons">
                 <a href="#" class="fas fa-eye"></a>
                 <a href="#" class="fas fa-heart"></a>
@@ -67,3 +72,4 @@
     }
 </div>
 
+    </section>

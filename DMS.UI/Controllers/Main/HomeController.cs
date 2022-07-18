@@ -72,24 +72,20 @@ namespace DMS.Controllers
                 Directory.CreateDirectory(path);
             }
             cphoto.SaveAs(newpath);
+            regcustomer.cphoto = "~/Content/customerimage/" + filename;
+           
+                regcustomer.id =Convert.ToInt32( Session["cid"]);
+                regcustomer.cfullname = Session["cfullname"].ToString();
+                regcustomer.cpno = Session["cpno"].ToString();
+                regcustomer.caddress = Session["cpno"].ToString();
+                regcustomer.cemail = Session["cemail"].ToString();
+                regcustomer.cpassword=Session["cpassword"].ToString();
 
-            int customerId = Convert.ToInt32(Session["cid"]);
-            regcustomer.cphoto = ("~/Content/customerimage/" + filename);
-            string aa = regcustomer.cphoto;
-            //var customerData = db.regcustomers.Where(x => x.id == customerId).FirstOrDefault();
-            int idd = Convert.ToInt32(Session["id"]);
-            //db.Entry(regcustomer).State = System.Data.Entity.EntityState.Modified;
-            //db.SaveChanges();
-            string mainconn = ConfigurationManager.ConnectionStrings["IdentityConnection"].ConnectionString;
-            SqlConnection sqlconn = new SqlConnection(mainconn);
+            
 
-            string sqlquery = "update regcustomer set cphoto='" + aa + "'where id='" + idd + "'";
-            sqlconn.Open();
-            SqlCommand sqlcomm = new SqlCommand(sqlquery, sqlconn);
-            sqlcomm.Parameters.AddWithValue("@cphoto", "a");
-            sqlcomm.ExecuteNonQuery();
-
-
+            db.Entry(regcustomer).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+         
 
             return RedirectToAction("profile", "home");
         }
@@ -117,10 +113,10 @@ namespace DMS.Controllers
 
 
             List<producttable> all_data = db.producttables.ToList();
-            string path = Server.MapPath("~/Content/productimage");
+            string path = Server.MapPath("~/Content/galleryphoto");
 
             string[] imagesfiles = Directory.GetFiles(path);
-            ViewBag.productimage = imagesfiles;
+            ViewBag.galleryphoto = imagesfiles;
             return View(all_data);
 
         }
@@ -128,8 +124,11 @@ namespace DMS.Controllers
         [HttpGet]
         public ActionResult Single(int id)
         {
-            var query = db.producttables.Where(x => x.pid == id).SingleOrDefault();
-            return View(query);
+         
+                var query = db.producttables.Where(x => x.pid == id).SingleOrDefault();
+                return View(query);
+            
+          
         }
         [HttpPost]
         public ActionResult Single(int id, int qty)
@@ -261,7 +260,7 @@ namespace DMS.Controllers
                 TempData["total"] = s;
 
             }
-            return RedirectToAction("index");
+            return RedirectToAction("Checkout","home");
         }
         //[HttpGet]
         //    public ActionResult Index(int id)
@@ -288,12 +287,12 @@ namespace DMS.Controllers
         public ActionResult viewallgallery()
         {
            
-            string path = Server.MapPath("~/Content/productimage");
+            string path = Server.MapPath("~/Content/galleryphoto");
 
             string[] imagesfiles = Directory.GetFiles(path);
-            ViewBag.productimage = imagesfiles;
+            ViewBag.galleryphoto = imagesfiles;
            
-            return View("viewallgallery");
+            return View();
         }
 
         public ActionResult category()

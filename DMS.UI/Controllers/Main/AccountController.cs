@@ -236,6 +236,8 @@ namespace DMS.UI.Controllers
                     Session["caddress"] = checkUser.caddress;
                     Session["cpno"] = checkUser.cpno;
                     Session["cemail"] = checkUser.cemail;
+                    Session["cpassword"] = checkUser.cpassword;
+                    Session["cphoto"] = checkUser.cphoto;
                     
 
 

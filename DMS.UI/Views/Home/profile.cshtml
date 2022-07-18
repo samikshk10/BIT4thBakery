@@ -38,17 +38,26 @@
 </style>
 <div class="form-container">
     <h1 class="profiletitle">My Profile Information</h1>
-
-    @using (Html.BeginForm("SavePhoto", "Home", FormMethod.Post, new { @class = "", @enctype = "multipart/form-data" }))
+    @if (Session["cphoto"] == null)
     {
-
-        <input type="file" value="Choose a image" name="cphoto" class="form-control"/>
-        <input type="submit" value="Save" class="form-control"/>
+        <img src="~/Content/Images/userimage.png" />
+        
     }
+    else
+    {
+        <img src = "@Url.Content(Session["cphoto"].ToString())" style = "border-radius:50%;height: 200px;width:200px"/>
 
+    }
+    @using (Html.BeginForm("SavePhoto", "Home", FormMethod.Post, new { @class = "", @enctype = "multipart/form-data" }))
+        {
+
+            <input type="file" value="Choose a image" name="cphoto" class="form-control" />
+            <input type="submit" value="Save" class="form-control" />
+
+        }
 
     <div class="form-row">
-        <h2><Label class="profilehead">Name:</Label></h2>  
+        <h2><Label class="profilehead">Name:</Label></h2>
         <h3 class="profilebody"> @Session["cfullname"].ToString()</h3>
     </div>
     <div class="form-row">

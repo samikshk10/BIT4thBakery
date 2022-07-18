@@ -315,7 +315,14 @@
 
                         <div class="action">
                             <div class="profile" onclick="menuToggle();">
-                                <img src="~/Content/Images/userimage.png" alt="Alternate Text" />
+                                @if (Session["cphoto"] == null)
+                                {
+                                    <img src="~/Content/Images/userimage.png" alt="Alternate Text" />
+                                }
+                                else
+                                {
+                                    <img src="@Url.Content(Session["cphoto"].ToString())" />
+                                }
                             </div>
 
                             <div class="menu">

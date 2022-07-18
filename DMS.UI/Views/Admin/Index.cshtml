@@ -1,4 +1,5 @@
-﻿@{
+﻿
+@{
 
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
     ViewBag.Title = "Dashboard";
@@ -245,83 +246,85 @@
 </div>
 
 
-            <div class="row clearfix">
-                <div class="col-lg-12">
-                    <div class="mb-4">
-                        <h4>Welcome Super Admin!</h4>
-                     
-                    </div>
+<div class="row clearfix">
+    <div class="col-lg-12">
+        <div class="mb-4">
+            <h4>Welcome Super Admin!</h4>
+
+        </div>
+    </div>
+</div>
+<div class="row clearfix row-deck">
+    <div class="col-xl-6 col-lg-6 col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title"><center>TOTAL PRODUCTS</center></h3>
+            </div>
+            <div class="card-body">
+                <h5 class="number mb-0 font-32 counter"><center>@ViewBag.Count</center></</h5>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-6 col-lg-6 col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title"><center>TOTAL COSTUMERS</center></h3>
+            </div>
+            <div class="card-body">
+                <h5 class="number mb-0 font-32 counter"><center>@ViewBag.Count1</center></h5>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-6 col-lg-6 col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title"><center>TOTAL ORDERS</center></h3>
+            </div>
+            <div class="card-body">
+                <h5 class="number mb-0 font-32 counter"><center>@ViewBag.Count2</center></h5>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-6 col-lg-6 col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title"><center>TOTAL SALES</center></h3>
+            </div>
+            <div class="card-body">
+                @model IEnumerable<DMS.DAL.DatabaseContext.getallorder>
+                
+                <h5 class="number mb-0 font-32 counter"><center style="left:30%;">@ViewBag.total</center></h5>
+
+            </div>
+        </div>
+    </div>
+    @*<div class="col-xl-2 col-lg-4 col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Open Requests</h3>
+                </div>
+                <div class="card-body">
+                    <h5 class="number mb-0 font-32 counter">19</h5>
+                    <span class="font-12">Measure How Fast... <a href="#">More</a></span>
                 </div>
             </div>
-            <div class="row clearfix row-deck">
-                <div class="col-xl-6 col-lg-6 col-md-6">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title"><center>TOTAL PRODUCTS</center></h3>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="number mb-0 font-32 counter"><center>@ViewBag.Count</center></</h5>
-                            
-                        </div>
-                    </div>
+        </div>
+        <div class="col-xl-2 col-lg-4 col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Hours Spent</h3>
                 </div>
-                <div class="col-xl-6 col-lg-6 col-md-6">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title"><center>TOTAL COSTUMERS</center></h3>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="number mb-0 font-32 counter"><center>@ViewBag.Count1</center></h5>
-                          
-                        </div>
-                    </div>
+                <div class="card-body">
+                    <h5 class="number mb-0 font-32 counter">284</h5>
+                    <span class="font-12">Measure How Fast... <a href="#">More</a></span>
                 </div>
-                <div class="col-xl-6 col-lg-6 col-md-6">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title"><center>TOTAL ORDERS</center></h3>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="number mb-0 font-32 counter"><center>@ViewBag.Count2</center></h5>
-                           
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-6 col-lg-6 col-md-6">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title"><center>TOTAL SALES</center></h3>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="number mb-0 font-32 counter"><center>12</center></h5>
-                           
-                        </div>
-                    </div>
-                </div>
-                @*<div class="col-xl-2 col-lg-4 col-md-6">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Open Requests</h3>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="number mb-0 font-32 counter">19</h5>
-                            <span class="font-12">Measure How Fast... <a href="#">More</a></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-2 col-lg-4 col-md-6">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Hours Spent</h3>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="number mb-0 font-32 counter">284</h5>
-                            <span class="font-12">Measure How Fast... <a href="#">More</a></span>
-                        </div>
-                    </div>
-                </div>
-                    *@
             </div>
-            
+        </div>
+    *@
+</div>
+
 
 

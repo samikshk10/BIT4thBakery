@@ -1,0 +1,27 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = "Add gallery image";
+}
+
+<style>
+    input[type=submit] {
+        background-color: aquamarine;
+        margin-top: 20px;
+        width: 150px;
+        color: white;
+    }
+
+        input[type=submit]:hover {
+            background-color: #f4c613;
+            color: black;
+        }
+</style>
+@using (Html.BeginForm("addgallerys", "admin", FormMethod.Post, new { @class = "", @enctype = "multipart/form-data" }))
+{
+
+    <input type="file" value="Choose a image" name="galleryphoto" class="form-control" />
+   
+
+    <input type="submit" value="Save" class="btn btn-color" />
+}
