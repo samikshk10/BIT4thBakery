@@ -314,6 +314,12 @@ namespace DMS.Controllers
             var query = db.getallorderusers.Where(x => x.id == id).ToList();
             return View(query);
         }
+
+        public ActionResult getallorder()
+        {
+            var query = db.getallorders.ToList();
+            return View(query);
+        }
        
 
         public async Task<ActionResult> Dashboard()
